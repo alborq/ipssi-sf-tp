@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>le site de la Team rocket</title>{% endblock %}
+
+
+    {% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('sass/_bootswatch.scss') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('sass/_variables.scss') }}">
+    {% endblock %}
+
+
+</head>
+<body>
+
+{% extends 'header.html.twig' %}
+
+{% block body%}{% endblock %}
+
+{% extends 'footer.html.twig' %}
+
+
+
+</body>
+</html>

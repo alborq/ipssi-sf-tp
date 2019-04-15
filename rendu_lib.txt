@@ -16,3 +16,6 @@ Permet d'avoir acces aux fontionnalites de la console
 - annotation
 
 - yaml
+
+- twig
+Est un moteur de templating qui permet de simplifier l'affichage

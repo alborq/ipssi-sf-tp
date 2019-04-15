@@ -6,7 +6,7 @@ services:
         depends_on:
             - app
         environment:
-            - DOCROOT=/srv/public
+            - DOCROOT=/srv/my-project/public
         volumes:
             - .:/srv
     app:

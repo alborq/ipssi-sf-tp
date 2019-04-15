@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  php:
+    image: 'chialab/php-dev:7.2-apache'
+    volumes:
+      - '.:/var/www/html'
+  database:
+    image: 'mariadb'
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=trdb
+  adminer:
+    image: 'adminer'
+    environment:
+      - ADMINER_DEFAULT_SERVER=database
+      - ADMINER_DESIGN=brade

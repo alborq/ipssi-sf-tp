@@ -1,0 +1,3 @@
+BUNDLES UTILISÉS ET LEURS UTILITÉS
+- asset:  Permet d'avoir acces au css, peut importe où on se trouve dans le projet.
+          on rentre directement dans le dossier public/asset.

@@ -3,12 +3,12 @@ DC=docker-compose
 HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)
 
 ifdef HAS_DOCKER
-  ifdef APP_ENV
-    EXECROOT=$(FIG) exec -e APP_ENV=$(APP_ENV) app
-    EXEC=$(FIG) exec -e APP_ENV=$(APP_ENV) -u $(USERID):$(GROUPID) app
+  ifdef PHP_ENV
+    EXECROOT=$(DC) exec -e PHP_ENV=$(PHP_ENV) php
+    EXEC=$(DC) exec -e PHP_ENV=$(PHP_ENV) -u $(USERID):$(GROUPID) php
 	else
-	  EXECROOT=$(FIG) exec app
-	  EXEC=$(FIG) exec -u $(USERID):$(GROUPID) app
+	  EXECROOT=$(DC) exec php
+	  EXEC=$(DC) exec -u $(USERID):$(GROUPID) php
 	endif
 else
 	EXECROOT=
@@ -40,7 +40,7 @@ start: docker-compose.override.yml
 stop:
 	$(DC) down
 
-.TEAMROCKET: exec ## Run bash in the app container
+.TEAMROCKET: exec ## Run bash in the php container
 exec:
 	$(EXEC) /bin/bash
 

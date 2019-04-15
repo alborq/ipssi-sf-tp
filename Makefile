@@ -1,3 +1,6 @@
+USERID=$(shell id -u)
+GROUPID=$(shell id -g)
+
 CONSOLE=php bin/console
 DC=docker-compose
 HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)

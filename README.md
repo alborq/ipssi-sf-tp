@@ -1,6 +1,7 @@
 # Informations de groupe :
 - Arthur DJIKPO
 - Etienne CRESPI
+- Aissatou DIOP
 
 
 # Thème: 

@@ -1,3 +1,18 @@
 BUNDLES UTILISÉS ET LEURS UTILITÉS
-- asset:  Permet d'avoir acces au css, peut importe où on se trouve dans le projet.
-          on rentre directement dans le dossier public/asset.
+- asset:
+Permet d'avoir acces au css, peut importe où on se trouve dans le projet. On rentre directement dans le dossier public/asset.
+
+- apache-pack
+
+- console
+Permet d'avoir acces aux fontionnalites de la console
+
+- dotenv
+
+- flex
+
+- framework-bundle
+
+- annotation
+
+- yaml

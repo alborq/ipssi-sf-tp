@@ -4,6 +4,7 @@ services:
     image: 'chialab/php-dev:7.2-apache'
     volumes:
       - '.:/var/www/html'
+      - './000-default.conf:/etc/apache2/sites-available/000-default.conf'
   database:
     image: 'mariadb'
     environment:

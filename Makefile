@@ -47,6 +47,15 @@ stop:
 exec:
 	$(EXEC) /bin/bash
 
+.TEAMROCKET: test ## Test
+test:
+	$(EXEC) vendor/bin/phpcs src
+	$(EXEC) vendor/bin/phpstan analyse --level 6 src
+
+.TEAMROCKET: testFix ## Test fix
+testFix:
+	$(EXEC) vendor/bin/phpcbf src
+
 ##
 ## Dependencies Files
 ##---------------------------------------------------------------------------

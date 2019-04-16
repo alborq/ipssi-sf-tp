@@ -1,4 +1,4 @@
-/.idea/workspace.xml
+/.idea/*
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php

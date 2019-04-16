@@ -12,6 +12,13 @@ help:
 .PHONY: start ## Démarre le projet
 start:
 	docker-compose up -d
+	docker-compose exec -u 1000:1000  app composer install
+
+.PHONY: dup ## restart le projet
+dup:
+	docker-compose stop
+	docker-compose up -d
+
 
 .PHONY: exec ## Permet de se connecter a l'intérieur du container app
 exec:

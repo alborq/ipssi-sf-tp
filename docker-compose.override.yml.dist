@@ -12,3 +12,10 @@ services:
   db:
     ports:
       - "3306:3306
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 28080:8080
+    depends_on:
+      - db

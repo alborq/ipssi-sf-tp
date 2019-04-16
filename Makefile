@@ -1,5 +1,3 @@
-USERID=$(shell id -u)
-GROUPID=$(shell id -g)
 
 CONSOLE=php bin/console
 DC=docker-compose
@@ -8,10 +6,10 @@ HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)
 ifdef HAS_DOCKER
   ifdef PHP_ENV
     EXECROOT=$(DC) exec -e PHP_ENV=$(PHP_ENV) php
-    EXEC=$(DC) exec -e PHP_ENV=$(PHP_ENV) -u $(USERID):$(GROUPID) php
+    EXEC=$(DC) exec -e PHP_ENV=$(PHP_ENV) php
 	else
 	  EXECROOT=$(DC) exec php
-	  EXEC=$(DC) exec -u $(USERID):$(GROUPID) php
+	  EXEC=$(DC) exec php
 	endif
 else
 	EXECROOT=

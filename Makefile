@@ -3,12 +3,12 @@ DC=docker-compose
 HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)
 
 ifdef HAS_DOCKER
-  ifdef PHP_ENV
-    EXECROOT=$(DC) exec -e PHP_ENV=$(PHP_ENV) php
-    EXEC=$(DC) exec -e PHP_ENV=$(PHP_ENV) php
+	ifdef PHP_ENV
+		EXECROOT=$(DC) exec -e PHP_ENV=$(PHP_ENV) php
+		EXEC=$(DC) exec -e PHP_ENV=$(PHP_ENV) php
 	else
-	  EXECROOT=$(DC) exec php
-	  EXEC=$(DC) exec -u php
+		EXECROOT=$(DC) exec php
+		EXEC=$(DC) exec php
 	endif
 else
 	EXECROOT=
@@ -35,7 +35,7 @@ start: docker-compose.override.yml
 	$(DC) pull || true
 	$(DC) build
 	$(DC) up -d
-	composer install
+	$(EXEC) composer install
 
 .PHONY: stop ## stop the project
 stop:
@@ -52,7 +52,7 @@ test:
 
 .PHONY: testFix ## Start a patch of the code. Keep in mind it couldn't patch everything
 testFix:
-  $(EXEC) vendor/bin/phpcbf src
+	$(EXEC) vendor/bin/phpcbf src
 
 ##
 ## Dependencies Files

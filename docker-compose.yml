@@ -8,8 +8,7 @@ services:
   database:
     image: 'mariadb'
     environment:
-      - MYSQL_RANDOM_ROOT_PASSWORD=yes
-      - MYSQL_DATABASE=trdb
+      - MYSQL_ROOT_PASSWORD=root
   adminer:
     image: 'adminer'
     environment:

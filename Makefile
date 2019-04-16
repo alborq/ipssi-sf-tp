@@ -1,5 +1,6 @@
 FIG=docker-compose
 EXEC= $(FIG) exec app
+HAS_DOCKER:=$(shell command -v $(FIG) 2> /dev/null)
 .DEFAULT_GOAL := help
 
 .PHONY: help ## Generate list of targets with descriptions
@@ -34,4 +35,9 @@ dup:
 .PHONY: stop ## stop and restart the project
 stop:
 	$(FIG) down
+
+.PHONY: tests ## Test the code
+tests:
+	$(EXEC) vendor/bin/phpstan analyse src
+
 

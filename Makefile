@@ -9,9 +9,6 @@ help:
 		| sed 's/\(##\)/\t/' \
 		| expand -t14
 
-## test
-## -----------------------------
-
 .PHONY: start ## Démarre le projet
 start:
 	docker-compose up -d
@@ -20,4 +17,11 @@ start:
 exec:
 	docker-compose exec -u 1000:1000  app bash
 
+.PHONY: tests ## Lance les tests de l'applications
+tests:
+	vendor/bin/phpcs src
+	vendor/bin/phpstan analyse --level 6 src
 
+.PHONY: tests-fix ## Fix le cs de mon app
+tests-fix:
+	vendor/bin/phpcbf src

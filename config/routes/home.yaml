@@ -1,3 +1,3 @@
 home:
   path: /
-  controller: App\Controller\HomeController::test
+  controller: App\Controller\HomeController::index

@@ -15,13 +15,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 
 {
-    public function test(): Response{
+    public function index(): Response{
 
-        $test="";
 
-        return $this->render('home.html.twig', [
-            'Hello World' => $test,
-        ]);
+        return $this->render('home.html.twig');
 
     }
 

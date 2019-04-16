@@ -8,5 +8,9 @@ jobs:
       - checkout
 
       - run:
+          name: Install vendor
+          command: composer install
+
+      - run:
           name: Code Style
           command: make tests

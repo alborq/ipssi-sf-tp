@@ -1,4 +1,3 @@
-
 CONSOLE=php bin/console
 DC=docker-compose
 HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)
@@ -18,11 +17,11 @@ endif
 
 .DEFAULT_GOAL := help
 
-.TEAMROCKET: help ## Generate list of targets with descriptions
+.PHONY: help ## Generate list of targets with descriptions
 help:
 		@grep '##' Makefile \
 		| grep -v 'grep\|sed' \
-		| sed 's/^\.TEAMROCKET: \(.*\) ##[\s|\S]*\(.*\)/\1:\t\2/' \
+		| sed 's/^\.PHONY: \(.*\) ##[\s|\S]*\(.*\)/\1:\t\2/' \
 		| sed 's/\(^##\)//' \
 		| sed 's/\(##\)/\t/' \
 		| expand -t14
@@ -31,26 +30,27 @@ help:
 ## Project setup & day to day shortcuts
 ##---------------------------------------------------------------------------
 
-.TEAMROCKET: start ## Start the project (Install in first place)
+.PHONY: start ## Start the project (Install in first place)
 start: docker-compose.override.yml
 	$(DC) pull || true
 	$(DC) build
 	$(DC) up -d
+	$(EXEC) composer install
 
-.TEAMROCKET: stop ## stop the project
+.PHONY: stop ## stop the project
 stop:
 	$(DC) down
 
-.TEAMROCKET: exec ## Run bash in the php container
+.PHONY: exec ## Run bash in the php container
 exec:
 	$(EXEC) /bin/bash
 
-.TEAMROCKET: test ## Test
+.PHONY: test ## Test
 test:
 	$(EXEC) vendor/bin/phpcs src
 	$(EXEC) vendor/bin/phpstan analyse --level 6 src
 
-.TEAMROCKET: testFix ## Test fix
+.PHONY: testFix ## Test fix
 testFix:
 	$(EXEC) vendor/bin/phpcbf src
 

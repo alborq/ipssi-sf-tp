@@ -19,6 +19,9 @@ dup:
 	docker-compose stop
 	docker-compose up -d
 
+.PHONY: stop ## stop the project
+stop:
+	docker-compose down
 
 .PHONY: exec ## Permet de se connecter a l'intérieur du container app
 exec:

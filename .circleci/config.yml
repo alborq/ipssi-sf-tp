@@ -8,9 +8,9 @@ jobs:
       - checkout
 
       - run:
-          name: Greeting
-          command: echo Hello, world.
+        name: Install Vendor
+        command: composer install
 
       - run:
-          name: Print the Current Time
-          command: date
+        name: Code Style
+        command: make tests

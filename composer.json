@@ -11,7 +11,9 @@
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
+        "symfony/maker-bundle": "^1.11",
         "symfony/orm-pack": "^1.0",
+        "symfony/security-bundle": "4.2.*",
         "symfony/yaml": "4.2.*"
     },
     "config": {
@@ -61,6 +63,7 @@
     },
     "require-dev": {
         "escapestudios/symfony2-coding-standard": "^3.5",
-        "symfony/debug-pack": "^1.0"
+        "symfony/debug-pack": "^1.0",
+        "symfony/profiler-pack": "^1.0"
     }
 }

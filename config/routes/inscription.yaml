@@ -1,3 +1,0 @@
-registration:
-  path: /
-  controller: App\Controller\SecurityController::registration

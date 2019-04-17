@@ -1,3 +1,7 @@
-inscription:
-  resource: 'routes/inscription.yaml'
-  prefix: '/inscription'
+register:
+  resource: 'routes/register.yaml'
+  prefix: '/register'
+
+login:
+  path: /login
+  controller: App\Controller\SecurityController::login

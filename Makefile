@@ -1,3 +1,4 @@
+FIG=docker-compose
 .DEFAULT_GOAL := help
 
 .PHONY: help ## Generate list of targets with descriptions
@@ -9,30 +10,28 @@ help:
 		| sed 's/\(##\)/\t/' \
 		| expand -t14
 
-.PHONY: start ## Démarre le projet
-start:
-	docker-compose up -d
-	docker-compose exec -u 1000:1000  app composer install
+##
+## Project setup & day to day shortcuts
+##---------------------------------------------------------------------------
 
-.PHONY: dup ## restart le projet
-dup:
-	docker-compose stop
-	docker-compose up -d
-	docker-compose exec -u 1000:1000  app composer install
+.PHONY: start ## Start the project (Install in first place)
+start: docker-compose.override.yml
+	$(FIG) pull || true
+	$(FIG) build
+	$(FIG) up -d
+	$(FIG) exec -u 1000:1000 app composer install
 
 .PHONY: stop ## stop the project
 stop:
-	docker-compose down
+	$(FIG) down
 
-.PHONY: exec ## Permet de se connecter a l'intérieur du container app
+.PHONY: exec ## Run bash in the app container
 exec:
-	docker-compose exec -u 1000:1000  app bash
+	$(EXEC) /bin/bash
 
-.PHONY: tests ## Lance les tests de l'applications
-tests:
-	vendor/bin/phpcs src
-	vendor/bin/phpstan analyse --level 6 src
+##
+## Dependencies Files
+##---------------------------------------------------------------------------
 
-.PHONY: tests-fix ## Fix le cs de mon app
-tests-fix:
-	vendor/bin/phpcbf src
+docker-compose.override.yml: docker-compose.override.yml.dist
+	$(RUN) cp docker-compose.override.yml.dist docker-compose.override.yml

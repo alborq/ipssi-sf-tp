@@ -1,0 +1,14 @@
+.header-link {
+  border-bottom:solid transparent;
+  transition:0.5s
+}
+
+ul .header-link{
+  border:none;
+  background:linear-gradient(to top, turquoise,turquoise) no-repeat bottom left;
+  background-size:0px 2px
+}
+
+ul .nav-link:hover .header-link {
+  background-size:100% 2px
+}

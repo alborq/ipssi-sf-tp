@@ -18,6 +18,7 @@ start:
 dup:
 	docker-compose stop
 	docker-compose up -d
+	docker-compose exec -u 1000:1000  app composer install
 
 .PHONY: stop ## stop the project
 stop:

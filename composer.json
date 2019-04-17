@@ -8,12 +8,14 @@
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "4.2.*",
         "symfony/console": "4.2.*",
+        "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.2",
         "symfony/form": "4.2.*",
         "symfony/framework-bundle": "4.2.*",
         "symfony/orm-pack": "^1.0",
         "symfony/routing": "4.2.*",
+        "symfony/twig-bridge": "4.2.*",
         "symfony/twig-bundle": "4.2.*",
         "symfony/yaml": "4.2.*"
     },
@@ -63,6 +65,8 @@
         }
     },
     "require-dev": {
+        "escapestudios/symfony2-coding-standard": "^3.5",
+        "phpstan/phpstan": "^0.11.5",
         "symfony/maker-bundle": "^1.11"
     }
 }

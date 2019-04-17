@@ -3,7 +3,6 @@
 
 namespace App\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,7 +15,8 @@ class AdminController extends AbstractController
     /**
      * @Route(path="/display")
      */
-public function display(){
-    return $this->render('base.html.twig');
-}
+    public function display()
+    {
+        return $this->render('base.html.twig');
+    }
 }

@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use App\Form\RegistrationType;
+use App\Entity\User;
 use App\Form\UserRegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
@@ -27,23 +28,21 @@ class SecurityController extends AbstractController
     ]);
   }
 
-  public function register(Request $request): Response
+  public function register(Request $request, UserPasswordEncoderInterface $encoder): Response
   {
+    /** @var User $user */
     $form = $this->createForm(UserRegistrationType::class);
-
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-
       $user = $form->getData();
-
+      $user->setRoles(['ROLE_USER']);
+      $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
       $entityManager = $this->getDoctrine()->getManager();
-
       $entityManager->persist($user);
-
       $entityManager->flush();
-
       return $this->redirectToRoute('login');
+
     }
 
     return $this->render('security/registerForm.html.twig', [

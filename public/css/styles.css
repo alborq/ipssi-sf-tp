@@ -1,0 +1,21 @@
+.jumbotron-bg{
+  margin-top: 50px;
+  background-color: #b6d5e1;
+}
+div.jumbotron.jumbotron-bg div{
+  color: red;
+}
+.jumbotron-bg label{
+  color: #0e0e0e;
+}
+.jumbotron-bg ul{
+  padding-left: 0;
+  padding-top: 10px;
+}
+.jumbotron-bg ul li{
+  color: #ff000f;
+  list-style: none;
+}
+.jumbotron-bg small{
+  color: #ff0014!important;
+}

@@ -15,7 +15,6 @@ class UserRegistrationType extends AbstractType
   {
     $builder
       ->add('email')
-      ->add('roles')
       ->add('password')
       ->add('password', RepeatedType::class, [
         'type' => PasswordType::class,
@@ -24,7 +23,7 @@ class UserRegistrationType extends AbstractType
         'required' => true,
         'first_options' => ['label' => 'Password'],
         'second_options' => ['label' => 'Repeat Password'],
-      ]);;
+      ]);
   }
 
   public function configureOptions(OptionsResolver $resolver)

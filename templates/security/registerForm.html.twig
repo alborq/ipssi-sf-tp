@@ -2,25 +2,55 @@
 
 {% block body %}
 
-  {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-  {% endif %}
+  {{ form_start(UserRegistrationForm) }}
 
-  <form action="{{ path('login') }}" method="post">
+  {{ form_errors(UserRegistrationForm) }}
+
+
+  <div class="jumbotron jumbotron-bg">
+    <h1 class="display-4">S'enregistrer</h1>
+
+    <hr class="my-4">
 
     <div class="form-group">
       <label for="username">Adresse email:</label>
-      <input type="text" class="form-control" id="username" name="_username" aria-describedby="emailHelp" placeholder="Adresse email" value="{{ last_username }}"/>
-      <small id="emailHelp" class="form-text text-muted">Ne divulguez jamais vos identifiants de connexion</small>
+      {{ form_row(UserRegistrationForm.email, {
+        'label': false,
+        'attr': {
+          'class': 'form-control',
+          'placeholder': 'Adresse email'
+        }
+      }) }}
     </div>
 
     <div class="form-group">
       <label for="password">Mot de passe:</label>
-      <input type="password" class="form-control" id="password" placeholder="Password" name="_password">
+      {{ form_row(UserRegistrationForm.password.first, {
+        'label': false,
+        'attr': {
+          'class': 'form-control',
+          'placeholder': 'Mot de passe'
+        }
+      }) }}
     </div>
 
-    <button type="submit" class="btn btn-primary">Connexion</button>
+    <div class="form-group">
+      <label for="password">Confirmer le mot de passe:</label>
+      {{ form_row(UserRegistrationForm.password.second, {
+        'label': false,
+        'attr': {
+          'class': 'form-control',
+          'placeholder': 'Confirmer le mot de passe'
+        }
+      }) }}
+    </div>
 
-  </form>
+    <br/>
+
+    <button type="submit" class="btn btn-primary">S'enregistrer</button>
+
+  </div>
+
+  {{ form_end (UserRegistrationForm) }}
 
 {% endblock %}

@@ -1,6 +1,6 @@
-register:
-  resource: 'routes/register.yaml'
-  prefix: '/register'
+registration:
+  resource: 'routes/registration.yaml'
+  prefix: '/registration'
 
 login:
   path: /login

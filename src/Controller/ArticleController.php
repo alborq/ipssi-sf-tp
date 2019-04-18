@@ -23,14 +23,18 @@ class ArticleController extends AbstractController
      */
     public function create(Request $request): Response
     {
-         $article = $this->createForm(ArticlesType::class)->handleRequest($request);
-        if ($article->isSubmitted() && $article->isValid()) {
-            $this->getDoctrine()->getManager()
-            ->persist($article->getData())
-            ->flush();
+        $isOk=false;
+        $newArticleForm = $this->createForm(ArticlesType::class);
+        $newArticleForm->handleRequest($request);
+        if ($newArticleForm->isSubmitted() && $newArticleForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($newArticleForm->getData());
+            $em->flush();
+            $isOk=true;
         }
         return $this->render('ArticleController/createArt.html.twig', [
-            'articleForm' => $article->createView(),
+            'articleForm' => $newArticleForm->createView(),
+            'isOk' => $isOk
         ]);
     }
 }

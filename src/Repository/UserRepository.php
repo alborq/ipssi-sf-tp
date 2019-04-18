@@ -27,7 +27,7 @@ class UserRepository extends ServiceEntityRepository implements UserLoaderInterf
      *
      * This method must return null if the user is not found.
      *
-     * @param string $username The username
+     * @param string $usernameOrEmail The user email or username
      *
      * @return UserInterface|null
      */

@@ -19,14 +19,20 @@ class SignupController extends AbstractController
      */
     public function signUp(Request $request): Response
     {
-        $user = $this->createForm(UserInscriptionType::class)->handleRequest($request);
-        if ($user->isSubmitted() && $user>isValid()) {
-            $this->getDoctrine()->getManager()
-                ->persist($user->getData())
-                ->flush();
+        $isOk=false;
+        $newUserForm = $this->createForm(UserInscriptionType::class);
+        $newUserForm->handleRequest($request);
+        if ($newUserForm->isSubmitted() && $newUserForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user = $newUserForm->getData();
+            $user->setRoles(['ROLE_USER']);
+            $em->persist($newUserForm->getData());
+            $em->flush();
+            $isOk=true;
         }
         return $this->render('SignUp/addUser.html.twig', [
-            'userInscriptionForm' => $user->createView(),
+            'userInscriptionForm' => $newUserForm->createView(),
+            'isOk' => $isOk
         ]);
     }
 }

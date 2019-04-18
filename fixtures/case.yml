@@ -1,0 +1,4 @@
+App\Entity\CaseGame:
+  case{0..36}:
+    color: "<color(<current()>)>"
+    number: "<number(<current()>)>"

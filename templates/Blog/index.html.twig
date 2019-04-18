@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PartyList index{% endblock %}
+
+{% block body %}
+    <h1>Advert list :</h1>
+    {% if listAdvert is defined and listAdvert is not empty %}
+        {% for advert in listAdvert %}
+            <div class="article">
+                <div class="title articlepart">
+                    <h3>{{ advert.title }}</h3>
+                    <a href="{{ path('showAdvert', {id : advert.id}) }}" target="_blank">See advert</a>
+                </div>
+
+                <div class="content articlepart">
+                    {{ advert.content }}
+                </div>
+                {% if advert.comments is defined and advert.comments is not empty %}
+                    {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  and is_granted('ROLE_ADMIN') %}
+                        {% for comment in advert.comments|slice(0, 5) %}
+                            <div class="commentInter" style="background-color:#f1f1f1">
+                                <h3>{{ comment.user.username }}</h3>
+                                {% if comment.enabled %}
+                                    <a href="{{ path('manageComment', { id : comment.id, state : "hide" }) }}">Hide</a>
+                                {% else %}
+                                    <a href="{{ path('manageComment', { id : comment.id, state : "show"  }) }}">Show</a>
+                                {% endif %}
+                                {{ comment.content }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for comment in advert.comments|slice(0, 5) if comment.enabled %}
+                            <div class="commentInter" style="background-color:#f1f1f1">
+                                <h3>{{ comment.user.username }}</h3>
+                                {{ comment.content }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="article">
+            No Advert found.
+        </div>
+    {% endif %}
+    <div class="navigation" style="margin-left: auto;margin-right: auto;text-align:center;">
+        {{ knp_pagination_render(listAdvert) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+button:not(.navbar-toggle) {
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.article {
+    margin-left:30%;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    border-color: #888;
+    position:relative;
+    margin-top:4%;
+    width:40%;
+    background-color:white;
+}
+
+.articlepart {
+    position:relative;
+}
+
+.title {
+    margin:5%;
+}
+
+.content {
+    padding:2%;
+    margin-right:5%;
+    margin-left:5%;
+    margin-bottom:5%;
+    border: 1px solid transparent;
+    border-color: #888;
+}
+
+.container1 {
+    padding: 16px;
+}
+
+.formConnexion {
+    width: 100%;
+    padding: 2px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.cancelbtn {
+    width: auto;
+    background-color: limegreen;
+    margin-left:2%;
+    padding: 7px 30px;
+    margin: 8px 10px;
+}
+
+.commentInter {
+    padding-left:5%;
+    padding-top: 1px;
+    padding-bottom: 5%;
+    border-bottom: 1px solid #888888;
+}
+
+.hidden {
+    display:none;
+}

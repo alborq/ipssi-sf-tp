@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PartyList index{% endblock %}
+
+{% block body %}
+    <h1>Blog list :</h1>
+    {% if advert is defined and advert is not empty %}
+        <div class="article">
+            <div class="title articlepart">
+                <h3>{{ advert.title }}</h3>
+            </div>
+
+            <div class="content articlepart">
+                {{ advert.content }}
+            </div>
+            {% if advert.comments is defined and advert.comments is not empty %}
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_ADMIN') %}
+                    {% for comment in advert.comments|slice(0, 5) %}
+                        <div class="commentInter" style="background-color:#f1f1f1">
+                            <h3>{{ comment.user.username }}</h3>
+                            {% if comment.enabled %}
+                                <a href="{{ path('manageComment', { id : comment.id, state : "hide" }) }}">Hide</a>
+                            {% else %}
+                                <a href="{{ path('manageComment', { id : comment.id, state : "show"  }) }}">Show</a>
+                            {% endif %}
+                            {{ comment.content }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for comment in advert.comments|slice(0, 5) if comment.enabled %}
+                        <div class="commentInter" style="background-color:#f1f1f1">
+                            <h3>{{ comment.user.username }}</h3>
+                            {{ comment.content }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <div class="commentInter" style="padding-top:5%;padding-right:5%;background-color:#f1f1f1">
+                    {{ form_start(form) }}
+                        {{ form_errors(form) }}
+                        {{ form_row(form.content, { 'label': 'Add new comment :' }) }}
+                        <button type="submit" name="advertComment" class="cancelbtn" value="true">Post</button>
+                    {{ form_end(form) }}
+                </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <div class="article">
+            No Advert found.
+        </div>
+    {% endif %}
+{% endblock %}

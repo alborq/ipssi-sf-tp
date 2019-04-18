@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PartyList index{% endblock %}
+
+{% block body %}
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <div class="well">
+            {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.amount, { 'label': 'Bet (€) :' }) }}
+            {{ form_row(form.type, { 'label': 'Bet on :' }) }}
+            {{ form_row(form.game, { 'label': 'Game :' }) }}
+            <button type="submit" name="advertComment" class="cancelbtn" value="true">Bet</button>
+            {{ form_end(form) }}
+        </div>
+        {% if bets is defined %}
+            <h1>My Bet :</h1>
+            <table class="table table-hover table-responsive">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Bet</th>
+                    <th>Game</th>
+                    <th>Potential gain</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for bet in bets %}
+                    <tr>
+                        <td>{{ bet.id }}</td>
+                        <td>{{ bet.amount }}</td>
+                        <td>{{ bet.game.name }}</td>
+                        <td>{% set gain = bet.amount + app.user.amount %}{{ gain }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" style="text-align: center;color: red;">No Bet</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+    {% if games is defined %}
+        <h1>Game :</h1>
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for game in games %}
+                <tr>
+                    <td>{{ game.id }}</td>
+                    <td>{{ game.name }}</td>
+                    <td>{{ game.amount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1>No Games </h1>
+    {% endif %}
+{% endblock %}

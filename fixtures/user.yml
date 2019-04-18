@@ -1,0 +1,12 @@
+App\Entity\User:
+  user1:
+    username: "Admin"
+    password: "<passwordGenerator()>"
+    email: "admin@admin.com"
+    roles: "[ROLE_USER,ROLE_ADMIN]"
+
+  user2:
+    username: "User"
+    password: "<passwordGenerator()>"
+    email: "user@user.com"
+    roles: "[ROLE_USER]"

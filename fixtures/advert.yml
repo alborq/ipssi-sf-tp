@@ -1,0 +1,4 @@
+App\Entity\Advert:
+  advert{0..25}:
+    title: "Title<numberBetween(1,100)>"
+    content: "Content<numberBetween(1,100)>"

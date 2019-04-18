@@ -1,0 +1,4 @@
+App\Entity\Game:
+  game{1..4}:
+    name: "Table<($current)>"
+    amount: "<numberBetween(1000,2000)>"

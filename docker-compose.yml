@@ -1,0 +1,44 @@
+version: '3.6'
+services:
+  nginx:
+    image: easybar/nginx:dev
+    depends_on:
+      - app
+    environment:
+      - DOCROOT=/srv/public
+    volumes:
+      - .:/srv
+    ports:
+      - 8080:80
+  app:
+    image: easybar/php:7.2.9-dev
+    depends_on:
+      - database
+      - mailhog
+    volumes:
+      - .:/srv
+  database:
+    image: mariadb
+    ports:
+      - '3307:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - database-data:/var/lib/mysql
+  adminer:
+    image: adminer
+    ports:
+      - '8082:8080'
+    depends_on:
+      - database
+    environment:
+      - ADMINER_DEFAULT_SERVER=database
+      - ADMINER_DESIGN=brade
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+
+volumes:
+    database-data: {}

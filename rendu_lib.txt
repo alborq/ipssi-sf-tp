@@ -1,0 +1,10 @@
+web-server-bundle : bin/console server:run
+debug-pack : Debug toolbar
+annotations : Routing
+twig : Templating
+orm-pack : Database
+maker-bundle : Make:entity
+asset : CSS/JS
+knp-paginator-bundle : Pagination
+security-bundle : User Connexion
+Validator : Form Contraints

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    {% endblock %}
+    {% block javascripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{ path('home') }}">Home</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="{{ path('blogHome') }}">Blog</a></li>
+            <li class="active"><a href="{{ path('gameHome') }}">Game</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <li style="color:darkgrey;padding-top:16px;">Logged as - <b>{{ app.user.username }}</b></li>
+                <li><a href="{{ path('app_logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ path('app_login') }}">Login</a></li>
+                <li><a href="{{ path('app_register') }}">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="container" style="margin-top:80px">
+    {% block body %}{% endblock %}
+</div>
+</body>
+</html>

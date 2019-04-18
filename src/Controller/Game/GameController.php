@@ -38,8 +38,9 @@ class GameController extends AbstractController
         $Games  = $em->getRepository(Game::class)->findAll();
 
         if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $idplayer = $em->getRepository(User::class)->find($userConnected->getId());
-            $Bets  = $em->getRepository(Bet::class)->findBy(['player' => $idplayer]);
+            /** @var $userConnected User */
+            $idPlayer = $em->getRepository(User::class)->find($userConnected->getId());
+            $Bets  = $em->getRepository(Bet::class)->findBy(['player' => $idPlayer]);
         }
 
         $form = $this->createForm(BetType::class, $bet);
@@ -48,18 +49,22 @@ class GameController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $bet = $form->getData();
 
-            $playerexist = false;
+            $playerExist = false;
             foreach ($Games as $game) {
                 $players = $game->getPlayers();
                 foreach ($players as $player) {
                     if ($player == $userConnected && $game == $bet->getGame()) {
-                        $playerexist = true;
+                        $playerExist = true;
                     }
                 }
             }
 
-            if ($playerexist != true) {
+            if ($playerExist != true) {
                 $game = $bet->getGame();
+                /**
+                 * @var $game Game
+                 * @var $userConnected User
+                 */
                 $game->addPlayer($userConnected);
                 $em->persist($game);
             }

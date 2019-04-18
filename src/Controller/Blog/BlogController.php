@@ -82,23 +82,23 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param $state
+     * @param string $state
      * @param int $id
      * @return RedirectResponse
      * @Route("/{state}/{id}", name="manageComment")
      */
-    public function deleteComment($state, int $id)
+    public function deleteComment(string $state, int $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $mycomment = $em->getRepository(Comment::class)->find($id);
+        $myComment = $em->getRepository(Comment::class)->find($id);
 
         if ($state == "hide") {
-            $mycomment->setEnabled(false);
-            $em->persist($mycomment);
+            $myComment->setEnabled(false);
+            $em->persist($myComment);
             $em->flush();
         } else {
-            $mycomment->setEnabled(true);
-            $em->persist($mycomment);
+            $myComment->setEnabled(true);
+            $em->persist($myComment);
             $em->flush();
         }
 

@@ -110,9 +110,8 @@ class Comment
 
     /**
      * @param mixed $enabled
-     * @return bool
      */
-    public function setEnabled(bool $enabled): bool
+    public function setEnabled($enabled): void
     {
         $this->enabled = $enabled;
     }

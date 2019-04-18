@@ -24,6 +24,7 @@ class HomeController extends AbstractController
     public function index(Security $security)
     {
         $player = "";
+        /** @var $userConnected User */
         $userConnected = $security->getUser();
         $em = $this->getDoctrine()->getManager();
 

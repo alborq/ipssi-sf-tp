@@ -4,52 +4,63 @@
 
 {% block body %}
 
+  <div class="jumbotron jumbotron-bg">
+
+  <h1 class="display-4">S'enregistrer</h1>
+
+  <hr class="my-4">
+
   {{ form_start(UserRegistrationForm) }}
 
   {{ form_errors(UserRegistrationForm) }}
 
+  <div class="form-group">
+    <label for="username">Pseudo:</label>
+    {{ form_row(UserRegistrationForm.nickname, {
+      'label': false,
+      'attr': {
+        'class': 'form-control',
+        'placeholder': 'Pseudo qui s\'affichera sur le site'
+      }
+    }) }}
+  </div>
 
-  <div class="jumbotron jumbotron-bg">
-    <h1 class="display-4">S'enregistrer</h1>
+  <div class="form-group">
+    <label for="username">Adresse email:</label>
+    {{ form_row(UserRegistrationForm.email, {
+      'label': false,
+      'attr': {
+        'class': 'form-control',
+        'placeholder': 'Adresse email'
+      }
+    }) }}
+  </div>
 
-    <hr class="my-4">
+  <div class="form-group">
+    <label for="password">Mot de passe:</label>
+    {{ form_row(UserRegistrationForm.password.first, {
+      'label': false,
+      'attr': {
+        'class': 'form-control',
+        'placeholder': 'Mot de passe'
+      }
+    }) }}
+  </div>
 
-    <div class="form-group">
-      <label for="username">Adresse email:</label>
-      {{ form_row(UserRegistrationForm.email, {
-        'label': false,
-        'attr': {
-          'class': 'form-control',
-          'placeholder': 'Adresse email'
-        }
-      }) }}
-    </div>
+  <div class="form-group">
+    <label for="password">Confirmer le mot de passe:</label>
+    {{ form_row(UserRegistrationForm.password.second, {
+      'label': false,
+      'attr': {
+        'class': 'form-control',
+        'placeholder': 'Confirmer le mot de passe'
+      }
+    }) }}
+  </div>
 
-    <div class="form-group">
-      <label for="password">Mot de passe:</label>
-      {{ form_row(UserRegistrationForm.password.first, {
-        'label': false,
-        'attr': {
-          'class': 'form-control',
-          'placeholder': 'Mot de passe'
-        }
-      }) }}
-    </div>
+  <br/>
 
-    <div class="form-group">
-      <label for="password">Confirmer le mot de passe:</label>
-      {{ form_row(UserRegistrationForm.password.second, {
-        'label': false,
-        'attr': {
-          'class': 'form-control',
-          'placeholder': 'Confirmer le mot de passe'
-        }
-      }) }}
-    </div>
-
-    <br/>
-
-    <button type="submit" class="btn btn-primary">S'enregistrer</button>
+  <button type="submit" class="btn btn-primary">S'enregistrer</button>
 
   </div>
 

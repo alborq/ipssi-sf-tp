@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: chialab/php-dev:7.2-apache
 
     steps:
       - checkout
@@ -13,4 +13,4 @@ jobs:
 
       - run:
         name: Code Style
-        command: make tests
+        command: make test

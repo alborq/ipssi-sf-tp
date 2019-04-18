@@ -15,16 +15,16 @@ help:
 ## Project setup & day to day shortcuts
 ##---------------------------------------------------------------------------
 
-.PHONY: fstart ## Start the project (The first launch of the app)
-fstart: docker-compose.override.yml
+.PHONY: start ## Start the project (The first launch of the app)
+start: docker-compose.override.yml
 	$(FIG) pull || true
 	$(FIG) build
 	$(FIG) up -d
 	$(FIG) exec -u 1000:1000 app composer install
 	$(FIG) exec -u 1000:1000 app $(CONSOLE) doctrine:database:create
 
-.PHONY: start ## Start the project
-start: docker-compose.override.yml
+.PHONY: up ## Start the project
+up: docker-compose.override.yml
 	$(FIG) up -d
 	$(FIG) exec -u 1000:1000 app composer install
 

@@ -9,3 +9,5 @@ div.jumbotron.jumbotron-bg label{color: #0e0e0e;}
 div.jumbotron.jumbotron-bg ul{padding-left: 0; padding-top: 10px;}
 div.jumbotron.jumbotron-bg ul li{color: #ff000f; list-style: none;}
 div.jumbotron.jumbotron-bg small{color: #ff0014!important;}
+div.jumbotron.jumbotron-bg a.blue-link{color: #0b00f0;}
+div.jumbotron.jumbotron-bg a.blue-link:hover{color: #ff0000; text-decoration: none;}

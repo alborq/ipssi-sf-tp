@@ -10,6 +10,8 @@ use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -111,6 +113,54 @@ class SecurityController extends AbstractController
       $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+  }
+
+  public function passwordForgotten(Request $request, UserPasswordEncoderInterface $encoder, Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
+  {
+
+    if ($request->isMethod('POST')){
+      $email = $request->request->get('email');
+
+      $entityManager = $this->getDoctrine()->getManager();
+
+      /* @var $user User */
+      $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
+
+      if ($user === null) {
+        $this->addFlash('danger', 'Email Inconnu');
+        return $this->redirectToRoute('blog/index.html.twig');
+      }
+
+      $token = $tokenGenerator->generateToken();
+
+      try{
+
+        $user->setResetToken($token);
+        $entityManager->flush();
+
+      } catch (\Exception $e) {
+
+        $this->addFlash('warning', $e->getMessage());
+        return $this->redirectToRoute('homepage');
+
+      }
+
+      $url = $this->generateUrl('app_reset_password', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+
+      $message = (new Swift_Message('Mot de passe oubliey'))
+      $message->setFrom('contact@betrocket.com')
+      $message->setTo($user->getEmail())
+      $message->setBody(
+        "blablabla voici le token pour reset votre mot de passe : " . $url,
+        'text/html'
+      );
+
+      $mailer->send($message);
+
+      $this->addFlash('notice', 'Mail envoyé');
+
+      return $this->redirectToRoute('blog/index.html.twig');
+    }
   }
 
 }

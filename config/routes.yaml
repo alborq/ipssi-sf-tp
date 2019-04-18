@@ -5,3 +5,7 @@ registration:
 login:
   path: /login
   controller: App\Controller\SecurityController::login
+
+password:
+  path: /password
+  controller: App\Controller\SecurityController::passwordForgotten

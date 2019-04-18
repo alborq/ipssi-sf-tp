@@ -38,7 +38,7 @@ class RouletteCommand extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine');
+        $em = $this->getContainer()->get('doctrine')->getEntityManager();
 
         $allGame = $em->getRepository(Game::class)->findAll();
         foreach ($allGame as $game) {

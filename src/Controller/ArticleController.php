@@ -36,7 +36,6 @@ class ArticleController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $comment = $form->getData();
             $comment->setCreatedAt(new \DateTime('NOW'))
                 ->setAuthor($this->getUser())

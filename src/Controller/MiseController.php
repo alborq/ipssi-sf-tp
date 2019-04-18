@@ -20,7 +20,6 @@ class MiseController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $mise = $form->getData();
             $mise->setCreatedAt(new \DateTime("NOW"))
                 ->setUser($this->getUser())

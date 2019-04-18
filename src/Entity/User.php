@@ -78,7 +78,8 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return "{$this->getFirstname()} {$this->getLastName()}";
     }
 
@@ -286,9 +287,8 @@ class User implements UserInterface
         return $this;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getFirstname();
     }
-
-
 }

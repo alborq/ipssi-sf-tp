@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class BlogController
@@ -45,13 +46,14 @@ class BlogController extends AbstractController
     }
 
     /**
+     * @param Security $security
      * @param Request $request
      * @param int $id
      * @return Response
      * @throws Exception
      * @Route("/{id}", name="showAdvert")
      */
-    public function showAdvert(Request $request, int $id)
+    public function showAdvert(Security $security, Request $request, int $id)
     {
         $comment = new Comment();
         $em = $this->getDoctrine()->getManager();
@@ -63,7 +65,7 @@ class BlogController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
-            $comment->setUser($this->get('security.token_storage')->getToken()->getUser());
+            $comment->setUser($security->getUser());
             $comment->setAdvert($advert);
             $comment->setDate(new DateTime());
             $comment->setEnabled(true);
@@ -80,12 +82,12 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @param $id
      * @param $state
+     * @param int $id
      * @return RedirectResponse
      * @Route("/{state}/{id}", name="manageComment")
      */
-    public function deleteComment($state, $id)
+    public function deleteComment($state, int $id)
     {
         $em = $this->getDoctrine()->getManager();
         $mycomment = $em->getRepository(Comment::class)->find($id);

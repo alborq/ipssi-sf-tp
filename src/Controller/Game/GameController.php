@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class GameController
@@ -23,15 +24,15 @@ class GameController extends AbstractController
 {
     /**
      * @Route("/", name="gameHome")
+     * @param Security $security
      * @param Request $request
      * @return RedirectResponse|Response
-     * @throws Exception
      */
-    public function index(Request $request)
+    public function index(Security $security, Request $request)
     {
         $bet = new Bet();
         $Bets = "";
-        $userConnected = $this->get('security.token_storage')->getToken()->getUser();
+        $userConnected = $security->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $Games  = $em->getRepository(Game::class)->findAll();
@@ -49,7 +50,8 @@ class GameController extends AbstractController
 
             $playerexist = false;
             foreach ($Games as $game) {
-                foreach ($game->getPlayers() as $player) {
+                $players = $game->getPlayers();
+                foreach ($players as $player) {
                     if ($player == $userConnected && $game == $bet->getGame()) {
                         $playerexist = true;
                     }

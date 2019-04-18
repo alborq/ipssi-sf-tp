@@ -7,6 +7,7 @@ use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class SecurityController
@@ -16,13 +17,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
     /**
+     * @param Security $security
      * @return Response
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(Security $security)
     {
         $player = "";
-        $userConnected = $this->get('security.token_storage')->getToken()->getUser();
+        $userConnected = $security->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $Games  = $em->getRepository(Game::class)->findAll();

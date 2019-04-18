@@ -1,7 +1,14 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+blog:
+  resource: 'routes/blog.yaml'
+  prefix: '/blog'
+
 registration:
   resource: 'routes/registration.yaml'
   prefix: '/registration'
 
 login:
-  path: /login
-  controller: App\Controller\SecurityController::login
+  resource: 'routes/login.yaml'
+  prefix: '/login'

@@ -1,0 +1,8 @@
+# fixtures/user.yml
+
+App\Entity\User:
+    user{1..10}:
+        lastname : '<lastName()>'
+        firstname: '<firstName(randomElements("male","female"))>'
+        email: '$firstname.$lastname@gmail.com'
+        password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$aTd4TG5wOU1iS1JRSVdxdw\$u+hOTMI/E709LTgb/i2v/ujxVtbHM99ccqxZQKBXxZk'

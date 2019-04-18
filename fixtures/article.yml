@@ -1,0 +1,9 @@
+# fixtures/article.yml
+
+App\Entity\Article:
+    article{1..10}:
+        title : <word()>
+        content: '<text()>'
+        createdAt: '<dateTime()>'
+        img: '<imageUrl(900, 600)>'
+        author: '@user<numberBetween(1, 10)>'

@@ -1,0 +1,11 @@
+list_article:
+    path: /
+    controller: App\Controller\ArticleController::list
+
+details_article:
+    path: /detail/{id}
+    controller: App\Controller\ArticleController::detail
+
+add_view_articme:
+    path: /addView
+    controller: App\Controller\ArticleController::addView

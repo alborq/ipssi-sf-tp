@@ -1,0 +1,16 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ${PHP_VERSION}-fpm-alpine
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install vendor
+          command: composer install
+
+      - run:
+          name: Code Style
+          command: make tests

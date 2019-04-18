@@ -1,0 +1,11 @@
+login_user:
+    path: /login
+    controller: App\Controller\UserController::login
+
+logout_user:
+    path: /logout
+    controller: App\Controller\UserController::logout
+
+register_user:
+    path: /register
+    controller: App\Controller\UserController::register

@@ -1,0 +1,14 @@
+article:
+  resource: 'routes/article.yaml'
+  prefix: '/article'
+
+mises:
+  resource: 'routes/mises.yaml'
+  prefix: '/mises'
+
+login:
+  resource: 'routes/user.yaml'
+
+home:
+  path: /
+  controller: App\Controller\HomeController::index

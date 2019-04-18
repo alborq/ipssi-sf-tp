@@ -45,6 +45,9 @@ exe:
 tests:
 	vendor/bin/phpcs src
 	vendor/bin/phpstan analyse --level 6 src
+
+.PHONY: tests-fix ## Fix le cs de mon app
+tests-fix:
 	vendor/bin/phpcbf src
 
 ##

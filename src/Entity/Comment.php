@@ -16,37 +16,35 @@ class Comment
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $author;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $content;
 
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
     /**
      * @ORM\Column(type="integer")
      */
+    private $author;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Article", inversedBy="comment", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
     private $article;
+
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAuthor(): ?string
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(string $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
 
     public function getContent(): ?string
     {
@@ -60,12 +58,37 @@ class Comment
         return $this;
     }
 
-    public function getArticle(): ?int
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?int
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(int $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    public function setArticle(int $article): self
+    public function setArticle(Article $article): self
     {
         $this->article = $article;
 

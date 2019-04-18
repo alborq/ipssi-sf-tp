@@ -31,6 +31,16 @@ class Article
      */
     private $author;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Comment", mappedBy="article", cascade={"persist", "remove"})
+     */
+    private $comment;
+
 
     public function getId(): ?int
     {
@@ -69,6 +79,35 @@ class Article
     public function setAuthor(int $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    public function getComment(): ?Comment
+    {
+        return $this->comment;
+    }
+
+    public function setComment(Comment $comment): self
+    {
+        $this->comment = $comment;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $comment->getArticle()) {
+            $comment->setArticle($this);
+        }
 
         return $this;
     }

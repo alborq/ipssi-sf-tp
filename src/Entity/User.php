@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -44,6 +43,20 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author")
      */
     private $comments;
+    /**
+     * @ORM\Column(type = "string", length = 255)
+     */
+    private $nickname;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCertified = false;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $certifiedCode = null;
 
 
     public function __construct()
@@ -51,6 +64,7 @@ class User implements UserInterface
         $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -130,6 +144,7 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+
     /**
      * @return Collection|Article[]
      */
@@ -144,9 +159,20 @@ class User implements UserInterface
             $this->articles[] = $article;
             $article->setAuthor($this);
         }
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): self
+    {
+        $this->nickname = $nickname;
 
         return $this;
     }
+
 
     public function removeArticle(Article $article): self
     {
@@ -192,4 +218,28 @@ class User implements UserInterface
         return $this;
     }
 
+
+    public function getIsCertified(): ?bool
+    {
+        return $this->isCertified;
+    }
+
+    public function setIsCertified(bool $isCertified): self
+    {
+        $this->isCertified = $isCertified;
+
+        return $this;
+    }
+
+    public function getCertifiedCode(): ?string
+    {
+        return $this->certifiedCode;
+    }
+
+    public function setCertifiedCode(string $certifiedCode): self
+    {
+        $this->certifiedCode = $certifiedCode;
+
+        return $this;
+    }
 }

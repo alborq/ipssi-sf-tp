@@ -4,27 +4,22 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserRegistrationType;
-use App\Repository\UserRepository;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class SecurityController extends AbstractController
 {
 
   public function login(AuthenticationUtils $authenticationUtils): Response
   {
-    //dd($this->getUser());
-    // get the login error if there is one
     $error = $authenticationUtils->getLastAuthenticationError();
-
-    // last username entered by the user
     $lastUsername = $authenticationUtils->getLastUsername();
 
     return $this->render('security/loginForm.html.twig', [
@@ -70,14 +65,14 @@ class SecurityController extends AbstractController
 
       $mailer->send($message);
 
-      //return $this->redirectToRoute('blog'); Redirigé vers le menu avec un popup allez voir vos mails
-      return $this->redirectToRoute('registration');
+      return $this->redirectToRoute('blog');
 
     }
 
     return $this->render('security/registerForm.html.twig', [
       'UserRegistrationForm' => $form->createView()
     ]);
+
   }
 
   public function confirm(Request $request): Response

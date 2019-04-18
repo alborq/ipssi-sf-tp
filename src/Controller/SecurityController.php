@@ -4,37 +4,36 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserRegistrationType;
-use App\Repository\UserRepository;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
 
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-      //dd($this->getUser());
-      // get the login error if there is one
+        //dd($this->getUser());
+        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-      // last username entered by the user
+        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/loginForm.html.twig', [
-        'title' => 'Bet Rocket | Login',
-        'last_username' => $lastUsername,
-        'error' => $error,
+            'title' => 'Bet Rocket | Login',
+            'last_username' => $lastUsername,
+            'error' => $error,
         ]);
     }
 
     public function register(Request $request, UserPasswordEncoderInterface $encoder, Swift_Mailer $mailer): Response
     {
-      /** @var User $user */
+        /** @var User $user */
         $form = $this->createForm(UserRegistrationType::class);
         $form->handleRequest($request);
 
@@ -50,7 +49,7 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-          // Mail part
+            // Mail part
             $message = (new Swift_Message('Validate your account'));
             $message->setFrom('contact@betrocket.com');
             $message->setTo($user->getEmail());
@@ -58,9 +57,9 @@ class SecurityController extends AbstractController
                 $this->renderView(
                     'email/registrationValidator.html.twig',
                     [
-                    'nickname' => $user->getNickname(),
-                    'certification' => $code,
-                    'randomString' => $code
+                        'nickname' => $user->getNickname(),
+                        'certification' => $code,
+                        'randomString' => $code
                     ]
                 ),
                 'text/html'
@@ -72,7 +71,7 @@ class SecurityController extends AbstractController
         }
 
         return $this->render('security/registerForm.html.twig', [
-        'UserRegistrationForm' => $form->createView()
+            'UserRegistrationForm' => $form->createView()
         ]);
     }
 
@@ -90,14 +89,14 @@ class SecurityController extends AbstractController
 
         if (!empty($user)) {
             return $this->render('security/registerForm.html.twig', array(
-            'UserRegistrationForm' => $form->createView(),
-            'exist' => true
+                'UserRegistrationForm' => $form->createView(),
+                'exist' => true
             ));
         }
 
         return $this->render('security/registerForm.html.twig', array(
-        'UserRegistrationForm' => $form->createView(),
-        'exist' => false
+            'UserRegistrationForm' => $form->createView(),
+            'exist' => false
         ));
     }
 

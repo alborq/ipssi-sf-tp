@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,16 +29,24 @@ class Comment
      */
     private $created;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $author;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Article", inversedBy="comment", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $author;
+
+
+    public function __construct()
+    {
+        $this->author = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -71,17 +80,6 @@ class Comment
         return $this;
     }
 
-    public function getAuthor(): ?int
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(int $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
 
     public function getArticle(): ?Article
     {
@@ -94,4 +92,17 @@ class Comment
 
         return $this;
     }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
 }

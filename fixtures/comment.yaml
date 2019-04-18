@@ -3,5 +3,5 @@ App\Entity\Comment:
     __construct: false
     content: '<paragraph($nbSentences = 3, $variableNbSentences = true)>'
     created: "<dateTimeBetween('1 year ago', 'now')>"
-    author: '<numberBetween(1,100)>'
+    author: '@user-<numberBetween(1,100)>'
     article: "@article-<numberBetween(1,50)>"

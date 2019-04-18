@@ -4,4 +4,4 @@ App\Entity\Article:
     title (unique): '<word()>'
     content: '<paragraph(3, true)>'
     created: "<dateTimeBetween('1 year ago', 'now')>"
-    author: '<numberBetween(1,100)>'
+    author: '@user-<numberBetween(1,100)>'

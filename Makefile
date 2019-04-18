@@ -9,6 +9,14 @@ help:
 		| sed 's/\(##\)/\t/' \
 		| expand -t14
 
+.PHONY: startServer ## Start symfony server
+startServer:
+	php bin/console server:run
+
+.PHONY: fixtures ## Start symfony server
+fixtures:
+	php bin/console hautelook:fixtures:load
+
 .PHONY: start ## Démarre le projet
 start:
 	docker-compose up -d

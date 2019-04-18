@@ -289,10 +289,7 @@ class User implements UserInterface
         $this->amountBet = $amountBet;
     }
 
-    /**
-     * @return string
-     */
-    public function getResetToken(): string
+    public function getResetToken()
     {
         return $this->resetToken;
     }

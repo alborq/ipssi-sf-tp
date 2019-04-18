@@ -150,7 +150,6 @@ class SecurityController extends AbstractController
 
     /**
      * @param Request $request
-     * @param UserPasswordEncoderInterface $encoder
      * @param Swift_Mailer $mailer
      * @param TokenGeneratorInterface $tokenGenerator
      * @return Response
@@ -158,7 +157,6 @@ class SecurityController extends AbstractController
      */
     public function forgottenPassword(
         Request $request,
-        UserPasswordEncoderInterface $encoder,
         Swift_Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
     ): Response {
@@ -190,10 +188,10 @@ class SecurityController extends AbstractController
             );
 
             $message = (new Swift_Message('Forgot Password'))
-                ->setFrom('g.ponty@dev-web.io')
+                ->setFrom('adminSymfony@admin.fr')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "blablabla voici le token pour reseter votre mot de passe : " . $url,
+                    "Voici le lien pour reset votre password : " . $url,
                     'text/html'
                 );
 

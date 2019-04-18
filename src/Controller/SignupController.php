@@ -20,7 +20,7 @@ class SignupController extends AbstractController
     public function signUp(Request $request): Response
     {
         $user = $this->createForm(UserInscriptionType::class)->handleRequest($request);
-        if($user->isSubmitted() && $user>isValid()){
+        if ($user->isSubmitted() && $user>isValid()) {
             $this->getDoctrine()->getManager()
                 ->persist($user->getData())
                 ->flush();

@@ -58,5 +58,4 @@ class Comment
     {
         $this->article = $article;
     }
-
 }

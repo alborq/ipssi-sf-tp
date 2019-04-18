@@ -36,21 +36,10 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        $title = "Log in";
         $error = $authenticationUtils->getLastAuthenticationError();
         $last_username = $authenticationUtils->getLastUsername();
-        $user = new User();
 
-        $form = $this->createFormBuilder($user)
-            ->add('_username', TextType::class)
-            ->add('_password', PasswordType::class)
-            ->add('save', SubmitType::class)
-            ->getForm()
-        ;
-
-        return $this->render('Security/manager.html.twig', array(
-            'page'          => $title,
-            'form'          => $form->createView(),
+        return $this->render('Security/login.html.twig', array(
             'error'         => $error,
             'last_username' => $last_username,
         ));
@@ -97,7 +86,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        return $this->render('Security/manager.html.twig', array(
+        return $this->render('Security/register.html.twig', array(
             'page'      => $title,
             'form'      => $form->createView(),
             'error'     => $error,

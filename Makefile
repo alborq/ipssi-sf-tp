@@ -19,7 +19,14 @@ fixtures:
 
 .PHONY: start ## Démarre le projet
 start:
+	docker-compose pull
+	docker-compose build
 	docker-compose up -d
+	composer install
+	php bin/console doctrine:database:create
+	php bin/console doctrine:schema:update --force
+	php bin/console make:migration
+	php bin/console hautelook:fixtures:load -q
 
 .PHONY: exec ## Permet de se connecter a l'intérieur du container app
 exec:

@@ -95,11 +95,13 @@ class BlogController extends AbstractController
         if ($state == "hide") {
             /** @var $myComment Comment */
             $myComment->setEnabled(false);
+            dump($myComment);
             $em->persist($myComment);
             $em->flush();
         } else {
             /** @var $myComment Comment */
             $myComment->setEnabled(true);
+            dump($myComment);
             $em->persist($myComment);
             $em->flush();
         }

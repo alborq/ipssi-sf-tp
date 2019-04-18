@@ -7,14 +7,14 @@
     <h1>Homepage !</h1>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         {% if player is defined and player is not empty %}
-            <h1>My Bet :</h1>
+            <h1>My Bet History :</h1>
             <table class="table table-hover table-responsive">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Amount</th>
                     <th>Game</th>
-                    <th>Potential gain</th>
+                    <th>Game amount</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,7 @@
                         <td>{{ bet.id }}</td>
                         <td>{{ bet.amount }}</td>
                         <td>{{ bet.game.name }}</td>
-                        <td>{% set gain = bet.amount + app.user.amount %}{{ gain }}</td>
+                        <td>{{ bet.game.amount }}</td>
                     </tr>
                 {% else %}
                     <tr>

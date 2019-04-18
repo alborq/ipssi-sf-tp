@@ -38,6 +38,11 @@ class Game
      */
     private $bets;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\CaseGame")
+     */
+    private $result;
+
     public function __construct()
     {
         $this->players = new ArrayCollection();
@@ -133,4 +138,21 @@ class Game
     {
         $this->amount = $amount;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    /**
+     * @param mixed $result
+     */
+    public function setResult($result): void
+    {
+        $this->result = $result;
+    }
+
 }

@@ -20,21 +20,23 @@
                 <tr>
                     <th>#</th>
                     <th>Bet</th>
+                    <th>Bet on</th>
                     <th>Game</th>
                     <th>Potential gain</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for bet in bets %}
+                {% for bet in bets if bet.enabled %}
                     <tr>
                         <td>{{ bet.id }}</td>
                         <td>{{ bet.amount }}</td>
+                        <td>{{ bet.type }}</td>
                         <td>{{ bet.game.name }}</td>
                         <td>{% set gain = bet.amount + app.user.amount %}{{ gain }}</td>
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="4" style="text-align: center;color: red;">No Bet</td>
+                        <td colspan="5" style="text-align: center;color: red;">No Bet</td>
                     </tr>
                 {% endfor %}
                 </tbody>

@@ -7,6 +7,7 @@ use App\Entity\Advert;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use DateTime;
+use Exception;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -47,7 +48,7 @@ class BlogController extends AbstractController
      * @param Request $request
      * @param int $id
      * @return Response
-     * @throws \Exception
+     * @throws Exception
      * @Route("/{id}", name="showAdvert")
      */
     public function showAdvert(Request $request, int $id)

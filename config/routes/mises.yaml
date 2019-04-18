@@ -1,0 +1,8 @@
+miser:
+    path: /miser
+    controller: App\Controller\MiseController::miser
+
+check_gain:
+    path: /check
+    controller: App\Controller\MiseController::checkGain
+

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}Nos Articles{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <h1>Liste des articles</h1>
+        <div class="row">
+            {% for article in articles | sortbyfield('createdAt', 'desc')%}
+                <div class="col-6 mb-5">
+                    <div class="post-module">
+                        <!-- Thumbnail-->
+                        <div class="thumbnail">
+                            <div class="date">
+                                <div class="day">{{ article.createdAt | date('d') }}</div>
+                                <div class="month" style="position: relative; top: -8px">{{ article.createdAt | date('MMMM') | slice(0, 3) }}</div>
+                            </div><img src="{{ article.img }}" />
+                        </div>
+                        <!-- Post Content-->
+                        <div class="post-content">
+                            <a href="{{ path("details_article", { 'id': article.id }) }}"><h1 class="title">{{ article.title }}</h1></a>
+                            <p class="description">{{ article.content | slice(0, 200) | raw}}...</p>
+                            <div class="post-meta">
+                                <span><i class="fa fa-eye"></i> {{ article.view }} vue(s)</span>
+                                <span class="comments">
+                                <i class="fa fa-comments"></i>
+                                <a href="#">
+                                    {{ article.comments | length }} commentaire(s)</a>
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+{% endblock %}

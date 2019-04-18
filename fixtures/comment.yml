@@ -1,0 +1,8 @@
+# fixtures/comment.yml
+
+App\Entity\Comment:
+    comment{1..10}:
+        author : '@user<numberBetween(1, 10)>'
+        content: '<paragraph(3)>'
+        createdAt: '<dateTime()>'
+        article: '@article<numberBetween(1, 10)>'

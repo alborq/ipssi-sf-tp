@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Miser dés Maintenant{% endblock %}
+
+{% block body %}
+<div class="container">
+    {{ form_start(form) }}
+    {{ form_row(form.amount) }}
+    {{ form_row(form.numCase) }}
+
+    <button type="submit">Miser!</button>
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}

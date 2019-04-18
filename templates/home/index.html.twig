@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="display-4">Salut, toi !</h1>
+        <p class="lead">Tu est alternant ? Besoin d'argent viens miser ta petite paie.</p>
+        <hr class="my-4">
+        <p>90% des joueurs ont doublé leurs mise de départ.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{{ path("miser") }}" role="button">Miser !</a>
+        </p>
+    </div>
+{% endblock %}

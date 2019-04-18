@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container dark-modal">
+        <div class="alert alert-dismissible alert-success">
+            <h2>L'utilisateur a bien été créer</h2>
+        </div>
+        <h2 style="text-align: center">Ajouter un utilisateur</h2>
+        <div class="px-4 py-3">
+            {{ form_start(userInscriptionForm) }}
+            {{ form_row(userInscriptionForm.email, {
+                'label': "Email",
+                'attr': {
+                    class: "form-control"
+                }
+            }) }}
+            {{ form_row(userInscriptionForm.password, {
+                'label': "Password",
+                'attr': {
+                    class: "form-control"
+                }
+            }) }}
+            {{ form_rest(userInscriptionForm) }}
+            <br>
+            <hr>
+            <div class="row justify-content-md-center">
+                <button type="submit" class="btn btn-lg btn-primary">Creer l'utilisateur</button>
+                {{ form_end(userInscriptionForm) }}
+            </div>
+
+        </div>
+    </div>
+
+
+{% endblock %}

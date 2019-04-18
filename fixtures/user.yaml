@@ -1,0 +1,22 @@
+App\Entity\User:
+  user-{1..10}:
+    __construct: false    
+    username (unique): '<name()>'    
+    roles: '[ROLE_USER]' 
+    email: '$username@gmail.com'
+    password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$RUN2UzZCRDlsRkFIcDM0Rg\$6HjDSVEjYPZXAOnSSd3Z+KsJvlD6vX9mxqE/2FCejTs'
+    amount: '<numberBetween(50,5000)>'
+
+  admin:
+    username (unique): '<name()>'    
+    roles: '[ROLE_ADMIN]' 
+    email: '$admin@admin.com'
+    password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$RUN2UzZCRDlsRkFIcDM0Rg\$6HjDSVEjYPZXAOnSSd3Z+KsJvlD6vX9mxqE/2FCejTs'
+    amount: '<numberBetween(50,5000)>'  
+
+  user:
+    username (unique): '<name()>'    
+    roles: '[ROLE_USER]' 
+    email: '$user@user.com'
+    password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$RUN2UzZCRDlsRkFIcDM0Rg\$6HjDSVEjYPZXAOnSSd3Z+KsJvlD6vX9mxqE/2FCejTs'
+    amount: '<numberBetween(50,5000)>'  

@@ -8,6 +8,8 @@ Création d'une platform de pari eu ligne
   - Groupe de 3 Max
   - Le Projet doit être démarrable via 'make start' sur un docker
   - Un jeu de test (fixtures) doit être présent, couvrant l'ensemble du scope du projet
+        admin@admin.com
+        user@user.com
   - Le rendu se faire sur Github,
 	- Une PR par groupe sur le dépot de base : https://github.com/alborq/ipssi-sf-tp ( Créer votre fork)
 	- La PR doit être ouvert dés Lundi, Elle porte le nom des membres du groupe.
@@ -33,8 +35,7 @@ Création d'une platform de pari eu ligne
   - Une zone de blog
 	  - Liste des articles paginé (10 par page)
 	  - Consultation d'un article.
-	  - Une zone de commentaire sous chaque article. Seul les utilisateurs connecter peuvent commenter.
-	  	(Nom de l'utilisateur, Date, message full text) 
+	  - Une zone de commentaire sous chaque article. (Nom de l'utilisateur, Date, message full text) 
 	  - Un administrateur peut censuré (et dé-censuré) un commentaire (Il n'est plus visible pour les utilisateur sauf admin qui a un indicateur) 
 	  - Un Flux RSS est mis a disposition. 
 

@@ -39,7 +39,6 @@ class GameController extends AbstractController
         $Games  = $em->getRepository(Game::class)->findAll();
 
         if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-
             $idPlayer = $em->getRepository(User::class)->find($userConnected->getId());
             $Bets  = $em->getRepository(Bet::class)->findBy(['player' => $idPlayer]);
         }

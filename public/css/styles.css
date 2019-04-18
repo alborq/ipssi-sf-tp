@@ -1,7 +1,5 @@
-.jumbotron-bg{
-  margin-top: 50px;
-  background-color: #b6d5e1;
-}
+body{background: url("../img/background.jpg") top center no-repeat;}
+.jumbotron-bg{margin-top: 50px; background-color: #b6d5e1; border: 2px solid black;}
 div.jumbotron.jumbotron-bg div{color: red;}
 div.jumbotron.jumbotron-bg h4.success, p.success{color: rgb(39, 99, 60);}
 div.jumbotron.jumbotron-bg h4.danger, p.danger{color: rgb(113, 43, 41);}

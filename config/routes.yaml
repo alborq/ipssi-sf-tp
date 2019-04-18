@@ -7,5 +7,5 @@ login:
   controller: App\Controller\SecurityController::login
 
 password:
-  path: /password
-  controller: App\Controller\SecurityController::passwordForgotten
+  resource: 'routes/password.yaml'
+  prefix: '/password'

@@ -1,0 +1,8 @@
+﻿composer require symfony/debug-pack --dev : pour avoir la barre de débug
+composer require annotations : pour faire les annotations pour les routes (ex: ArticleController)
+composer require form validator : Nous permet de faire des formulaires (ex: Article/add.html.twig)
+composer require maker : pouvoir nous creer des entity pour la base de données (ex: Entity/Article)
+composer require symfony/asset: pour gérer image etc
+composer require symfony/orm-pack : Doctrine pour la bdd (ex: ArticleController)
+composer require symfony/security-bundle : faire la sécurité des comptes utilisateurs
+composer require knplabs/knp-paginator-bundle : pour la pagination (ex: Article/list.html.twig)

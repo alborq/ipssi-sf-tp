@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if isOk %}
+    <div class="alert alert-dismissible alert-success">
+        <h2>L'article a bien été créer</h2>
+    </div>
+    {% else %}
+    <h2 style="text-align: center">Ajouter un article</h2>
+        {{ form_start(articleForm) }}
+        {{ form_row(articleForm.titreArticle, {
+            'label': "Titre de l'article",
+            'attr': {
+                class: "form-control"
+            }
+        }) }}
+        {{ form_row(articleForm.contenuArticle, {
+            'label': "Contenu de l'article",
+            'attr': {
+                class: "form-control"
+            }
+        }) }}
+        {{ form_rest(articleForm) }}
+        <br>
+        <button type="submit" class="btn btn-secondary">Ajouter l'article</button>
+        {{ form_end(articleForm) }}
+    {% endif %}
+{% endblock %}

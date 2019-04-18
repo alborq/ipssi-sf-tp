@@ -1,0 +1,7 @@
+App\Entity\Users:
+  Users-{1..25}:
+    __construct: false
+    name: '<name()>'
+    mail: '<email()>'
+    password: '<password()>'
+    admin: '<numberBetween(0,1)>'

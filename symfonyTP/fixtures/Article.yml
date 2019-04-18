@@ -1,0 +1,5 @@
+App\Entity\Article:
+  Article-{1..25}:
+    __construct: false
+    titre_article: '<text()>'
+    contenu_article: '<text()>'

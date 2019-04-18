@@ -1,4 +1,3 @@
-
 # Thème: 
 [![CircleCI](https://circleci.com/gh/alborq/ipssi-sf-tp.svg?style=svg)](https://circleci.com/gh/alborq/ipssi-sf-tp) 
 
@@ -72,3 +71,4 @@ Création d'une platform de pari eu ligne
 	- Ajouter Stripe comme systeme de payement pour pouvoir remplir le compte de l'utilisateur
 	- Ajouter Une page d'historique de transaction sur le profil du joueur
 
+Groupe : Alexandre Vigier, Bryce Tavares ,Adrien Stupnicki

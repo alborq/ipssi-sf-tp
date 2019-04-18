@@ -24,19 +24,12 @@ class HomeController extends AbstractController
     public function index(Security $security)
     {
         $player = "";
-        /** @var $userConnected User */
-        $userConnected = $security->getUser();
-        $em = $this->getDoctrine()->getManager();
-
-        $Games  = $em->getRepository(Game::class)->findAll();
-
         if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            $player = $em->getRepository(User::class)->find($userConnected->getId());
+            $player = $security->getUser();
         }
 
         return $this->render("index.html.twig", array(
             'player'  => $player,
-            'games'   => $Games,
         ));
     }
 }

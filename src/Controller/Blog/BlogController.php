@@ -90,22 +90,22 @@ class BlogController extends AbstractController
     public function deleteComment(string $state, int $id)
     {
         $em = $this->getDoctrine()->getManager();
+        /** @var $myComment Comment */
         $myComment = $em->getRepository(Comment::class)->find($id);
 
-        if ($state == "hide") {
-            /** @var $myComment Comment */
-            $myComment->setEnabled(false);
-            dump($myComment);
-            $em->persist($myComment);
-            $em->flush();
-        } else {
-            /** @var $myComment Comment */
-            $myComment->setEnabled(true);
-            dump($myComment);
-            $em->persist($myComment);
-            $em->flush();
+        if (!$myComment) {
+            throw $this->createNotFoundException(
+                'No comment found for id '.$id
+            );
         }
 
+        if ($state == "hide") {
+            $myComment->setEnabled(false);
+        } else {
+            $myComment->setEnabled(true);
+        }
+
+        $em->flush();
 
         return $this->redirectToRoute('blogHome');
     }

@@ -8,7 +8,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={email},message="email already exist")
  */
 class User implements UserInterface
 {

@@ -22,12 +22,12 @@ class Article
     private $title;
 
     /**
-     * @ORM\Column(type=text)
+     * @ORM\Column(type="text")
      */
     private $content;
 
     /**
-     * @ORM\Column(type=datetime)
+     * @ORM\Column(type="datetime")
      */
     private $creationDate;
 

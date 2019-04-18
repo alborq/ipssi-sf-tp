@@ -41,6 +41,7 @@ start: docker-compose.override.yml
 	$(FIG) up -d
 	$(FIG) exec -u 1000:1000 app composer install
 	$(EXEC) $(CONSOLE) doctrine:database:create --if-not-exists
+	$(EXEC) $(CONSOLE) doctrine:schema:update --force
 
 .PHONY: dup ## restart the project
 dup:

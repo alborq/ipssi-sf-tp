@@ -22,14 +22,20 @@ class Article
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type=text)
      */
     private $content;
+
+    /**
+     * @ORM\Column(type=datetime)
+     */
+    private $creationDate;
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
 
     public function getTitle(): ?string
     {
@@ -53,5 +59,21 @@ class Article
         $this->content = $content;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * @param mixed $creationDate
+     */
+    public function setCreationDate($creationDate): void
+    {
+        $this->creationDate = $creationDate;
     }
 }

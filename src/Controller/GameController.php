@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace App\Controller;
+
 use App\Entity\Game;
 use App\Form\GameType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

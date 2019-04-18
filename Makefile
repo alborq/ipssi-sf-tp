@@ -23,9 +23,9 @@ exec:
 
 .PHONY: tests ##Lancer les tests de l'application
 tests:
-	vendor/bin/phpcs src 
-	vendor/bin/phpstan analyse --level 6 src
+	phpcs src 
+	phpstan analyse --level 6 src
 
 .PHONY: tests-fix ## Fix le cs de mon appli
 tests-fix:
-	vendor/bin/phpcbf src
+	phpcbf src

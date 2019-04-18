@@ -1,5 +1,5 @@
 FIG=docker-compose
-CONSOLE=bin/console
+CONSOLE=php bin/console
 .DEFAULT_GOAL := help
 
 .PHONY: help ## Generate list of targets with descriptions

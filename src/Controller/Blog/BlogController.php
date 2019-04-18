@@ -93,12 +93,12 @@ class BlogController extends AbstractController
         $myComment = $em->getRepository(Comment::class)->find($id);
 
         if ($state == "hide") {
-            /** var $myComment Comment */
+            /** @var $myComment Comment */
             $myComment->setEnabled(false);
             $em->persist($myComment);
             $em->flush();
         } else {
-            /** var $myComment Comment */
+            /** @var $myComment Comment */
             $myComment->setEnabled(true);
             $em->persist($myComment);
             $em->flush();

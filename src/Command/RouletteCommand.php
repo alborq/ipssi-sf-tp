@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Entity\Bet;
 use App\Entity\CaseGame;
 use App\Entity\Game;
+use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class RouletteCommand
  * @package App\Command
- * @Cron(minute="/1")
  */
 class RouletteCommand extends ContainerAwareCommand
 {
@@ -38,7 +38,7 @@ class RouletteCommand extends ContainerAwareCommand
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $em = $this->getContainer()->get('doctrine')->getEntityManager();
+        $em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
         $allGame = $em->getRepository(Game::class)->findAll();
         foreach ($allGame as $game) {

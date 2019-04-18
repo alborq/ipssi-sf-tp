@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   
+        {{ form_start(UserForm) }}
+        {{ form_rest(UserForm) }}
+        <button type="submit">Ajouter un utilisateur</button>
+        {{ form_end(UserForm) }}
+    
+{% endblock %}

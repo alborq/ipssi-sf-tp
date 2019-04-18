@@ -1,0 +1,5 @@
+App\Entity\Article:
+  article-{1-10}:
+    title:  '<title()>'
+    content:  '<content()>'
+    datearticle: "<dateTimeBetween('1 year ago','now')>"

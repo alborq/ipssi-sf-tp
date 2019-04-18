@@ -154,5 +154,4 @@ class Game
     {
         $this->result = $result;
     }
-
 }

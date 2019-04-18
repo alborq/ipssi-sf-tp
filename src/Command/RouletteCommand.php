@@ -51,7 +51,7 @@ class RouletteCommand extends ContainerAwareCommand
 
         foreach ($allGame as $game) {
             $result = $game->getResult();
-            if($result->getNumber() % 2 == 0) {
+            if ($result->getNumber() % 2 == 0) {
                 $parity = "Even";
             } else {
                 $parity = "Odd";
@@ -60,15 +60,18 @@ class RouletteCommand extends ContainerAwareCommand
             $output->writeln($result->getNumber()." ".$result->getColor().' ('.$parity.') !');
 
             foreach ($game->getBets() as $bet) {
-                if($bet->getEnabled()) {
-                    if ($bet->getType() == $result->getNumber() || $bet->getType() == $result->getColor() || $bet->getType() == $parity) {
+                if ($bet->getEnabled()) {
+                    if ($bet->getType() == $result->getNumber() ||
+                        $bet->getType() == $result->getColor() || $bet->getType() == $parity) {
                         $amountPlayer = $bet->getPlayer()->getAmount() + $bet->getAmount();
                         $amountGame = $bet->getGame()->getAmount() - $bet->getAmount();
 
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
-                        $output->writeln($bet->getPlayer()->getUsername()." a gagné en pariant sur ".$bet->getType().' (Table :'.$game->getName().') !');
+                        $output->writeln($bet->getPlayer()->getUsername().
+                            " a gagné en pariant sur ".$bet->getType().
+                            ' (Table :'.$game->getName().') !');
 
                         $bet->setEnabled(false);
                         $em->persist($bet);
@@ -79,14 +82,15 @@ class RouletteCommand extends ContainerAwareCommand
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
-                        $output->writeln($bet->getPlayer()->getUsername()." a perdu en pariant sur ".$bet->getType().' (Table :'.$game->getName().') !');
+                        $output->writeln($bet->getPlayer()->getUsername().
+                            " a perdu en pariant sur ".$bet->getType().
+                            ' (Table :'.$game->getName().') !');
 
                         $bet->setEnabled(false);
                         $em->persist($bet);
                     }
                     $amountbet = $bet->getPlayer()->getAmountBet() - $bet->getAmount();
                     $bet->getPlayer()->setAmountBet($amountbet);
-
                 }
             }
         }

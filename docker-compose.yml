@@ -16,6 +16,7 @@ services:
     image: easybar/php:7.2.9-dev
     depends_on:
       - db
+      - mailhog
     volumes:
       - .:/srv
 
@@ -25,6 +26,9 @@ services:
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - db-data:/var/lib/mysql
-
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
 volumes:
   db-data: {}

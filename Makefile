@@ -1,3 +1,5 @@
+FIG=docker-compose
+CONSOLE=php bin/console
 .DEFAULT_GOAL := help
 
 .PHONY: help ## Generate list of targets with descriptions
@@ -9,24 +11,35 @@ help:
 		| sed 's/\(##\)/\t/' \
 		| expand -t14
 
-.PHONY: start ## Démarre le projet
-start:
-	docker-compose up -d
-	docker-compose exec -u 1000:1000  app composer install
+##
+## Project setup & day to day shortcuts
+##---------------------------------------------------------------------------
 
-.PHONY: dup ## restart le projet
+.PHONY: fstart ## Start the project (The first launch of the app)
+fstart: docker-compose.override.yml
+	$(FIG) pull || true
+	$(FIG) build
+	$(FIG) up -d
+	$(FIG) exec -u 1000:1000 app composer install
+	$(FIG) exec -u 1000:1000 app $(CONSOLE) doctrine:database:create
+
+.PHONY: start ## Start the project
+start: docker-compose.override.yml
+	$(FIG) up -d
+	$(FIG) exec -u 1000:1000 app composer install
+
+.PHONY: dup ## restart the project
 dup:
-	docker-compose stop
-	docker-compose up -d
-	docker-compose exec -u 1000:1000  app composer install
+	$(FIG) stop
+	$(FIG) up -d
 
 .PHONY: stop ## stop the project
 stop:
-	docker-compose down
+	$(FIG) down
 
-.PHONY: exec ## Permet de se connecter a l'intérieur du container app
-exec:
-	docker-compose exec -u 1000:1000  app bash
+.PHONY: exe ## Run bash in the app container
+exe:
+	$(FIG) exec -u 1000:1000 app /bin/bash
 
 .PHONY: tests ## Lance les tests de l'applications
 tests:
@@ -36,3 +49,10 @@ tests:
 .PHONY: tests-fix ## Fix le cs de mon app
 tests-fix:
 	vendor/bin/phpcbf src
+
+##
+## Dependencies Files
+##---------------------------------------------------------------------------
+
+docker-compose.override.yml: docker-compose.override.yml.dist
+	$(RUN) cp docker-compose.override.yml.dist docker-compose.override.yml

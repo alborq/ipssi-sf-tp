@@ -7,3 +7,4 @@
 vendor/
 .
 docker-compose.override.yml
+var/cache

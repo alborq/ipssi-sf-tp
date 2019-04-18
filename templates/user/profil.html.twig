@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+{% block title %}Profil{% endblock %}
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="row mb-2 mt-5">
+                    <div class="col-12">
+                        <h4>
+                            Infos Personnelle
+                        </h4>
+                        <hr/>
+                    </div>
+                </div>
+                {{ form_start(profilForm) }}
+                {{ form_row(profilForm.firstname) }}
+                {{ form_row(profilForm.lastname) }}
+                {{ form_row(profilForm.email) }}
+                <br>
+                <button class="btn btn-primary" type="submit">Modifier !</button>
+                {{ form_end(profilForm) }}
+                <div class="row mb-2 mt-5">
+                    <div class="col-12">
+                        <h4>
+                            Paiement
+                        </h4>
+                        <hr/>
+                    </div>
+                </div>
+                <!-- money -->
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-2 required" for="profil_user_money">Money</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">€ </span>
+                            </div>
+                            <input type="text" id="profil_user_money" name="profil_user[money]" required="required"
+                                class="form-control" value="{{ app.user.money }}.00">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-5">
+                    <div class="col-12">
+                        <h4>
+                            Security
+                        </h4>
+                        <hr/>
+                    </div>
+                </div>
+                {{ form_start(formPassword) }}
+                {{ form_row(formPassword.password) }}
+                <br>
+                <button class="btn btn-primary" type="submit">Modifier !</button>
+                {{ form_end(formPassword) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

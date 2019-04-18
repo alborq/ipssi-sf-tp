@@ -9,3 +9,7 @@ logout_user:
 register_user:
     path: /register
     controller: App\Controller\UserController::register
+
+profil_user:
+    path: /profil/{id}
+    controller: App\Controller\ProfilController::profil

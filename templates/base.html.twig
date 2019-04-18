@@ -45,6 +45,9 @@
                     <span class="nav-link">Money : {{ app.user.money }} €</span>
                 </div>
                 <div class="navbar-nav my-2 my-lg-0">
+                    <a class="nav-link" href="{{ path('profil_user',{'id' : app.user.id}) }}">Profil</a>
+                </div>
+                <div class="navbar-nav my-2 my-lg-0">
                     <a class="nav-link" href="{{ path('logout_user') }}">Déconnexion</a>
                 </div>
             {% else %}

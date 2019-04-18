@@ -41,14 +41,12 @@ class SecurityController extends AbstractController
         $last_username = $authenticationUtils->getLastUsername();
         $user = new User();
 
-        $formBuilder = $this->get('form.factory')->createNamedBuilder(null, FormType::class, $user);
-        $formBuilder
+        $form = $this->createFormBuilder($user)
             ->add('_username', TextType::class)
             ->add('_password', PasswordType::class)
             ->add('save', SubmitType::class)
+            ->getForm()
         ;
-
-        $form = $formBuilder->getForm();
 
         return $this->render('Security/manager.html.twig', array(
             'page'          => $title,
@@ -128,7 +126,7 @@ class SecurityController extends AbstractController
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $user = $entityManager->getRepository(User::class)->findOneByResetToken($token);
+            $user = $entityManager->getRepository(User::class)->findOneBy(['reset_token' => $token]);
             /* @var $user User */
 
             if ($user === null) {
@@ -164,7 +162,8 @@ class SecurityController extends AbstractController
             $email = $request->request->get('email');
 
             $entityManager = $this->getDoctrine()->getManager();
-            $user = $entityManager->getRepository(User::class)->findOneByEmail($email);
+            /** @var $user User */
+            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
             /* @var $user User */
             if ($user === null) {

@@ -19,15 +19,6 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function findOneByEmail($email)
-    {
-        return $query = $this->createQueryBuilder('p')
-            ->andWhere('p.email = :email')
-            ->setParameter('email', $email)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
@@ -51,6 +42,16 @@ class UserRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('u')
             ->andWhere('u.exampleField = :val')
             ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    public function findOneByEmail($email)
+    {
+        return $query = $this->createQueryBuilder('p')
+            ->andWhere('p.email = :email')
+            ->setParameter('email', $email)
             ->getQuery()
             ->getOneOrNullResult()
         ;

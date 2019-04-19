@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b068edc1-ba41-4a37-b639-4f5282bfc347" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/fixtures/user.yml" beforeDir="false" afterPath="$PROJECT_DIR$/fixtures/user.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Faker/Provider/PasswordProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Faker/Provider/PasswordProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,8 +66,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="956">
-              <caret line="167" column="56" lean-forward="true" selection-start-line="167" selection-start-column="56" selection-end-line="167" selection-end-column="56" />
+            <state relative-caret-position="157">
+              <caret line="120" column="28" selection-start-line="120" selection-start-column="28" selection-end-line="120" selection-end-column="28" />
               <folding>
                 <element signature="e#43#63#0#PHP" expanded="true" />
               </folding>
@@ -139,9 +138,9 @@
         <option value="$PROJECT_DIR$/templates/Blog/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Command/RouletteCommand.php" />
         <option value="$PROJECT_DIR$/src/Controller/Game/GameController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
         <option value="$PROJECT_DIR$/src/Faker/Provider/PasswordProvider.php" />
         <option value="$PROJECT_DIR$/fixtures/user.yml" />
+        <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
       </list>
     </option>
   </component>
@@ -350,12 +349,12 @@
       <workItem from="1555574700423" duration="1081000" />
       <workItem from="1555575897997" duration="4605000" />
       <workItem from="1555583135119" duration="882000" />
-      <workItem from="1555584324092" duration="24066000" />
+      <workItem from="1555584324092" duration="24340000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110104000" />
+    <option name="totallyTimeSpent" value="110378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="752" extended-state="6" />
@@ -743,8 +742,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="956">
-          <caret line="167" column="56" lean-forward="true" selection-start-line="167" selection-start-column="56" selection-end-line="167" selection-end-column="56" />
+        <state relative-caret-position="157">
+          <caret line="120" column="28" selection-start-line="120" selection-start-column="28" selection-end-line="120" selection-end-column="28" />
           <folding>
             <element signature="e#43#63#0#PHP" expanded="true" />
           </folding>

@@ -90,6 +90,7 @@ class BlogController extends AbstractController
     public function deleteComment(string $state, int $id)
     {
         $em = $this->getDoctrine()->getManager();
+        /** @var Comment $myComment */
         $myComment = $em->getRepository(Comment::class)->find($id);
 
         if (!$myComment) {

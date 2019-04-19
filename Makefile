@@ -15,8 +15,8 @@ start:
 	&& docker-compose up -d \
 	&& docker-compose exec app composer install \
 	&& docker-compose exec app php bin/console d:d:c --if-not-exists \
+	&& docker-compose exec app php bin/console d:s:u --force\
 	&& docker-compose exec app php bin/console m:m \
-	&& docker-compose exec app php bin/console d:m:m \
 	&& docker-compose exec app php bin/console h:f:l
 
 .PHONY: exec ## Permet de se connecter a l'intérieur du container app

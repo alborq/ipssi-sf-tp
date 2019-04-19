@@ -2,14 +2,17 @@
 
 namespace App\Command;
 
-use App\Entity\Bet;
+use App\Entity\Advert;
 use App\Entity\CaseGame;
 use App\Entity\Game;
 use Doctrine\ORM\EntityManager;
 use Exception;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Twig\Environment;
 
 /**
  * Class RouletteCommand
@@ -17,6 +20,15 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class RouletteCommand extends ContainerAwareCommand
 {
+    private $mailer;
+    private $twig;
+
+    public function __construct(Swift_Mailer $mailer, Environment $twig)
+    {
+        parent::__construct();
+        $this->mailer = $mailer;
+        $this->twig = $twig;
+    }
 
     protected function configure()
     {
@@ -74,12 +86,35 @@ class RouletteCommand extends ContainerAwareCommand
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
+                        $bet->setEnabled(false);
+                        $em->persist($bet);
+
                         $output->writeln($bet->getPlayer()->getUsername().
                             " a gagné en pariant sur ".$bet->getType().
                             ' (Table :'.$game->getName().') !');
 
-                        $bet->setEnabled(false);
-                        $em->persist($bet);
+                    // Mailer
+                    //------------------------------------------------------------------
+                        $message = (new Swift_Message('Vous avez gagner !!!'))
+                            ->setFrom('adminSymfony@admin.fr')
+                            ->setTo($bet->getPlayer()->getEmail())
+                            ->setBody(
+                                "Vous avez gagner ".$bet->getAmount()
+                                ." € en pariant sur ".$bet->getType()
+                                ." de la Table : ".$game->getName(),
+                                'text/html'
+                            );
+
+                        $this->mailer->send($message);
+                    //------------------------------------------------------------------
+
+                        $advertLoose = new Advert();
+                        $advertLoose->setTitle($bet->getPlayer()->getUsername()." won ".$bet->getAmount());
+                        $advertLoose->setContent($bet->getPlayer()->getUsername()
+                            ." won ".$bet->getAmount()." by beting on ".$bet->getType()
+                            ." (".$game->getName().")");
+                        $em->persist($advertLoose);
+                        $em->flush();
                     } else {
                         $amountPlayer = $bet->getPlayer()->getAmount() - $bet->getAmount();
                         $amountGame = $bet->getGame()->getAmount() + $bet->getAmount();
@@ -87,12 +122,35 @@ class RouletteCommand extends ContainerAwareCommand
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
+                        $bet->setEnabled(false);
+                        $em->persist($bet);
+
                         $output->writeln($bet->getPlayer()->getUsername().
                             " a perdu en pariant sur ".$bet->getType().
                             ' (Table :'.$game->getName().') !');
 
-                        $bet->setEnabled(false);
-                        $em->persist($bet);
+                    // Mailer
+                    //------------------------------------------------------------------
+                        $message = (new Swift_Message('Vous avez perdu ...'))
+                            ->setFrom('adminSymfony@admin.fr')
+                            ->setTo($bet->getPlayer()->getEmail())
+                            ->setBody(
+                                "Vous avez perdu ".$bet->getAmount()
+                                ." € en pariant sur ".$bet->getType()
+                                ." de la Table : ".$game->getName(),
+                                'text/html'
+                            );
+
+                        $this->mailer->send($message);
+                    //------------------------------------------------------------------
+
+                        $advertLoose = new Advert();
+                        $advertLoose->setTitle($bet->getPlayer()->getUsername()." lost ".$bet->getAmount());
+                        $advertLoose->setContent($bet->getPlayer()->getUsername()
+                            ." lost ".$bet->getAmount()." by beting on ".$bet->getType()
+                            ." (".$game->getName().")");
+                        $em->persist($advertLoose);
+                        $em->flush();
                     }
                     $amountbet = $bet->getPlayer()->getAmountBet() - $bet->getAmount();
                     $bet->getPlayer()->setAmountBet($amountbet);

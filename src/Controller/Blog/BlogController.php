@@ -6,6 +6,7 @@ namespace App\Controller\Blog;
 use App\Entity\Advert;
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Repository\AdvertRepository;
 use DateTime;
 use Exception;
 use Knp\Component\Pager\PaginatorInterface;
@@ -32,7 +33,11 @@ class BlogController extends AbstractController
     public function index(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
-        $allAppointmentsQuery  = $em->getRepository(Advert::class)->findAdvertByDate();
+
+        /** @var AdvertRepository $repo */
+        $repo = $em->getRepository(Advert::class);
+
+        $allAppointmentsQuery = $repo->findAdvertByDate();
 
         $appointments = $paginator->paginate(
             $allAppointmentsQuery,

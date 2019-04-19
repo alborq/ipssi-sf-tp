@@ -7,6 +7,7 @@ use App\Entity\Bet;
 use App\Entity\Game;
 use App\Entity\User;
 use App\Form\BetType;
+use Doctrine\Common\Collections\Collection;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -37,6 +38,7 @@ class GameController extends AbstractController
         $userConnected = $security->getUser();
         $em = $this->getDoctrine()->getManager();
 
+        /** @var Collection|Game[] $game */
         $Games  = $em->getRepository(Game::class)->findAll();
 
         if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -51,9 +53,9 @@ class GameController extends AbstractController
             $bet = $form->getData();
 
             $playerExist = false;
-            /** @var Game[] $Games */
+
             foreach ($Games as $game) {
-                /** @var Game $game */
+                /** @var Collection|User[] $players */
                 $players = $game->getPlayers();
                 foreach ($players as $player) {
                     if ($player == $userConnected && $game == $bet->getGame()) {

@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <div style="text-align:center; margin-top:1.25rem">
+        <h1>Détails de l'article {{ article.id }} !</h1>
+        <hr>
+        <br>
+    </div>
+    </div>
+    <div class="container">
+        <div class=" row justify-content-md-center">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Publication Date</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.content }}</td>
+                    <td>{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            {#
+                {% if isOk %}
+                <div class="alert alert-dismissible alert-success">
+                    <pre>
+
+                    </pre>
+                </div>
+            {%  endif %}
+            #}
+        </div>
+        <div class="row justify-content-md-center">
+            <table class="table" style="text-align: center">
+                <ttitle><h2>Liste des commentaires</h2></ttitle>
+                <thead>
+                <tr>
+                    <th>Comment id</th>
+                    <th>Content</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.content }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">pas de commentaires trouvés</td>
+                    </tr>
+                {% endfor %}
+                {#
+                    {% if isOk %}
+                    <div class="alert alert-dismissible alert-success">
+                        <pre>
+
+                        </pre>
+                    </div>
+                {%  endif %}
+                #}
+            </table>
+
+        </div>
+            <div>
+            <br>
+                <form>
+                    <div class="form-group purple-border">
+                        <label for="comment">Votre commentaire</label>
+                        <textarea style="width: 50rem" class="form-control" id="exampleFormControlTextarea4" rows="3"></textarea>
+                        <button class="btn btn-lg btn-primary"type="submit">Ajouter Commentaire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+{% endblock %}

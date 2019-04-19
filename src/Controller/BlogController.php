@@ -4,8 +4,11 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Form\ArticlesType;
+use App\Form\CommentFormType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +27,6 @@ class BlogController extends AbstractController
      * @param Request $request
      * @param PaginatorInterface $paginator
      * @return Response
-     * @Route(path="/index")
      */
     public function index(Request $request, PaginatorInterface $paginator) :Response
     {
@@ -44,6 +46,48 @@ class BlogController extends AbstractController
 
         return $this->render('Blog/index.html.twig', [
             'articles' => $articles
+        ]);
+    }
+
+    /**
+     * @Route(path="/show/{id}")
+     */
+    public function show(Request $request, int $id): Response
+    {
+        /** @var ArticleRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $article = $repository->find($id);
+
+        if ($article === null) {
+            throw $this->createNotFoundException();
+        }
+
+        /** @var CommentRepository $commentRepository */
+        $commentRepository = $this->getDoctrine()->getRepository(Comment::class);
+        $comments = $commentRepository->findByArticleId($id);
+
+           /*$newCommentForm = $this->createForm(CommentFormType::class);
+        $newCommentForm->handleRequest($request);
+        if($newCommentForm->isSubmitted() && $newCommentForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            /** @var CommentRepository $commentRepository */
+            /*$commentRepository = $this->getDoctrine()->getRepository(Comment::class);
+
+            $comments = $commentRepository->findByArticleId($id);
+
+            foreach ($comments as $comment)
+            {
+
+            }
+
+            $em->persist($newCommentForm->getData());
+            $em->flush();
+            $isOk = true;
+        }*/
+        return $this->render('ArticleController/view.html.twig', [
+            'article' => $article,
+            'comments' => $comments,
         ]);
     }
 }

@@ -22,38 +22,37 @@
             </tr>
             </thead>
             <tbody>
-            {% for article in articles %}
-                <tr>
-                    <td>{{ article.title }}</td>
-                    <td>{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</td>
-                    <td><a href="{{ path('article_show', {'id': article.id}) }}">Consulter</a></td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">pas trouvé</td>
-                </tr>
-            {% endfor %}
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.title }}</td>
+                        <td>{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                        {# <td><a href="{{ path('article_show', {'id': article.id}) }}">Consulter</a></td> #}
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">pas trouvé</td>
+                    </tr>
+                {% endfor %}
+
             </tbody>
         </table>
-        <div class="col-md-2 col-md-offset-5">
-            <ul class="pagination">
+            <div class="col-md-2 col-md-offset-5">
+                <ul class="pagination">
+                    <li class="page-item active">
+                        {{ knp_pagination_render(articles) }}
+                    </li>
+
+                </ul>
+            </div>
+
+            {#
+                <ul class="pagination">
                 {% for i in 1..10 %}
                     <li class="page-item active">
                         <a class="page-link" href="{{ path('index', {page: i}) }}">{{ i }}</a>
                     </li>&nbsp;
                 {% endfor %}
             </ul>
-
-
-
-            {#
-
-                <div class="navigation">
-                {{ knp_pagination_render(articles) }}
-            </div>
-
-
-
             #}
         </div>
     </div>

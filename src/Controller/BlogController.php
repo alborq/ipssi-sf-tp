@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 // Include paginator interface
 use Knp\Component\Pager\PaginatorInterface;
 
-
 /**
  * Class BlogController
  * @package App\Controller
@@ -30,23 +29,26 @@ class BlogController extends AbstractController
     public function index(Request $request, PaginatorInterface $paginator) :Response
     {
 
-        $doctrine = $this->getDoctrine();
+        $em = $this->getDoctrine()->getManager();
 
-        /** @var PlayerRepository $repository */
-        $repository = $doctrine->getRepository(Article::class);
+        /** @var ArticleRepository $repository */
+        $repository = $em->getRepository(Article::class);
 
-        $articles = $repository->findAll();
+        $articles = $repository->createQueryBuilder('a')
+            ->orderBy('a.creationDate', 'DESC')
+            ->getQuery();
 
-        //dd($articles);
 
-        $paginator->paginate($articles, $request->query->getInt('page', 1, 10));
+        $articles = $paginator->paginate($articles, $request->query->getInt('page', 1), 10);
+
 
         return $this->render('Blog/index.html.twig', [
             'articles' => $articles
         ]);
-
     }
 }
+
+
 
 
 /*public function index(Request $request, PaginatorInterface $paginator)

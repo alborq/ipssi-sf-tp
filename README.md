@@ -1,107 +1,78 @@
-# Symfony Docker
+Contributeur:
 
-A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html) and HTTPS support.
+- Branis AINOUZ
+- Quentin BERGER
+- Kevan PETIT
 
-## Getting Started
+# Thème: 
+[![CircleCI](https://circleci.com/gh/kpetit98/ipssi-sf-tp.svg?style=svg)](https://circleci.com/gh/kpetit98/ipssi-sf-tp) 
 
-1. Run `docker-compose up` (the logs will be displayed in the current shell)
-2. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-3. **Enjoy!**
+Création d'une platform de pari eu ligne
 
-## Selecting a Specific Symfony Version
+## Regles : 
+  - Groupe de 3 Max
+  - Le Projet doit être démarrable via 'make start' sur un docker
+  - Un jeu de test (fixtures) doit être présent, couvrant l'ensemble du scope du projet
+  - Le rendu se faire sur Github,
+	- Une PR par groupe sur le dépot de base : https://github.com/alborq/ipssi-sf-tp ( Créer votre fork)
+	- La PR doit être ouvert dés Lundi, Elle porte le nom des membres du groupe.
+	- Je fais des review régulière sur les PR mis a jour régulièrement		
+  - Créer le fichier suivant :
+    - rendu_lib.txt :
+       - Une ligne par dépendences dans le projet (basé sur le composer.json)
+       - Pour chaque dépendences, Un fichier qui l'utilise + une description court de 'A quoi il VOUS sert.'
 
-Use the `SYMFONY_VERSION` environment variable to select a specific Symfony version.
 
-For instance, use the following command to install Symfony 3.4:
+## Technologies : 
+  - Symfony (pas de version full) 
+  - Docker
+  - Make
+  - Boostwatch, théme au choix : https://bootswatch.com/ (Base bootstrap)
+  - Libs a votre convenance. Sauf les lib Interdite : FOS User, Sonata****, 
+  - CircleCI doit être configurer sur votre projet, et lancer les test de Code Style (Php CS, PhpStan niveau 6)
+    - https://github.com/phpstan/phpstan
+    - https://symfony.com/doc/current/contributing/code/standards.html  
 
-`SYMFONY_VERSION=3.4 docker-compose up --build`
 
-To install a non-stable version of Symfony, use the `STABILITY` environment variable during the build.
-The value must be [a valid Composer stability option](https://getcomposer.org/doc/04-schema.md#minimum-stability)) .
+## Fonctionnalité attendu : 
+  - Une zone de blog
+	  - Liste des articles paginé (10 par page)
+	  - Consultation d'un article.
+	  - Une zone de commentaire sous chaque article. Seul les utilisateurs connecter peuvent commenter.
+	  	(Nom de l'utilisateur, Date, message full text) 
+	  - Un administrateur peut censuré (et dé-censuré) un commentaire (Il n'est plus visible pour les utilisateur sauf admin qui a un indicateur) 
+	  - Un Flux RSS est mis a disposition. 
 
-For instance, use the following command to use the `master` branch of Symfony:
+  - Gestion de compte: 
+   - Possibilité de créer un compte Utilisateur - Email, Mot de passe, Niveau de droit(Standard ou Admin), Montant
+    - mot de passe oublié
+    - Login
+    - Une liste des parti auquel le joueur a participé et ces gain/perte
 
-```bash
-STABILITY=dev docker-compose up --build
-```
+  - Zone de jeu. 
+    - Chaque joueur peut parier a la roulette (Même regle que sur le premier cours)
+      - Une fois parié, le joueur a un récap de sont paris, les montant engagné, les gain potentiel, et le montant total de la table. 
 
-## Debugging
+	- Toutes les deux heures (Ou sous entend un CRON) la roulettes est lancer.
+		- Les gains sont distribué au joueur
+		- Un Article de blog est publié avec les résultat du tirage
+		- Un Mail est envoyer a tout les joueurs avec leur résultat personnel
 
-The default Docker stack is shipped without a Xdebug stage.
-It's easy though to add [Xdebug](https://xdebug.org/) to your project, for development purposes such as debugging tests or API requests remotely.
+  -Zone admin ( sur `/admin/`)
+  - Interface de gestion des compte utilisateur VIA EasyAdminBundle 
+	- Zone de création d'article de blog en MarkDown via un editeur Markdown (https://github.com/KnpLabs/KnpMarkdownBundle, https://github.com/Grafikart/JS-Markdown-Editor)
+		Un Article aura un Titre et une photo d'accroche
+		On pourra réglé si les commentaire sont activé ou pas
+		On pourra choisir la date et l'heure de parution
 
-### Add a Development Stage to the Dockerfile
+	- Dashboard 
+		- les top articles par page vue. (soutent le comptage de 'page vue', (Nombre de fois que la page 'Consultation d'un article' est afficher)
+		- Le montant actuel de la maison
+		- Les top/flop joueurs (Montant les plus haut)
+		- Les top/flop de la semaine (Plus de gain sur les 7 dernier jour)
+		- Un Graph des 7 dernier jour avec le nombre de parti joué par demi journée (Graph en bar groupé par 2(AM, PM))
+		- Un Graph des finances de la maison. 
 
-To avoid deploying Symfony Docker to production with an active Xdebug extension,
-it's recommended to add a custom stage to the end of the `Dockerfile`.
-
-```Dockerfile
-# Dockerfile
-FROM symfony_docker_php as symfony_docker_php_dev
-
-ARG XDEBUG_VERSION=2.6.0
-RUN set -eux; \
-	apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
-	pecl install xdebug-$XDEBUG_VERSION; \
-	docker-php-ext-enable xdebug; \
-	apk del .build-deps
-```
-
-### Configure Xdebug with Docker Compose Override
-
-Using an [override](https://docs.docker.com/compose/reference/overview/#specifying-multiple-compose-files) file named `docker-compose.override.yaml` ensures that the production
-configuration remains untouched.
-
-As example, an override could look like this:
-
-```yaml
-version: '3.4'
-
-services:
-  app:
-    build:
-      context: .
-      target: symfony_docker_php_dev
-    environment:
-      # See https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host
-      # See https://github.com/docker/for-linux/issues/264
-      # The `remote_host` below may optionally be replaced with `remote_connect_back`
-      XDEBUG_CONFIG: >-
-        remote_enable=1
-        remote_host=host.docker.internal
-        remote_port=9001
-        idekey=PHPSTORM
-      # This should correspond to the server declared in PHPStorm `Preferences | Languages & Frameworks | PHP | Servers`
-      # Then PHPStorm will use the corresponding path mappings
-      PHP_IDE_CONFIG: serverName=symfony-docker
-```
-
-Then run:
-
-````bash
-docker-compose up -d
-````
-
-If `docker-compose.yaml` and a `docker-compose.override.yaml` are present on the same directory level, Docker Compose combines the two files into a single configuration, applying the configuration in the `docker-compose.override.yaml` file over and in addition to the values in the `docker-compose.yaml` file.
-
-### Troubleshooting
-
-Inspect the installation with the following command. The requested Xdebug version should be displayed in the output.
-
-```bash
-$ docker-compose exec app php --version
-
-PHP 7.2.8 (cli) (built: Jul 21 2018 08:09:37) ( NTS )
-Copyright (c) 1997-2018 The PHP Group
-Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
-    with Zend OPcache v7.2.8, Copyright (c) 1999-2018, by Zend Technologies
-    with Xdebug v2.6.0, Copyright (c) 2002-2018, by Derick Rethans
-```
-
-### Editing Permissions on Linux
-
-If you work on linux and cannot edit some of the project files right after the first installation, you can run `docker-compose run --rm app chown -R $(id -u):$(id -g) .` to set yourself as owner of the project files that were created by the docker container.
-
-## Credits
-
-Created by [Kévin Dunglas](https://dunglas.fr) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+- Bonus: 
+	- Ajouter Stripe comme systeme de payement pour pouvoir remplir le compte de l'utilisateur
+	- Ajouter Une page d'historique de transaction sur le profil du joueur

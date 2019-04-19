@@ -1,3 +1,23 @@
+USERID=$(shell id -u)
+GROUPID=$(shell id -g)
+
+CONSOLE=php bin/console
+FIG=docker-compose
+HAS_DOCKER:=$(shell command -v $(FIG) 2> /dev/null)
+
+ifdef HAS_DOCKER
+	ifdef APP_ENV
+		EXECROOT=$(FIG) exec -e APP_ENV=$(APP_ENV) app
+		EXEC=$(FIG) exec -e APP_ENV=$(APP_ENV) -u $(USERID):$(GROUPID) app
+	else
+		EXECROOT=$(FIG) exec app
+		EXEC=$(FIG) exec -u $(USERID):$(GROUPID) app
+	endif
+else
+	EXECROOT=
+	EXEC=
+endif
+
 .DEFAULT_GOAL := help
 
 .PHONY: help ## Generate list of targets with descriptions
@@ -9,25 +29,59 @@ help:
 		| sed 's/\(##\)/\t/' \
 		| expand -t14
 
-.PHONY: start ## Démarre le projet
+##
+## Project setup & day to day shortcuts
+##---------------------------------------------------------------------------
+
+.PHONY: start ## Start the project (Install in first place)
 start:
-	docker-compose pull
-	docker-compose build
-	docker-compose up -d
+start: docker-compose.override.yml
+	$(FIG) pull || true
+	$(FIG) build
+	$(FIG) up -d
 	composer install
-	php bin/console doctrine:database:create --if-not-exists
-	php bin/console doctrine:migration:migrate
-	php bin/console hautelook:fixtures:load -q
+	$(EXEC) $(CONSOLE) doctrine:database:create --if-not-exists
+	$(EXEC) $(CONSOLE) doctrine:schema:update --force
+	$(EXEC) $(CONSOLE) make:migration
+	$(EXEC) $(CONSOLE) hautelook:fixtures:load -q
 
-.PHONY: exec ## Permet de se connecter a l'intérieur du container app
+.PHONY: start-mounia
+start-mounia:
+	composer install
+	$(CONSOLE) doctrine:database:create --if-not-exists
+	$(CONSOLE) doctrine:schema:update --force
+	$(CONSOLE) make:migration
+	$(CONSOLE) hautelook:fixtures:load -q
+	$(CONSOLE) server:run
+
+.PHONY: stop ## stop the project
+stop:
+stop:
+	$(FIG) down
+
+.PHONY: cc ## Clear the cache in dev env
+cc: perm
+	$(EXECROOT) rm -rf var/cache/*
+	$(EXEC) $(CONSOLE) cache:clear --no-warmup
+	$(EXEC) $(CONSOLE) cache:warmup
+
+.PHONY: exec ## Run bash in the app container
 exec:
-	docker-compose exec app sh
+	$(EXEC) /bin/bash
 
-.PHONY: tests ## Lance les tests de l'applications
+.PHONY: tests ## Make code Tests
 tests:
-	vendor/bin/phpcs src
-	vendor/bin/phpstan analyse -l 6 -c phpstan.neon src
+	$(EXEC) vendor/bin/phpcs src/
+	$(EXEC) vendor/bin/phpstan analyse --level=6 src
 
-.PHONY: tests-fix ## Fix le cs de mon app
+.PHONY: fix ## Fix error code test
 fix:
-	vendor/bin/phpcbf src
+	$(EXEC) vendor/bin/phpcbf src/
+
+
+##
+## Dependencies Files
+##---------------------------------------------------------------------------
+
+docker-compose.override.yml: docker-compose.override.yml.dist
+	$(RUN) cp docker-compose.override.yml.dist docker-compose.override.yml

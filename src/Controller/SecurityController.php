@@ -37,19 +37,20 @@ class SecurityController extends AbstractController
         TokenGeneratorInterface $tokenGenerator
     ) {
         /** @var User $user */
+
         $form = $this->createForm(UserRegistrationType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $token = $tokenGenerator->generateToken();
 
-            $userData = $form->getData();
-            $userData->setRoles(['ROLE_USER']);
-            $userData->setCertifiedCode($token);
-            $userData->setPassword($encoder->encodePassword($user, $user->getPassword()));
+            $user = $form->getData();
+            $user->setRoles(['ROLE_USER']);
+            $user->setCertifiedCode($token);
+            $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userData);
+            $entityManager->persist($user);
 
             $entityManager->flush();
 
@@ -74,7 +75,7 @@ class SecurityController extends AbstractController
             $mailer->send($message);
 
 
-            return $this->redirectToRoute('blog');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('security/registerForm.html.twig', [

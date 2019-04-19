@@ -55,7 +55,7 @@ class RouletteCommand extends ContainerAwareCommand
         /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $allGame = $em->getRepository(Game::class)->findAll();
-        $admin = $em->getRepository(User::class)->findOneBy(['email' => 'admin@admin.fr']);
+        $admin = $em->getRepository(User::class)->findOneBy(['email' => 'admin@admin.com']);
 
         /** @var Game $game */
         foreach ($allGame as $game) {

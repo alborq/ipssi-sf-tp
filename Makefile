@@ -11,8 +11,10 @@ help:
 
 .PHONY: start ## Démarre le projet
 start:
-	docker-compose up -d \
-	&& docker-compose exec app php bin/console d:d:c \
+	docker-compose build \
+	&& docker-compose up -d \
+	&& composer install \
+	&& docker-compose exec app php bin/console d:d:c --if-not-exists \
 	&& docker-compose exec app php bin/console m:m \
 	&& docker-compose exec app php bin/console h:f:l
 

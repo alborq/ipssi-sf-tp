@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b068edc1-ba41-4a37-b639-4f5282bfc347" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Migrations/phpstan.neon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpstan.neon" beforeDir="false" afterPath="$PROJECT_DIR$/phpstan.neon" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/phpstan.neon" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/phpstan.neon" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/src/Migrations/phpstan.neon">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
-              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+              <caret line="2" column="12" lean-forward="true" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -55,7 +55,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/Security/manager.html.twig" />
         <option value="$PROJECT_DIR$/templates/Security/forgotten_password.html.twig" />
         <option value="$PROJECT_DIR$/src/Form/BetType.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20190415101035.php" />
@@ -106,6 +105,7 @@
         <option value="$PROJECT_DIR$/src/Controller/Game/GameController.php" />
         <option value="$PROJECT_DIR$/src/Command/RouletteCommand.php" />
         <option value="$PROJECT_DIR$/src/Migrations/phpstan.neon" />
+        <option value="$PROJECT_DIR$/phpstan.neon" />
       </list>
     </option>
   </component>
@@ -306,12 +306,12 @@
       <workItem from="1555574700423" duration="1081000" />
       <workItem from="1555575897997" duration="4605000" />
       <workItem from="1555583135119" duration="882000" />
-      <workItem from="1555584324092" duration="28551000" />
+      <workItem from="1555584324092" duration="28802000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114589000" />
+    <option name="totallyTimeSpent" value="114840000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="752" extended-state="6" />
@@ -342,13 +342,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190415135520.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190415141508.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -700,10 +693,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/phpstan.neon">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/phpstan.neon">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <caret line="2" column="12" lean-forward="true" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>

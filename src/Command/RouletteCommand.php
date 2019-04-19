@@ -40,20 +40,18 @@ class RouletteCommand extends ContainerAwareCommand
     {
         /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        /** @var Game $allGames[] */
         $allGame = $em->getRepository(Game::class)->findAll();
 
-        /** @var Game $allGames[] */
         foreach ($allGame as $game) {
             $rand = random_int(0, 36);
             /** @var CaseGame $resultRoulette */
             $resultRoulette  = $em->getRepository(CaseGame::class)->findOneBy(['number' => $rand]);
-            /** @var Game $game */
             $game->setResult($resultRoulette);
             $em->persist($game);
         }
         $em->flush();
 
-        /** @var Game $allGames[] */
         foreach ($allGame as $game) {
             /** @var CaseGame $result */
             $result = $game->getResult();

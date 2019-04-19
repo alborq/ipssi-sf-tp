@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Entity\Advert;
 use App\Entity\CaseGame;
 use App\Entity\Game;
+use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Exception;
@@ -54,6 +55,7 @@ class RouletteCommand extends ContainerAwareCommand
         /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $allGame = $em->getRepository(Game::class)->findAll();
+        $admin = $em->getRepository(User::class)->findOneBy(['email' => 'admin@admin.fr']);
 
         /** @var Game $game */
         foreach ($allGame as $game) {
@@ -116,6 +118,7 @@ class RouletteCommand extends ContainerAwareCommand
                             ." (".$game->getName().")");
                         $advertLoose->setReleaseDate(new DateTime());
                         $advertLoose->setCommentEnabled(true);
+                        $advertLoose->setAuthor($admin);
                         $em->persist($advertLoose);
                         $em->flush();
                     } else {
@@ -154,6 +157,7 @@ class RouletteCommand extends ContainerAwareCommand
                             ." (".$game->getName().")");
                         $advertLoose->setReleaseDate(new DateTime());
                         $advertLoose->setCommentEnabled(true);
+                        $advertLoose->setAuthor($admin);
                         $em->persist($advertLoose);
                         $em->flush();
                     }

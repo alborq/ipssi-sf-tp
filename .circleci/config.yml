@@ -1,22 +1,16 @@
-version: 2.1
+version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.3-node-browsers
+      - image: easybar/php:7.2.9-dev
 
     steps:
       - checkout
 
       - run:
-          name: Install Composer
-          command: |
-            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-            php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer invalid'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php
-            php -r "unlink('composer-setup.php');"
+          name: Install vendor
+          command: composer install
+
       - run:
-          name: Install project dependencies
-          command: php composer.phar install
-      - run:
-          name: Running PHPCS
-          command: bash ./.circleci/phpcs.sh
+          name: Code Style
+          command: vendor/bin/phpcs

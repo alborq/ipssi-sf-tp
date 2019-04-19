@@ -41,14 +41,18 @@ class RouletteCommand extends ContainerAwareCommand
         /** @var EntityManager $em */
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $allGame = $em->getRepository(Game::class)->findAll();
+
+        /** @var Game $allGames[] */
         foreach ($allGame as $game) {
             $rand = random_int(0, 36);
             $resultRoulette  = $em->getRepository(CaseGame::class)->findOneBy(['number' => $rand]);
+            /** @var Game $game */
             $game->setResult($resultRoulette);
             $em->persist($game);
         }
         $em->flush();
 
+        /** @var Game $allGames[] */
         foreach ($allGame as $game) {
             /** @var Game $game */
             $result = $game->getResult();
@@ -70,6 +74,7 @@ class RouletteCommand extends ContainerAwareCommand
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
+                        /** @var Game $game */
                         $output->writeln($bet->getPlayer()->getUsername().
                             " a gagné en pariant sur ".$bet->getType().
                             ' (Table :'.$game->getName().') !');
@@ -83,6 +88,7 @@ class RouletteCommand extends ContainerAwareCommand
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
+                        /** @var Game $game */
                         $output->writeln($bet->getPlayer()->getUsername().
                             " a perdu en pariant sur ".$bet->getType().
                             ' (Table :'.$game->getName().') !');

@@ -10,7 +10,7 @@ easy_admin:
           form:  # <-- 'form' is applied to both 'new' and 'edit' views
             fields:
                 - { property: 'title', type: 'text', label: 'Titre' }
-                - { property: 'content', type: 'text', label: 'Contenu2', css_class: 'markDown' }
+                - { property: 'content', type: 'text', label: 'Contenu', css_class: 'markDown' }
                 - { property: 'createdAt', type: 'datetime', label: 'Date' }
                 - { property: 'img', type: 'text', label: 'Lien Image' }
                 - { property: 'author', type_options: { expanded: false, multiple: false }, label: 'Auteur' }

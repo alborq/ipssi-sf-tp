@@ -3,7 +3,7 @@ security:
   encoders:
     # use your user class name here
     App\Entity\User:
-        algorithm: Argon2i
+        algorithm: argon2i
 
   providers:
     users:

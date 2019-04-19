@@ -1,6 +1,18 @@
+#navbar-collapse1 {
+  margin-right: 15rem;
+}
+
+#navbar-collapse2 {
+  margin-left: 15rem;
+}
+
 .header-link {
   border-bottom:solid transparent;
-  transition:0.5s
+  transition:0.5s;
+  margin-left: 3rem;
+  margin-right: 3rem;
+  color: white;
+  font-size: 1.5rem;
 }
 
 ul .header-link{

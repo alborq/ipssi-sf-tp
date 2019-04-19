@@ -2,11 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="{{ asset('_bootswatch.scss') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.css') }}">
-        <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
-        <link rel="stylesheet" type="text/css" href="{{ asset('fontAwesome/css/all.css') }}">
-        <script src="{{ asset('fontAwesome/js/all.js') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+        <link rel="stylesheet" type="text/css" href="{{ asset('fontAwesome/css/all.min..css') }}">
+        <script src="{{ asset('fontAwesome/js/all.min.js') }}"></script>
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset('ui/main.css') }}">
@@ -17,10 +16,13 @@
     <body>
         {% block header %}
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
+                <div class="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0" id="navbar-collapse1">
                     <ul class="navbar-nav ml-auto text-center">
-                        <li class="nav-item" routerLinkActive="active">
-                            <a class="nav-link" routerLink="dashboard"><span class="header-link">Dashboard</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/dashboard"><span class="header-link">Dashboard</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/"><span class="header-link">Blog</span></a>
                         </li>
                     </ul>
                 </div>
@@ -32,24 +34,30 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
+                <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2" id="navbar-collapse2">
                     <ul class="navbar-nav mr-auto text-center">
-                        <li class="nav-item" routerLinkActive="active">
-                            <a class="nav-link" routerLink="clients"><span class="header-link">Clients</span></a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login"><span class="header-link">Se Connecter</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/signUp"><span class="header-link">Inscription</span></a>
                         </li>
                     </ul>
                 </div>
             </nav>
         {% endblock %}
-    Hello world!!
-        {% block body %}{% endblock %}
+
+        {% block body %} {% endblock %}
         {% block javascripts %}{% endblock %}
-    {% block footer %}
+        {#
+
+        {% block footer %}
         <nav class="navbar navbar-dark bg-dark mt-5 fixed-bottom">
             <div class="navbar-expand m-auto navbar-text">
-                Made with <i class="fa fa-heart"></i> by <a href="#">WingsHell</a>
+                Docker Php Symfony Project
             </div>
         </nav>
     {% endblock %}
+        #}
     </body>
 </html>

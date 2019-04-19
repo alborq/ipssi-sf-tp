@@ -1,5 +1,23 @@
-FIG=docker-compose
+USERID=$(shell id -u)
+GROUPID=$(shell id -g)
+
 CONSOLE=php bin/console
+FIG=docker-compose
+HAS_DOCKER:=$(shell command -v $(FIG) 2> /dev/null)
+
+ifdef HAS_DOCKER
+    ifdef APP_ENV
+        EXECROOT=$(FIG) exec -e APP_ENV=$(APP_ENV) app
+        EXEC=$(FIG) exec -e APP_ENV=$(APP_ENV) -u $(USERID):$(GROUPID) app
+	else
+        EXECROOT=$(FIG) exec app
+        EXEC=$(FIG) exec -u $(USERID):$(GROUPID) app
+	endif
+else
+	EXECROOT=
+	EXEC=
+endif
+
 .DEFAULT_GOAL := help
 
 .PHONY: help ## Generate list of targets with descriptions
@@ -15,19 +33,16 @@ help:
 ## Project setup & day to day shortcuts
 ##---------------------------------------------------------------------------
 
-.PHONY: fstart ## Start the project (The first launch of the app)
-fstart: docker-compose.override.yml
+.PHONY: start ## Start the project (Install in first place)
+start:
+start: docker-compose.override.yml
 	$(FIG) pull || true
 	$(FIG) build
 	$(FIG) up -d
 	$(FIG) exec -u 1000:1000 app composer install
-	$(FIG) exec -u 1000:1000 app $(CONSOLE) doctrine:database:create
-
-.PHONY: start ## Start the project
-start: docker-compose.override.yml
-	$(FIG) up -d
-	$(FIG) exec -u 1000:1000 app composer install
-
+	$(EXEC) $(CONSOLE) doctrine:database:create --if-not-exists
+	$(EXEC) $(CONSOLE) doctrine:schema:update --force
+	$(EXEC) $(CONSOLE) hautelook:fixtures:load -q
 .PHONY: dup ## restart the project
 dup:
 	$(FIG) stop

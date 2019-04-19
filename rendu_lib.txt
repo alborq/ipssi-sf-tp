@@ -1,19 +1,45 @@
 Liste des dépendances:
     - "php": "^7.1.3" : Utilisation du langage PHP 
+
     - "sensio/framework-extra-bundle": "^5.2": Configuration via les annotations (ArticleController.php)
+
     - "symfony/apache-pack": "^1.0": Utilisation du serveur Apache 
+
     - "symfony/asset": "4.2.*":
+
     - "symfony/console": "4.2.*": Utilisation de la console
+
     - "symfony/dotenv": "4.2.*": Configuration du fichier .env(variables d'environnement)  (.env)
+
     - "symfony/flex": "^1.1": Automatisation des tâches redondantes des applications Symfony
+
     - "symfony/form": "4.2.*: Gestionnaire de formulaires  (ArticleType.php)
+
     - "symfony/framework-bundle": "4.2.*" Configuration principale du framework
+
     - "symfony/maker-bundle": "^1.11": Génération de l'architecture d'une application Symfony (Article.php)
+
     - "symfony/orm-pack": "^1.0": Configuration de Doctrine (ArticleController.php)
+
     - "symfony/security": "4.2.*",
       "symfony/security-bundle": "4.2.*": Mise en place de la sécurité de l'application Symfony (LoginFormAuthenticator.php)
+
     - "symfony/twig-bundle": "4.2.*",
       "twig/extensions": "^1.5",
       "twig/twig": "^2.0": Compatibilité avec l'outil Twig (base.html.twig)
-    - "symfony/validator": "4.2.*": 
+
+    - "symfony/validator": "4.2.*": Utilisation des validateurs
+
+    - "symfony/yaml": "4.2.*" : Compatibilité avec les fichiers yaml (user.yaml)
+
+    - "hautelook/alice-bundle": "^2.4"
+
+      "nelmio/alice": "^3.5": Paramétrage des fixtures (article.yaml)
+
+    - "phpstan/phpstan": "^0.11.5": Vérification de la qualité du code
+
+    - "squizlabs/php_codesniffer": "^3.4": Validation de la syntaxe du code PHP
+
+    - "symfony/debug-pack": "^1.0": Fonctionnalité de la console debug
     
+    - "symfony/web-server-bundle": "4.2.*" Configuration d'un serveur local

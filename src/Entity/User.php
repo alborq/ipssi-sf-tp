@@ -59,8 +59,7 @@ class User implements UserInterface
    */
   private $certifiedCode = null;
 
-<<<<<<< HEAD
-=======
+
   /**
    * @var string le token qui servira lors de l'oubli de mot de passe
    * @ORM\Column(type="string", length=255, nullable=true)
@@ -73,7 +72,6 @@ class User implements UserInterface
    * @ORM\Column(type="integer")
    */
 
->>>>>>> 57676bdec0b014ec8fade10b4fd0b5d3db02c494
 
   public function __construct()
   {
@@ -162,11 +160,7 @@ class User implements UserInterface
 
 
   /**
-<<<<<<< HEAD
    * @return Collection
-=======
-   * @return Collection|Article[]
->>>>>>> 57676bdec0b014ec8fade10b4fd0b5d3db02c494
    */
   public function getArticles(): Collection
   {
@@ -262,8 +256,6 @@ class User implements UserInterface
 
     return $this;
   }
-<<<<<<< HEAD
-=======
 
   /**
    * @return string
@@ -280,5 +272,4 @@ class User implements UserInterface
   {
     $this->resetToken = $resetToken;
   }
->>>>>>> 57676bdec0b014ec8fade10b4fd0b5d3db02c494
 }

@@ -42,6 +42,7 @@ class RouletteCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
         $allGame = $em->getRepository(Game::class)->findAll();
 
+        /** @var Game $game */
         foreach ($allGame as $game) {
             $rand = random_int(0, 36);
             /** @var CaseGame $resultRoulette */
@@ -51,6 +52,7 @@ class RouletteCommand extends ContainerAwareCommand
         }
         $em->flush();
 
+        /** @var Game $game */
         foreach ($allGame as $game) {
             /** @var CaseGame $result */
             $result = $game->getResult();
@@ -62,7 +64,6 @@ class RouletteCommand extends ContainerAwareCommand
 
             $output->writeln($result->getNumber()." ".$result->getColor().' ('.$parity.') !');
 
-            /** @var Game $game */
             foreach ($game->getBets() as $bet) {
                 if ($bet->getEnabled()) {
                     if ($bet->getType() == $result->getNumber() ||

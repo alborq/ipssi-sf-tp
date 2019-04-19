@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b068edc1-ba41-4a37-b639-4f5282bfc347" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fixtures/user.yml" beforeDir="false" afterPath="$PROJECT_DIR$/fixtures/user.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Faker/Provider/PasswordProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Faker/Provider/PasswordProvider.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +67,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
+            <state relative-caret-position="956">
               <caret line="167" column="56" lean-forward="true" selection-start-line="167" selection-start-column="56" selection-end-line="167" selection-end-column="56" />
               <folding>
                 <element signature="e#43#63#0#PHP" expanded="true" />
@@ -90,8 +91,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/fixtures/case.yml" />
-        <option value="$PROJECT_DIR$/src/Faker/Provider/CaseProvider.php" />
         <option value="$PROJECT_DIR$/templates/Security/forgot_password.html.twig" />
         <option value="$PROJECT_DIR$/templates/Security/manager.html.twig" />
         <option value="$PROJECT_DIR$/templates/Security/forgotten_password.html.twig" />
@@ -141,6 +140,8 @@
         <option value="$PROJECT_DIR$/src/Command/RouletteCommand.php" />
         <option value="$PROJECT_DIR$/src/Controller/Game/GameController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
+        <option value="$PROJECT_DIR$/src/Faker/Provider/PasswordProvider.php" />
+        <option value="$PROJECT_DIR$/fixtures/user.yml" />
       </list>
     </option>
   </component>
@@ -282,40 +283,25 @@
             <path>
               <item name="ipssi-sf-tp" type="b2602c69:ProjectViewProjectNode" />
               <item name="ipssi-sf-tp" type="462c0819:PsiDirectoryNode" />
+              <item name="fixtures" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ipssi-sf-tp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ipssi-sf-tp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ipssi-sf-tp" type="b2602c69:ProjectViewProjectNode" />
               <item name="ipssi-sf-tp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Command" type="462c0819:PsiDirectoryNode" />
+              <item name="Faker" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ipssi-sf-tp" type="b2602c69:ProjectViewProjectNode" />
               <item name="ipssi-sf-tp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ipssi-sf-tp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ipssi-sf-tp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Blog" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ipssi-sf-tp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ipssi-sf-tp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Game" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ipssi-sf-tp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ipssi-sf-tp" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Security" type="462c0819:PsiDirectoryNode" />
+              <item name="Faker" type="462c0819:PsiDirectoryNode" />
+              <item name="Provider" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -364,12 +350,12 @@
       <workItem from="1555574700423" duration="1081000" />
       <workItem from="1555575897997" duration="4605000" />
       <workItem from="1555583135119" duration="882000" />
-      <workItem from="1555584324092" duration="23574000" />
+      <workItem from="1555584324092" duration="24066000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109612000" />
+    <option name="totallyTimeSpent" value="110104000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="752" extended-state="6" />
@@ -400,20 +386,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190415101035.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190415124447.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="35" column="12" lean-forward="true" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20190415132256.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -755,9 +727,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Faker/Provider/PasswordProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fixtures/user.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
+        <state relative-caret-position="956">
           <caret line="167" column="56" lean-forward="true" selection-start-line="167" selection-start-column="56" selection-end-line="167" selection-end-column="56" />
           <folding>
             <element signature="e#43#63#0#PHP" expanded="true" />

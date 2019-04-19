@@ -11,19 +11,23 @@ final class PasswordProvider extends BaseProvider
 {
     private $password;
 
+    private $passwordEncoder;
+
+
     public function __construct(Generator $generator, UserPasswordEncoderInterface $passwordEncoder)
     {
         parent::__construct($generator);
-        $user = new User();
-        $this->password = $passwordEncoder->encodePassword(
-            $user,
-            'Password'
-        );
+        $this->passwordEncoder = $passwordEncoder;
     }
 
 
-    public function passwordGenerator()
+    public function passwordGenerator(string $password)
     {
+        $user = new User();
+        $this->password = $this->passwordEncoder->encodePassword(
+            $user,
+            $password
+        );
         return $this->password;
     }
 }

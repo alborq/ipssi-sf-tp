@@ -15,6 +15,9 @@
                 <div class="content articlepart">
                     {{ advert.content }}
                 </div>
+                <div class="information articlepart">
+                    published at {{ advert.releaseDate|date("m/d/Y") }} by <b>{{ advert.author.username }}</b>
+                </div>
                 {% if advert.comments is defined and advert.comments is not empty %}
                     {% if is_granted('IS_AUTHENTICATED_REMEMBERED')  and is_granted('ROLE_ADMIN') %}
                         {% for comment in advert.comments|slice(0, 5) %}

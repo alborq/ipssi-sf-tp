@@ -2,3 +2,6 @@ App\Entity\Advert:
   advert{0..25}:
     title: "Title<numberBetween(1,100)>"
     content: "Content<numberBetween(1,100)>"
+    release_date: "<dateTimeBetween('2018-01-01', '2019-04-01')>"
+    author: "@user<numberBetween(1,2)>"
+    comment_enabled: "<boolean(50)>"

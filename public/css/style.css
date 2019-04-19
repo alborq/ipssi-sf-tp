@@ -23,6 +23,11 @@ button:not(.navbar-toggle) {
     margin:5%;
 }
 
+.information {
+    margin:5%;
+    text-align: right;
+}
+
 .content {
     padding:2%;
     margin-right:5%;

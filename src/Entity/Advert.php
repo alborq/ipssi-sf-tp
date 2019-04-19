@@ -33,6 +33,22 @@ class Advert
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $release_date;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $comment_enabled;
+
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -96,5 +112,53 @@ class Advert
         }
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author): void
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReleaseDate()
+    {
+        return $this->release_date;
+    }
+
+    /**
+     * @param mixed $release_date
+     */
+    public function setReleaseDate($release_date): void
+    {
+        $this->release_date = $release_date;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommentEnabled()
+    {
+        return $this->comment_enabled;
+    }
+
+    /**
+     * @param mixed $comment_enabled
+     */
+    public function setCommentEnabled($comment_enabled): void
+    {
+        $this->comment_enabled = $comment_enabled;
     }
 }

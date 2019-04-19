@@ -13,6 +13,9 @@
             <div class="content articlepart">
                 {{ advert.content }}
             </div>
+            <div class="information articlepart">
+                published at {{ advert.releaseDate|date("m/d/Y") }} by <b>{{ advert.author.username }}</b>
+            </div>
             {% if advert.comments is defined and advert.comments is not empty %}
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and is_granted('ROLE_ADMIN') %}
                     {% for comment in advert.comments|slice(0, 5) %}
@@ -35,7 +38,7 @@
                     {% endfor %}
                 {% endif %}
             {% endif %}
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') and advert.commentEnabled%}
                 <div class="commentInter" style="padding-top:5%;padding-right:5%;background-color:#f1f1f1">
                     {{ form_start(form) }}
                         {{ form_errors(form) }}

@@ -29,36 +29,80 @@
                     <hr>
 
                     <!-- Post Content -->
-                    <p class="lead">{{ article.content |raw }}</p>
+                    <p class="lead">{{ article.content |markdown }}</p>
 
                     <hr>
 
                     <!-- Comments Form -->
-                    <div class="card my-4">
-                        <h5 class="card-header">Laisser un commentaire :</h5>
-                        <div class="card-body">
-                            <div class="form-group">
-                                {{ form_start(commentForm) }}
-                                {{ form_widget(commentForm.content) }}
-                                <br>
-                                <button class="btn btn-primary" type="submit">Commenter !</button>
-                                {{ form_end(commentForm) }}
+                    {% if is_granted("ROLE_USER") %}
+                        <div class="card my-4">
+                            <h5 class="card-header">Laisser un commentaire :</h5>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    {{ form_start(commentForm) }}
+                                    {{ form_widget(commentForm.content) }}
+                                    <br>
+                                    <button class="btn btn-primary" type="submit">Commenter !</button>
+                                    {{ form_end(commentForm) }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <div class="card my-4">
+                            <h5 class="card-header"><a href="{{ path('login_user') }}">Connecte toi</a> pour poster un commentaire</h5>
+                        </div>
+                    {% endif %}
 
-                    {% for comment in article.comments | sortbyfield('createdAt', 'desc') %}
-                        <div class="media mb-4">
-                            <img alt="" class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
-                            <div class="media-body">
-                                <h5 class="mt-0">{{ comment.author.firstname ~ ' ' ~ comment.author.lastname }}</h5>
-                                {{ comment.content }}
-                            </div>
-                            <div class="row text-right">
-                                {{ comment.createdAt | date('d/m/Y à H:m') }}
-                            </div>
-                        </div>
-                    {% endfor %}
+
+
+
+
+
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {% for comment in article.comments | sortbyfield('createdAt', 'desc') %}
+                            {% if comment.isCensured == 1 %}
+                                <div class="media mb-4" style="color:red">
+                                    <img alt="" class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">{{ comment.author.firstname ~ ' ' ~ comment.author.lastname }}</h5>
+                                        {{ comment.content }}
+                                    </div>
+                                    <div class="row text-right">
+                                        {{ comment.createdAt | date('d/m/Y à H:i') }}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="media mb-4">
+                                    <img alt="" class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">{{ comment.author.firstname ~ ' ' ~ comment.author.lastname }}</h5>
+                                        {{ comment.content }}
+                                    </div>
+                                    <div class="row text-right">
+                                        {{ comment.createdAt | date('d/m/Y à H:i') }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% for comment in article.comments | sortbyfield('createdAt', 'desc') %}
+                            {% if comment.isCensured != 1 %}
+                                <div class="media mb-4">
+                                    <img alt="" class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">{{ comment.author.firstname ~ ' ' ~ comment.author.lastname }}</h5>
+                                        {{ comment.content }}
+                                    </div>
+                                    <div class="row text-right">
+                                        {{ comment.createdAt | date('d/m/Y à H:i') }}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+
+
                 </div>
 
 

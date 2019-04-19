@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Miser dés Maintenant{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Mes Mises</h1>
+
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Num Case</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Date</th>
+                <th scope="col">est Verifié</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for mise in mises %}
+                <tr>
+                    <th scope="row">{{ mise.id }}</th>
+                    <td>{{ mise.numCase }}</td>
+                    <td>{{ mise.amount }}</td>
+                    <td>{{ mise.createdAt | date("d/m/Y h:i") }}</td>
+                    <td>{{ (mise.checkMise) ? 'Oui' : 'Non' }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+
+    </div>
+{% endblock %}

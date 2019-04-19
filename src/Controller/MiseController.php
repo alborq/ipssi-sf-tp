@@ -36,6 +36,18 @@ class MiseController extends AbstractController
     }
 
 
+    public function historique(): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $myMises = $this->getDoctrine()->getRepository(Mise::class)->findBy(['user'=> $this->getUser()]);
+        dump($myMises);
+        return $this->render('mise/histo.html.twig', [
+            'controller_name' => 'MiseController',
+            'mises' => $myMises
+        ]);
+    }
+
+
     public function checkGain(): Response
     {
         $entityManager = $this->getDoctrine()->getManager();

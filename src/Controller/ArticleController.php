@@ -4,20 +4,28 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Form\CommentType;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\CommentType;
-use Symfony\Component\HttpFoundation\Request;
 
 class ArticleController extends AbstractController
 {
-    public function list(): Response
+    public function list(PaginatorInterface $paginator, Request $request): Response
     {
-        $articles = $this->getDoctrine()
-            ->getRepository(Article::class)
-            ->findAll();
+       /**
+        * @var \App\Repository\ArticleRepository $repo
+       */
+        $repo = $this->getDoctrine()->getRepository(Article::class);
+        $query = $repo->findAllQuery();
+        $pagination = $paginator->paginate(
+            $query, // query NOT result
+            $request->query->getInt('page', 1), // Page number
+            4 //Limt per page
+        );
         return $this->render('article/index.html.twig', [
-            'articles' => $articles
+            'pagination' => $pagination
         ]);
     }
 

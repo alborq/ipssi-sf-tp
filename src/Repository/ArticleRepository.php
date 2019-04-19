@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Article;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Article|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +20,16 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    // /**
-    //  * @return Article[] Returns an array of Article objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Query
+     */
+    public function findAllQuery(): Query
     {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.createdAt', 'DESC')
             ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+            ->getQuery();
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Article

@@ -6,3 +6,16 @@ App\Entity\User:
         firstname: '<firstName(randomElements("male","female"))>'
         email: '$firstname.$lastname@gmail.com'
         password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$aTd4TG5wOU1iS1JRSVdxdw\$u+hOTMI/E709LTgb/i2v/ujxVtbHM99ccqxZQKBXxZk'
+    
+    user11:
+        lastname: 'admin'
+        firstname: 'admin'
+        email: 'admin@admin.fr'
+        roles: '["ROLE_ADMIN"]'
+        password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$T1NZdjQxOUQzMDFBUS5RNA\$HMiz8RG8rJ5vGXbDOpJDEMxFzvgbdcU8vWPnNH9ipHY'
+
+    user12:
+        lastname: 'user'
+        firstname: 'user'
+        email: 'user@user.fr'
+        password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$U3VIRDg1allGUlpPdXBuUg\$UFa+jAiASgiUCgJC7275CGWUDDeay/y9NhtI43JFBPw'

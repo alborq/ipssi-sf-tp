@@ -12,7 +12,9 @@ help:
 .PHONY: start ## Démarre le projet
 start:
 	docker-compose up -d \
-	&& docker-compose exec app php bin/console d:d:c 
+	&& docker-compose exec app php bin/console d:d:c \
+	&& docker-compose exec app php bin/console m:m \
+	&& docker-compose exec app php bin/console h:f:l
 
 .PHONY: exec ## Permet de se connecter a l'intérieur du container app
 exec:
@@ -22,3 +24,7 @@ exec:
 tests:
 	vendor/bin/phpcs src
 	vendor/bin/phpstan analyse --level 6 src
+
+.PHONY: tests-fix ## Fix le cs de mon app
+fix:
+	vendor/bin/phpcbf src

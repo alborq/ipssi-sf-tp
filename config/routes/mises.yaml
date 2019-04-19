@@ -6,3 +6,6 @@ check_gain:
     path: /check
     controller: App\Controller\MiseController::checkGain
 
+histo:
+    path: /histo
+    controller: App\Controller\MiseController::historique

@@ -7,11 +7,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-  /**
-   * @Route("/index", name="index")
-   */
-  public function index()
-  {
-    return $this->render('blog/index.html.twig');
-  }
+    /**
+     * @Route("/index", name="index")
+     */
+    public function index()
+    {
+        return $this->render('blog/index.html.twig');
+    }
 }

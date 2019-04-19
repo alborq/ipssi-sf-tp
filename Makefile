@@ -1,4 +1,4 @@
-CONSOLE=php bin/console
+CONSOLE=bin/console
 DC=docker-compose
 HAS_DOCKER:=$(shell command -v $(DC) 2> /dev/null)
 
@@ -35,7 +35,10 @@ start: docker-compose.override.yml
 	$(DC) pull || true
 	$(DC) build
 	$(DC) up -d
-	$(EXEC) composer install
+#	$(EXEC) composer install
+	$(EXEC) $(CONSOLE) doctrine:database:create --if-not-exists
+	$(EXEC) $(CONSOLE) doctrine:migrations:migrate
+	$(EXEC) $(CONSOLE) hautelook:fixtures:load -q
 
 .PHONY: stop ## stop the project
 stop:
@@ -49,9 +52,6 @@ exec:
 test:
 	$(EXEC) vendor/bin/phpcs src
 	$(EXEC) vendor/bin/phpstan analyse --level 6 src
-
-.PHONY: testFix ## Start a patch of the code. Keep in mind it couldn't patch everything
-testFix:
 	$(EXEC) vendor/bin/phpcbf src
 
 ##

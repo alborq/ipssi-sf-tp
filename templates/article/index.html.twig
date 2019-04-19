@@ -60,8 +60,9 @@
 
     <h1>Articles</h1>
     <div class="jumbotron">
+
         {% for article in articles %}
-        <div class="col-lg-12 card-group">
+            <div class="col-lg-12 card-group">
             <div class="card mb-3">
                 <h3 class="card-header">{{ article.id }}</h3>
                 <img style="height: 200px; width: 100%; display: block;"
@@ -74,16 +75,18 @@
                     <a href="#" class="card-link">Lire</a>
                 </div>
                 <div class="card-footer text-muted">
-                    Écrit par {{ article.author }}<br>
+                    Écrit par{{ article.nickname }} <br>
                     {{ article.created ? article.created|date('Y-m-d H:i:s') : '' }}
                 </div>
             </div>
-            {% else %}
-                <tr>
-                    <td colspan="6">no records found</td>
-                </tr>
-            {% endfor %}
-        </div>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+
+            </div>
+        {% endfor %}
+
     </div>
 
 

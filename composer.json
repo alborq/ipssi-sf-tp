@@ -14,15 +14,16 @@
     "symfony/flex": "^1.2",
     "symfony/form": "4.2.*",
     "symfony/framework-bundle": "4.2.*",
+    "symfony/maker-bundle": "^1.11",
     "symfony/orm-pack": "^1.0",
     "symfony/routing": "4.2.*",
     "symfony/security-bundle": "4.2.*",
     "symfony/security-csrf": "4.2.*",
+    "symfony/swiftmailer-bundle": "^3.2",
     "symfony/twig-bridge": "4.2.*",
     "symfony/twig-bundle": "4.2.*",
     "symfony/validator": "4.2.*",
-    "symfony/yaml": "4.2.*",
-    "symfony/swiftmailer-bundle": "^3.2"
+    "symfony/yaml": "4.2.*"
   },
   "config": {
     "preferred-install": {
@@ -72,7 +73,6 @@
   "require-dev": {
     "escapestudios/symfony2-coding-standard": "^3.5",
     "hautelook/alice-bundle": "^2.5",
-    "phpstan/phpstan": "^0.11.5",
-    "symfony/maker-bundle": "^1.11"
+    "phpstan/phpstan": "^0.11.5"
   }
 }

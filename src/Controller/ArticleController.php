@@ -23,7 +23,7 @@ class ArticleController extends AbstractController
         /** Ds un ctrller */
         $doctrine = $this->getDoctrine();
 
-        /**@var  ArticleRepository $articleRepository */
+        /** @var  ArticleRepository $articleRepository */
         $articleRepository = $doctrine->getRepository(Article::class);
 
 

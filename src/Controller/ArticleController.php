@@ -26,7 +26,7 @@ class ArticleController extends AbstractController
         /**@var  ArticleRepository $repository */
         $articleRepository = $doctrine->getRepository(Article::class);
 
-        /** Recupère tous les objets de la bdd  */
+
         $art = $articleRepository->findAll();
         $listArticle = $articleRepository->listArticle();
 

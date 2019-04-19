@@ -30,16 +30,17 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
-
-    {
+    public function register(
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        Swift_Mailer $mailer,
+        TokenGeneratorInterface $tokenGenerator
+    ) {
         /** @var User $user */
         $form = $this->createForm(UserRegistrationType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-
             $token = $tokenGenerator->generateToken();
 
             $userData = $form->getData();
@@ -59,7 +60,8 @@ class SecurityController extends AbstractController
             $message->setBody(
                 $this->renderView(
 
-                    'email/registrationValidator.html.twig', [
+                    'email/registrationValidator.html.twig',
+                    [
                         'nickname' => $user->getNickname(),
                         'certification' => $token,
                         'randomString' => $token
@@ -73,13 +75,11 @@ class SecurityController extends AbstractController
 
 
             return $this->redirectToRoute('blog');
-
         }
 
         return $this->render('security/registerForm.html.twig', [
             'UserRegistrationForm' => $form->createView()
         ]);
-
     }
 
     public function confirm(Request $request): Response
@@ -106,11 +106,14 @@ class SecurityController extends AbstractController
             'UserRegistrationForm' => $form->createView(),
             'exist' => false
         ));
-
     }
 
-    public function passwordForgotten(Request $request, UserPasswordEncoderInterface $encoder, Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
-    {
+    public function passwordForgotten(
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        Swift_Mailer $mailer,
+        TokenGeneratorInterface $tokenGenerator
+    ): Response {
 
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
@@ -147,14 +150,19 @@ class SecurityController extends AbstractController
                 ]);
             }
 
-            $url = $this->generateUrl('reset', array('token' => $token), UrlGeneratorInterface::ABSOLUTE_URL);
+            $url = $this->generateUrl(
+                'reset',
+                array('token' => $token),
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
 
             $message = new Swift_Message('Mot de passe oublié');
             $message->setFrom('contact@betrocket.com');
             $message->setTo($user->getEmail());
             $message->setBody(
                 $this->renderView(
-                    'email/passwordForgotten.html.twig', [
+                    'email/passwordForgotten.html.twig',
+                    [
                         'nickname' => $user->getNickname(),
                         'url' => $url,
                     ]
@@ -168,18 +176,18 @@ class SecurityController extends AbstractController
 
             //return $this->redirectToRoute('blog');
             return $this->redirectToRoute('password');
-
         }
 
         return $this->render('security/passwordForgotten.html.twig');
-
     }
 
-    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
+    public function resetPassword(
+        Request $request,
+        string $token,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response {
 
         if ($request->isMethod('POST')) {
-
             $entityManager = $this->getDoctrine()->getManager();
 
             $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
@@ -201,16 +209,10 @@ class SecurityController extends AbstractController
 
             //return $this->redirectToRoute('blog');
             return $this->redirectToRoute('login');
-
         } else {
-
             return $this->render('security/passwordReset.html.twig', [
                 'token' => $token
             ]);
-
         }
-
     }
-
-
 }

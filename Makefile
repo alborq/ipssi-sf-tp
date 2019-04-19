@@ -52,11 +52,15 @@ exec:
 test:
 	$(EXEC) vendor/bin/phpcs src
 	$(EXEC) vendor/bin/phpstan analyse --level 6 src
+
+
+.PHONY: testF ## Start an analyze of the code and return a checkup
+testF:
 	$(EXEC) vendor/bin/phpcbf src
 
 ##
 ## Dependencies Files
 ##---------------------------------------------------------------------------
 
-docker-compose.override.yml: docker-compose.override.yml
-	$(RUN) cp docker-compose.override.yml docker-compose.override.yml
+docker-compose.override.yml: docker-compose.override.yml.dist
+	$(RUN) cp docker-compose.override.yml.dist docker-compose.override.yml

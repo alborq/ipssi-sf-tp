@@ -89,5 +89,4 @@ class Game
     {
         return $this->idUser;
     }
-
 }

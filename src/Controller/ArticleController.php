@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace App\Controller;
+
 use App\Entity;
 use App\Repository;
 use App\Entity\Article;
@@ -27,7 +28,7 @@ class ArticleController extends AbstractController
         $isOk = false;
         $newArticleForm = $this->createForm(ArticleType::class);
         $newArticleForm->handleRequest($request);
-        if($newArticleForm->isSubmitted() && $newArticleForm->isValid()) {
+        if ($newArticleForm->isSubmitted() && $newArticleForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($newArticleForm->getData());
             $em->flush();
@@ -44,11 +45,9 @@ class ArticleController extends AbstractController
      */
     public function view(Article $article): Response
     {
-       return $this->render('article/view.html.twig', [
+        return $this->render('article/view.html.twig', [
            'article' => $article
-       ]);
-
-
+        ]);
     }
 
     /**

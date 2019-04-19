@@ -1,5 +1,7 @@
 App\Entity\Article:
-  article-{1-10}:
-    title:  '<title()>'
-    content:  '<content()>'
-    datearticle: "<dateTimeBetween('1 year ago','now')>"
+  article-{1..10}:
+    title (unique):  '<name()>'
+    content:  <text(20)>
+    comment:  '<numberBetween(0,1)>' 
+    date_article: "<dateTimeBetween('1 year ago','now')>"
+    

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace App\Controller;
+
 use App\Entity\Bet;
 use App\Form\BetType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

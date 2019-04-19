@@ -31,7 +31,7 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="content", type="text", length=0, nullable=false)
+     * @ORM\Column(name="content", type="string", length=0, nullable=false)
      */
     private $content;
 
@@ -45,7 +45,7 @@ class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_article", type="datetime", nullable=false)
+     * @ORM\Column(name="date_article", type="datetime", nullable=true)
      */
     private $dateArticle;
 
@@ -75,12 +75,12 @@ class Article
          return $this;
     }
 
-    public function getContent(): text
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    public function setContent(text $content): self
+    public function setContent(string $content): self
     {
          $this->content = $content;
          return $this;

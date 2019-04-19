@@ -5,7 +5,8 @@
     <thead>
         <tr>
             <th>Titre</th>
-            <th>Auteur</th>
+            <th>Extrait</th>
+            {# <th>Auteur</th> #}
             <th>Date de publication</th>
         </tr>
     </thead>
@@ -13,8 +14,9 @@
     {% for article in articles %}
         <tr>
             <td><a href="{{ path('app_article_view', {id: article.id}) }}"></a>{{article.title}}</td>
-            <td>{{article.user}}</td>
-            <td>{{article.dateArticle}}</td>
+            {# <td>{{article.user}}</td> #}
+            <td>{{article.content}}</td>
+            <td>{{article.dateArticle|date("d/m/Y")}}</td>
         </tr>
     {% endfor %}
     </tbody>

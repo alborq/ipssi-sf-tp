@@ -92,5 +92,4 @@ class Bet
     {
         return $this->idUser;
     }
-
 }

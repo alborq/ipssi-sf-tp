@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 namespace App\Controller;
+
 use App\Entity\User;
 use App\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,7 @@ class UserController extends AbstractController
      * @Route("/index")
      */
     public function index()
-        {
+    {
         // usually you'll want to make sure the user is authenticated first
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -31,30 +32,29 @@ class UserController extends AbstractController
         // Call whatever methods you've added to your User class
         // For example, if you added a getFirstName() method, you can use that.
         return new Response('Well hi there '.$user->getUserName());
-        }
+    }
 
     /**
      * @Route(path="/add")
      */
     public function add(Request $request): Response
     {
-    $form = $this->createForm(UserType::class);
-    $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-        $user = $form->getData();
+        $form = $this->createForm(UserType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-        // return $this->redirectToRoute('userapp_user_view', [
-        //     'id' => $user->getId(),
-        // ]);
-    }
-    return $this->render('user/add.html.twig', [
+            // return $this->redirectToRoute('userapp_user_view', [
+            //     'id' => $user->getId(),
+            // ]);
+        }
+        return $this->render('user/add.html.twig', [
         'UserForm' => $form->createView()
-    ]);
-        
+        ]);
     }
 
     /**

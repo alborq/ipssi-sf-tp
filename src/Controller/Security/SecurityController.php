@@ -116,7 +116,7 @@ class SecurityController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             $user = $entityManager->getRepository(User::class)->findOneBy(['reset_token' => $token]);
-            /* @var $user User */
+            /* @var User $user */
 
             if ($user === null) {
                 $this->addFlash('danger', 'Token Inconnu');
@@ -151,10 +151,10 @@ class SecurityController extends AbstractController
             $email = $request->request->get('email');
 
             $entityManager = $this->getDoctrine()->getManager();
-            /** @var $user User */
+            /** @var User $user */
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
-            /* @var $user User */
+            /* @var User $user */
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
                 return $this->redirectToRoute('home');

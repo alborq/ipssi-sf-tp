@@ -13,4 +13,4 @@ jobs:
 
       - run:
           name: Code Style
-          command: make tests
+          command: phpcs src

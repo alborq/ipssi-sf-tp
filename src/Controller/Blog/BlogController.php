@@ -32,7 +32,7 @@ class BlogController extends AbstractController
     public function index(Request $request, PaginatorInterface $paginator)
     {
         $em = $this->getDoctrine()->getManager();
-        $allAppointmentsQuery  = $em->getRepository(Advert::class)->findAll();
+        $allAppointmentsQuery  = $em->getRepository(Advert::class)->findAdvertByDate();
 
         $appointments = $paginator->paginate(
             $allAppointmentsQuery,

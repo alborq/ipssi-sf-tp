@@ -19,6 +19,16 @@ class AdvertRepository extends ServiceEntityRepository
         parent::__construct($registry, Advert::class);
     }
 
+    public function findAdvertByDate()
+    {
+        $query = $this->createQueryBuilder('p')
+            ->orderBy('p.release_date', 'DESC')
+        ;
+
+        return $query->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Advert[] Returns an array of Advert objects
     //  */

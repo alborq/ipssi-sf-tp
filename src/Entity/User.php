@@ -37,8 +37,8 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="integer")
      */
-    
     private $amount;
+
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Game")
      */

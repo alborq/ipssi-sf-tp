@@ -42,7 +42,7 @@ start: docker-compose.override.yml
 	$(FIG) exec -u 1000:1000 app composer install
 	$(EXEC) $(CONSOLE) doctrine:database:create --if-not-exists
 	$(EXEC) $(CONSOLE) doctrine:schema:update --force
-
+	$(EXEC) $(CONSOLE) hautelook:fixtures:load -q
 .PHONY: dup ## restart the project
 dup:
 	$(FIG) stop

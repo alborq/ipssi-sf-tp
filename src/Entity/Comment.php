@@ -23,7 +23,7 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Article")
-     */
+         */
     private $article;
 
     public function getId(): ?int

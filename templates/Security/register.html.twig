@@ -16,9 +16,6 @@
                 {{ form_start(form) }}
                     {{ form_errors(form) }}
                     {{ form_rest(form) }}
-                    {% if app.request.get('_route') == "app_login" %}
-                        <a href="{{ path('app_forgotten_password') }}">Forgot Password ?</a>
-                    {% endif %}
                 {{ form_end(form) }}
             </div>
         </div>

@@ -116,7 +116,7 @@ class SecurityController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
 
             /** @var User $user */
-            $user = $entityManager->getRepository(User::class)->findOneBy(['reset_token' => $token]);
+            $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
 
             if (empty($user)) {
                 $this->addFlash('danger', 'Token Inconnu');
@@ -179,7 +179,7 @@ class SecurityController extends AbstractController
                 ->setFrom('adminSymfony@admin.fr')
                 ->setTo($user->getEmail())
                 ->setBody(
-                    "Voici le lien pour reset votre password : " . $url,
+                    "Voici le lien pour reset votre password : <a href=\"$url\">$url</a>",
                     'text/html'
                 );
 

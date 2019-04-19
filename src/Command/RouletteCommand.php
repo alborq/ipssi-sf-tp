@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Entity\Advert;
 use App\Entity\CaseGame;
 use App\Entity\Game;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use Swift_Mailer;
@@ -113,6 +114,8 @@ class RouletteCommand extends ContainerAwareCommand
                         $advertLoose->setContent($bet->getPlayer()->getUsername()
                             ." won ".$bet->getAmount()." by beting on ".$bet->getType()
                             ." (".$game->getName().")");
+                        $advertLoose->setReleaseDate(new DateTime());
+                        $advertLoose->setCommentEnabled(true);
                         $em->persist($advertLoose);
                         $em->flush();
                     } else {
@@ -149,6 +152,8 @@ class RouletteCommand extends ContainerAwareCommand
                         $advertLoose->setContent($bet->getPlayer()->getUsername()
                             ." lost ".$bet->getAmount()." by beting on ".$bet->getType()
                             ." (".$game->getName().")");
+                        $advertLoose->setReleaseDate(new DateTime());
+                        $advertLoose->setCommentEnabled(true);
                         $em->persist($advertLoose);
                         $em->flush();
                     }

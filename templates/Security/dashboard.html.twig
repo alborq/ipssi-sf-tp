@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Forgotten Password!{% endblock %}
+
+{% block body %}
+    <h1>Amount (Casino)</h1>
+    <table class="table table-hover table-responsive">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Table</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if games is defined %}
+            {% set amountTot = 0 %}
+            {% for game in games %}
+                <tr>
+                    <td>{{ game.id }}</td>
+                    <td>{{ game.name }}</td>
+                    <td>{{ game.amount }}</td>
+                    {% set amountTot = amountTot + game.amount %}
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" style="text-align: center; color:red; font-size: 2rem;">Total amount : {{ amountTot }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center;color: red;">No Game</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

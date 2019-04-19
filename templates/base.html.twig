@@ -18,6 +18,10 @@
                 <img height="50" src="{{ asset('img/logo.png') }}">
             </a>
             <span>{{ 'now'|date('H:i:s') }}</span>
+            <a href="http://ipssi-sf/login/">Login</a>
+            <a href="http://ipssi-sf/article/list">Articles</a>
+            <a href="http://ipssi-sf/user/list">Joueurs</a>
+            <a href="http://ipssi-sf/user/add">Inscription</a>
         </header>
 
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}

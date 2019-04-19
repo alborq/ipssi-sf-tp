@@ -1,0 +1,26 @@
+#navbar-collapse1 {
+  margin-right: 15rem;
+}
+
+#navbar-collapse2 {
+  margin-left: 15rem;
+}
+
+.header-link {
+  border-bottom:solid transparent;
+  transition:0.5s;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  color: white;
+  font-size: 1.5rem;
+}
+
+ul .header-link{
+  border:none;
+  background:linear-gradient(to top, turquoise,turquoise) no-repeat bottom left;
+  background-size:0px 2px
+}
+
+ul .nav-link:hover .header-link {
+  background-size:100% 2px
+}

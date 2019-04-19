@@ -1,0 +1,21 @@
+version: "3.6"
+
+services:
+  app:
+    volumes:
+      - "~/.composer:/home/app/.composer"
+
+  nginx:
+    ports:
+      - "8080:80"
+
+  db:
+    ports:
+      - "3306:3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 28080:8080
+    depends_on:
+      - db

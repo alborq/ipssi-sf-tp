@@ -1,0 +1,37 @@
+App\Entity\User:
+  admin:
+    __construct: false
+    roles: '[ROLE_ADMIN]'
+    email: 'admin@admin.com'
+    password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$bEEvU2t0TjA0MWh3REUxbA\$jekkq5lZdcxQmguBa4WQa7HJmJUcsQT8+b4XMpeONXI'
+    amount: '<numberBetween(1, 1000)>'
+
+  user:
+    __construct: false
+    roles: '[ROLE_USER]'
+    email: 'user@user.com'
+    password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$UGlHRVhsRE1nV0ZHaG13Tw\$UyMjOse59/FscWqlDUQ3PsLB0atbxTZ0s2MH15f3UYw'
+    amount: '<numberBetween(1, 3000)>'
+
+App\Entity\Game:
+  game-{1..10}:
+    __construct: false
+    name: 'game'
+    startTime: "<dateTimeBetween('1 year ago', 'now')>"
+    amount: '<numberBetween(1, 3000)>'
+    players: ['@user']
+
+
+App\Entity\Article:
+  article-{1..50}:
+    __construct: false
+    title: 'What happen on party : <numberBetween(1,100)>'
+    content: 'This is the results : win <numberBetween(1, 1000)> euros, the game was cool!!'
+    creationDate: "<dateTimeBetween('1 year ago', 'now')>"
+
+App\Entity\Comment:
+  comment{1..100}:
+    __construct: false
+    article: "@article-<numberBetween(1,10)>"
+    content: 'The comment'
+

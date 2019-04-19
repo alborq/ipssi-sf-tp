@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div style="text-align:center; margin-top:1.25rem">
+            <h1>Bienvenue sur notre blog !</h1>
+            <hr>
+            <br>
+            <h2>Voici la liste des articles</h2>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date de publication</th>
+                <th>Détails</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.title }}</td>
+                        <td>{{ article.creationDate ? article.creationDate|date('Y-m-d H:i:s') : '' }}</td>
+                        <td><a href="/show/{{article.id}}">Consulter</a></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">pas d'articles trouvés</td>
+                    </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+            <div class="row justify-content-md-center">
+                <ul class="pagination">
+                    {% for i in 1..6 %}
+                        <li class="page-item active">
+                            <a class="page-link" href="{{ path('index', {page: i}) }}">{{ i }}</a>
+                        </li>&nbsp;
+                    {% endfor %}
+                </ul>
+            </div>
+
+            {#
+
+                <ul class="pagination">
+                    <li class="page-item active">
+                        {{ knp_pagination_render(articles) }}
+                    </li>
+                </ul>
+            #}
+        </div>
+    </div>
+
+{% endblock %}

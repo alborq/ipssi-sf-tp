@@ -93,12 +93,6 @@ class BlogController extends AbstractController
         /** @var Comment $myComment */
         $myComment = $em->getRepository(Comment::class)->find($id);
 
-        if (!$myComment) {
-            throw $this->createNotFoundException(
-                'No comment found for id '.$id
-            );
-        }
-
         if ($state == "hide") {
             $myComment->setEnabled(false);
         } else {

@@ -52,6 +52,7 @@ class GameController extends AbstractController
 
             $playerExist = false;
             foreach ($Games as $game) {
+                /** @var Game $game */
                 $players = $game->getPlayers();
                 foreach ($players as $player) {
                     if ($player == $userConnected && $game == $bet->getGame()) {

@@ -51,6 +51,7 @@ class GameController extends AbstractController
             $bet = $form->getData();
 
             $playerExist = false;
+            /** @var Game $Games[] */
             foreach ($Games as $game) {
                 /** @var Game $game */
                 $players = $game->getPlayers();

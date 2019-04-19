@@ -50,6 +50,7 @@ class RouletteCommand extends ContainerAwareCommand
         $em->flush();
 
         foreach ($allGame as $game) {
+            /** @var Game $game */
             $result = $game->getResult();
             if ($result->getNumber() % 2 == 0) {
                 $parity = "Even";

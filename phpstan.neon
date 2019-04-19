@@ -1,3 +1,9 @@
+includes:
+	- extension.neon
+	- rules.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan-phpunit/rules.neon
 parameters:
     excludes_analyse:
-        - ipssi-sf-tp/src/DoctrineMigrations/*
+        - */src/DoctrineMigrations/*

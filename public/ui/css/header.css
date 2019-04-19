@@ -1,6 +1,9 @@
 .header-link {
   border-bottom:solid transparent;
-  transition:0.5s
+  transition:0.5s;
+  margin-left: 12rem;
+  color: white;
+  font-size: 1.5rem;
 }
 
 ul .header-link{

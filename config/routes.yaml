@@ -10,5 +10,11 @@ registration:
   prefix: '/registration'
 
 login:
-  resource: 'routes/login.yaml'
-  prefix: '/login'
+  path: /login
+  controller: App\Controller\SecurityController::login
+  #resource: 'routes/login.yaml'
+  #prefix: '/login'
+
+password:
+  resource: 'routes/password.yaml'
+  prefix: '/password'

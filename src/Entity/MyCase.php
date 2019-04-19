@@ -8,13 +8,12 @@
 
 namespace App\Entity;
 
-
 class MyCase
 {
     /**@var integer*/
-private $num;
+    private $num;
     /**@var integer*/
-private $color;
+    private $color;
 
     /**
      * MyCase constructor.
@@ -59,6 +58,4 @@ private $color;
     {
         $this->color = $color;
     }
-
-
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserLoginType;
 use App\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,14 +12,21 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
-    public function login(AuthenticationUtils $authenticationUtils)
+    public function login(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $user = new User();
+        $userForm = $this->createForm(UserLoginType::class, $user);
+
+        $userForm->handleRequest($request);
+
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+
 
         return $this->render('user/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
+            'userForm'      => $userForm->createView(),
         ]);
     }
 
@@ -31,6 +39,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -40,6 +49,7 @@ class UserController extends AbstractController
             ['form' => $form->createView()]
         );
     }
+
 
     public function logout()
     {

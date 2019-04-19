@@ -25,7 +25,7 @@ exec:
 .PHONY: tests ## Lance les tests de l'applications
 tests:
 	vendor/bin/phpcs src
-	vendor/bin/phpstan analyse -l 4 -c phpstan.neon src
+	vendor/bin/phpstan analyse -l 6 -c phpstan.neon src
 
 .PHONY: tests-fix ## Fix le cs de mon app
 fix:

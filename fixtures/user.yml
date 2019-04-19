@@ -11,7 +11,7 @@ App\Entity\User:
         lastname: 'admin'
         firstname: 'admin'
         email: 'admin@admin.fr'
-        roles: '["ROLE_ADMIN"]'
+        roles: '[ROLE_ADMIN]'
         password: '\$argon2i\$v=19\$m=1024,t=2,p=2\$T1NZdjQxOUQzMDFBUS5RNA\$HMiz8RG8rJ5vGXbDOpJDEMxFzvgbdcU8vWPnNH9ipHY'
 
     user12:

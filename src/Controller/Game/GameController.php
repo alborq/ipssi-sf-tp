@@ -33,7 +33,7 @@ class GameController extends AbstractController
     {
         $bet = new Bet();
         $Bets = "";
-        /** @var $userConnected Security */
+        /** @var User $userConnected */
         $userConnected = $security->getUser();
         $em = $this->getDoctrine()->getManager();
 

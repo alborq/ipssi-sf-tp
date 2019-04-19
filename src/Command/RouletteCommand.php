@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Entity\Bet;
 use App\Entity\CaseGame;
 use App\Entity\Game;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -39,7 +38,6 @@ class RouletteCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
-
         $allGame = $em->getRepository(Game::class)->findAll();
         foreach ($allGame as $game) {
             $rand = random_int(0, 36);

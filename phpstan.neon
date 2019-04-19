@@ -1,3 +1,3 @@
 parameters:
     excludes_analyse:
-        - ipssi-sf-yp/src/DoctrineMigrations/*
+        - ipssi-sf-tp/src/DoctrineMigrations/*

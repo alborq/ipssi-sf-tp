@@ -45,6 +45,7 @@ class RouletteCommand extends ContainerAwareCommand
         /** @var Game $allGames[] */
         foreach ($allGame as $game) {
             $rand = random_int(0, 36);
+            /** @var CaseGame $resultRoulette */
             $resultRoulette  = $em->getRepository(CaseGame::class)->findOneBy(['number' => $rand]);
             /** @var Game $game */
             $game->setResult($resultRoulette);
@@ -54,7 +55,7 @@ class RouletteCommand extends ContainerAwareCommand
 
         /** @var Game $allGames[] */
         foreach ($allGame as $game) {
-            /** @var Game $game */
+            /** @var CaseGame $result */
             $result = $game->getResult();
             if ($result->getNumber() % 2 == 0) {
                 $parity = "Even";
@@ -64,6 +65,7 @@ class RouletteCommand extends ContainerAwareCommand
 
             $output->writeln($result->getNumber()." ".$result->getColor().' ('.$parity.') !');
 
+            /** @var Game $game */
             foreach ($game->getBets() as $bet) {
                 if ($bet->getEnabled()) {
                     if ($bet->getType() == $result->getNumber() ||
@@ -74,7 +76,6 @@ class RouletteCommand extends ContainerAwareCommand
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
-                        /** @var Game $game */
                         $output->writeln($bet->getPlayer()->getUsername().
                             " a gagné en pariant sur ".$bet->getType().
                             ' (Table :'.$game->getName().') !');
@@ -88,7 +89,6 @@ class RouletteCommand extends ContainerAwareCommand
                         $bet->getPlayer()->setAmount($amountPlayer);
                         $bet->getGame()->setAmount($amountGame);
 
-                        /** @var Game $game */
                         $output->writeln($bet->getPlayer()->getUsername().
                             " a perdu en pariant sur ".$bet->getType().
                             ' (Table :'.$game->getName().') !');

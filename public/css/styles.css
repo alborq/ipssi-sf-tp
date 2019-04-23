@@ -1,4 +1,4 @@
-body{background: url("../img/background.jpg") top center no-repeat;}
+body{background: url("../img/background.jpg") top center no-repeat fixed;}
 .jumbotron-bg{margin-top: 50px; background-color: #b6d5e1; border: 2px solid black;}
 div.jumbotron.jumbotron-bg div{color: red;}
 div.jumbotron.jumbotron-bg h4.success, p.success{color: rgb(39, 99, 60);}
@@ -9,3 +9,5 @@ div.jumbotron.jumbotron-bg ul li{color: #ff000f; list-style: none;}
 div.jumbotron.jumbotron-bg small{color: #ff0014!important;}
 div.jumbotron.jumbotron-bg a.blue-link{color: #0b00f0;}
 div.jumbotron.jumbotron-bg a.blue-link:hover{color: #ff0000; text-decoration: none;}
+
+div.proverb{background-color: #f7f7f9; margin: 20px 0; margin-bottom: 2rem;}

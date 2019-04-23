@@ -4,68 +4,90 @@
 
 {% block body %}
 
-    <div class="jumbotron">
-        <h1 class="display-3">Dernières actus !</h1>
-        <div class="col-lg-12 card-group">
-            <div class="card mb-3">
-                <h3 class="card-header">Prochain paris</h3>
-                <img style="height: 200px; width: 100%; display: block;"
-                     src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_158bd1d28ef%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_158bd1d28ef%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22129.359375%22%20y%3D%2297.35%22%3EImage%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E"
-                     alt="Card image">
-                <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et, repellat.</p>
-                </div>
-                <div class="card-body">
-                    <a href="#" class="card-link">Pariez !</a>
-                </div>
-
-            </div>
-            <div class="card mb-3">
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th scope="col">Pseudo</th>
-                        <th scope="col">Gain</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="table-active">
-                        <th scope="row">Active</th>
-                        <td>Column content</td>
-
-                    </tr>
-                    <tr>
-                        <th scope="row">Default</th>
-                        <td>Column content</td>
-
-                    </tr>
-                    <tr class="table-primary">
-                        <th scope="row">Primary</th>
-                        <td>Column content</td>
-
-                    </tr>
-                    <tr class="table-secondary">
-                        <th scope="row">Secondary</th>
-                        <td>Column content</td>
-
-                    </tr>
-                    </tbody>
-                </table>
-
-            </div>
-
+  <div class="jumbotron">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-12">
+            <a href="">
+              <img src="http://img.over-blog-kiwi.com/1/10/82/36/20190102/ob_216360_la-beaute-est-partout-dans-la-nature.jpg" alt="img" style="max-width: 505px; height: auto">
+            </a>
+          </div>
         </div>
-
+        <div class="row">
+          <div class="col-md-12">
+            <a href="">
+              <span style="font-size: 30px;">Un titre trop bien</span>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p style="color: #333333;">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cum delectus excepturi exercitationem harum illo,
+              llum itaque omnis pariatur provident quisquam recusandae
+              m sapiente sint, sunt tempora tenetur ut, vel!
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Rang</th>
+            <th scope="col">Pseudo</th>
+            <th scope="col">Montant gagné</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Lord'</td>
+            <td>240558€</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
-    <blockquote class="blockquote text-center">
-        <p class="mb-0">Celui qui boit perd au jeu </p>
-        <footer class="blockquote-footer">Proverbes <cite title="Source Title">Chinois</cite></footer>
-    </blockquote>
+  <div class="jumbotron">
 
+  {% for article in articles %}
 
+    <div class="row">
+      <div class="col-md-3">
+        <a href="">
+          <img src="http://img.over-blog-kiwi.com/1/10/82/36/20190102/ob_216360_la-beaute-est-partout-dans-la-nature.jpg" alt="img" style="max-width: 240px; height: auto">
+        </a>
+      </div>
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-md-12">
+            <a href="{{ url('article',{'id':article.id}) }}">
+              <span style="font-size: 30px;">{{ article.title }}</span>
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <span>Le {{ article.created|date('d/m/Y') }} par <a href="#">{{ article.author.nickname }}</a></span>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <p>{{ article.content|slice(0, 200) }}</p>
+          </div>
+        </div>
+      </div>
     </div>
+    <hr>
+
+  {% endfor %}
+
+  </div>
 
 {% endblock body %}
 

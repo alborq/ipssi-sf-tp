@@ -1,0 +1,23 @@
+index:
+  path: /
+  controller: App\Controller\ArticleController::index
+
+article:
+  path: /{id}
+  controller: App\Controller\ArticleController::show
+
+articles:
+  path: articles
+  controller: App\Controller\ArticleController::list
+
+edit:
+  path: edit/{id}
+  controller: App\Controller\ArticleController::edit
+
+delete:
+  path: delete/{id}
+  controller: App\Controller\ArticleController::delete
+
+new:
+  path: new/
+  controller: App\Controller\ArticleController::new

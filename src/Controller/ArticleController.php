@@ -8,24 +8,14 @@ use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("blog/article")
- */
 class ArticleController extends AbstractController
 {
-    /**
-     * @Route("/", name="article_index", methods={"GET"})
-     */
     public function index(ArticleRepository $articleRepository): Response
     {
-        /** Ds un ctrller */
         $doctrine = $this->getDoctrine();
-
         /** @var  ArticleRepository $articleRepository */
         $articleRepository = $doctrine->getRepository(Article::class);
-
 
         $art = $articleRepository->findAll();
         $listArticle = $articleRepository->listArticle();
@@ -34,15 +24,21 @@ class ArticleController extends AbstractController
             'article' => $art,
             'articles' => $listArticle,
         ]);
-        /* return $this->render('article/index.html.twig', [
-           'articles' => $articleRepository->findAll(),
-          'articles' => $articleRepository->findOneBy(['id' => 1]),
-         ]);*/
     }
 
-    /**
-     * @Route("/new", name="article_new", methods={"GET","POST"})
-     */
+    public function list(ArticleRepository $articleRepository): Response
+    {
+        $doctrine = $this->getDoctrine();
+        /** @var  ArticleRepository $articleRepository */
+        $articleRepository = $doctrine->getRepository(Article::class);
+
+        $articles = $articleRepository->findAll();
+
+        return $this->render('article/list.html.twig', [
+            'articles' => $articles,
+        ]);
+    }
+
     public function new(Request $request): Response
     {
         $article = new Article();
@@ -63,9 +59,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="article_show", methods={"GET"})
-     */
     public function show(Article $article): Response
     {
         return $this->render('article/show.html.twig', [
@@ -73,9 +66,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
-     */
     public function edit(Request $request, Article $article): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
@@ -95,9 +85,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="article_delete", methods={"DELETE"})
-     */
     public function delete(Request $request, Article $article): Response
     {
         if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {

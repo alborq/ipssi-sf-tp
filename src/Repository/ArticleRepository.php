@@ -20,12 +20,12 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return  Article[]
+     * @return Article[]
      */
     public function listArticle(): array
     {
         $queryBuilder = $this->createQueryBuilder('p')
-            ->orderBy('p.title', 'DESC')
+            ->orderBy('p.created', 'DESC')
             ->setMaxResults(5);
         return $queryBuilder->getQuery()->getResult();
     }

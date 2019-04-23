@@ -3,13 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Article;
-use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexController extends AbstractController
 {
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $articleRepository = $entityManager->getRepository(Article::class);

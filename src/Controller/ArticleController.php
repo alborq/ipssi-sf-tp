@@ -11,30 +11,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends AbstractController
 {
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(): Response
     {
         $doctrine = $this->getDoctrine();
-        /** @var  ArticleRepository $articleRepository */
-        $articleRepository = $doctrine->getRepository(Article::class);
-
-        $art = $articleRepository->findAll();
-        $listArticle = $articleRepository->listArticle();
-
-        return $this->render('article/index.html.twig', [
-            'article' => $art,
-            'articles' => $listArticle,
-        ]);
-    }
-
-    public function list(ArticleRepository $articleRepository): Response
-    {
-        $doctrine = $this->getDoctrine();
-        /** @var  ArticleRepository $articleRepository */
+        /** @var ArticleRepository $articleRepository */
         $articleRepository = $doctrine->getRepository(Article::class);
 
         $articles = $articleRepository->findAll();
 
-        return $this->render('article/list.html.twig', [
+        return $this->render('article/index.html.twig', [
             'articles' => $articles,
         ]);
     }

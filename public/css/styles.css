@@ -11,3 +11,7 @@ div.jumbotron.jumbotron-bg a.blue-link{color: #0b00f0;}
 div.jumbotron.jumbotron-bg a.blue-link:hover{color: #ff0000; text-decoration: none;}
 
 div.proverb{background-color: #f7f7f9; margin: 20px 0; margin-bottom: 2rem;}
+
+/* Article */
+img.dev{max-width: 274px; margin: 5px;}
+img.dev:hover{-webkit-filter: brightness(150%);}

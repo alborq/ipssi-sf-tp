@@ -7,7 +7,7 @@ article:
   controller: App\Controller\ArticleController::show
 
 articles:
-  path: articles
+  path: articles/
   controller: App\Controller\ArticleController::list
 
 edit:

@@ -47,24 +47,36 @@
       <div class="row">
         <div class="col-md-12">
 
-          {{ form_start (ArticleCommentForm) }}
+          {% if app.user == null %}
 
-          {{ form_errors (ArticleCommentForm) }}
+            <div class="alert alert-dismissible alert-danger">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Il n'est possible d'écrire un commentaire qu'une fois</strong>
+              <a href="{{ url('login') }}" class="alert-link">connecté</a>.
+            </div>
 
-          <div class="form-group">
-            <label for="username">Message:</label>
-            {{ form_row(ArticleCommentForm.content, {
-              'label': false,
-              'attr': {
-                'class': 'form-control',
-                'placeholder': 'Message'
-              }
-            }) }}
-          </div>
+          {% else %}
 
-          <button type="submit" class="btn btn-success">Envoyer</button>
+            {{ form_start (ArticleCommentForm) }}
 
-          {{ form_end (ArticleCommentForm) }}
+            {{ form_errors (ArticleCommentForm) }}
+
+            <div class="form-group">
+              <label for="username">Message:</label>
+              {{ form_row(ArticleCommentForm.content, {
+                'label': false,
+                'attr': {
+                  'class': 'form-control',
+                  'placeholder': 'Message'
+                }
+              }) }}
+            </div>
+
+            <button type="submit" class="btn btn-success">Envoyer</button>
+
+            {{ form_end (ArticleCommentForm) }}
+
+          {% endif %}
 
         </div>
       </div>
@@ -84,6 +96,11 @@
           <div class="col-md-12">
             <span class="comment-author">Le {{ comment.created|date('d/m/Y') }} par
               <a href="#" class="article-author">{{ comment.author.nickname }}</a>
+            </span>
+            <span class="float-right">
+              <a href="{{ url('delete', { 'id': article.id }) }}" class="text-danger">
+                <i class="fas fa-comment-slash"></i>&nbsp;Censurer
+              </a>
             </span>
           </div>
         </div>

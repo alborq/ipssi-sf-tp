@@ -1,0 +1,5 @@
+user:
+  path: /{id}
+  controller: App\Controller\UserController::profile
+  requirements:
+    id: \d+

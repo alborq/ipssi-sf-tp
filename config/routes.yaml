@@ -23,3 +23,7 @@ login:
 password:
   resource: 'routes/password.yaml'
   prefix: '/password'
+
+user:
+  resource: 'routes/user.yaml'
+  prefix: '/user'

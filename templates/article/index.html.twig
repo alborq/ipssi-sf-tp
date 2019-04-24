@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row article-list article-back">
 
     {% for article in articles %}
 
@@ -33,7 +33,11 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <span>{{ article.author.nickname }} - {{ article.created ? article.created|date('d/m/Y') : '' }}</span>
+              <span>
+{#                <a href="{{ url('profile', { 'id': article.author.id } ) }}" class="article-author">{{ article.author.nickname }}</a>#}
+                <a href="#" class="article-author">{{ article.author.nickname }}</a>
+                - {{ article.created ? article.created|date('d/m/Y') : '' }}
+              </span>
             </div>
           </div>
           <hr>

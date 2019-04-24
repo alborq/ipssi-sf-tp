@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Entity\User;
 use App\Form\ArticleCommentType;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +39,7 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('article/new.html.twig', [
@@ -73,6 +75,7 @@ class ArticleController extends AbstractController
         }
 
         $entityManager = $this->getDoctrine()->getManager();
+        /** @var CommentRepository $commentRepository */
         $commentRepository = $entityManager->getRepository(Comment::class);
         $comments = $commentRepository->findBy(['article' => $article],['created'=>'DESC']);
 
@@ -112,12 +115,14 @@ class ArticleController extends AbstractController
 
     public function delete(Request $request, Article $article): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token')) && in_array('ROLE_ADMIN', $user->getRoles())) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('article_index');
+        return $this->redirectToRoute('index');
     }
 }

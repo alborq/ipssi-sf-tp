@@ -76,6 +76,27 @@
       </div>
       <hr class="hr-light">
 
+      {% for comment in comments %}
+
+        <div class="row">
+          <div class="col-md-12">
+            <span class="comment-author">Le {{ comment.created|date('d/m/Y') }} par
+              <a href="#" class="article-author">{{ comment.author.nickname }}</a>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <textarea disabled class="comment-content">{{ comment.content }}</textarea>
+          </div>
+        </div>
+
+      {% else %}
+
+
+
+      {% endfor %}
+
     </div>
 
   </div>

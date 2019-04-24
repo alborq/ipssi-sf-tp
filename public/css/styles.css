@@ -37,3 +37,6 @@ div.article-show div.article-back{background-color: #1a1a1a; margin-bottom: 20px
 div.article-show div.article-back span.article-title{font-size: 35px; text-transform: uppercase; color: #fff;}
 div.article-show div.article-back a.article-author{color: #fff;}
 div.article-show div.article-back a.article-author:hover{color: lightseagreen; text-decoration: none;}
+
+/* Article - show - comments */
+textarea.comment-content{width: 100%; height: auto; margin: 10px auto 50px auto; font-size: 18px;}

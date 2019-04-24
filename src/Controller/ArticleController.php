@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
+use App\Form\ArticleCommentType;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -44,11 +46,43 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    public function show(Article $article): Response
+    /**
+     * @param Article $article
+     * @param Request $request
+     * @return Response
+     */
+    public function show(Article $article, Request $request): Response
     {
-        return $this->render('article/show.html.twig', [
-            'article' => $article,
-        ]);
+
+        $form = $this->createForm(ArticleCommentType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Comment $comment */
+            $comment = $form->getData();
+            $comment->setAuthor($this->getUser());
+            $comment->setCreated(new \DateTime());
+            $comment->setArticle($article);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        if(!empty($this->getUser())){
+            return $this->render('article/show.html.twig', [
+                'article' => $article,
+                'ArticleCommentForm' => $form->createView()
+            ]);
+        }else{
+            return $this->render('article/show.html.twig', [
+                'article' => $article,
+            ]);
+        }
+
     }
 
     public function edit(Request $request, Article $article): Response

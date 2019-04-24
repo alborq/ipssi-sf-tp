@@ -2,9 +2,9 @@ default:
   path: /
   controller: App\Controller\IndexController::index
 
-article:
+articles:
   resource: 'routes/article.yaml'
-  prefix: '/article'
+  prefix: '/articles'
 
 blog:
   resource: 'routes/blog.yaml'

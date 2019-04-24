@@ -39,12 +39,21 @@
 
                     </ul>
                     <ul class="navbar-nav">
+                    {% if app.user == null %}
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('registration') }}">S'inscrire</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('login') }}">Se connecter</a>
                         </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <span>Bienvenue</span>&nbsp;
+                            <a class="nav-link user-navbar" href="{{ app.user.nickname }}">
+                                {{ app.user.nickname }}
+                            </a>
+                        </li>
+                    {% endif %}
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="text" placeholder="Search">

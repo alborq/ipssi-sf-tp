@@ -11,7 +11,29 @@ div.jumbotron.jumbotron-bg a.blue-link{color: #0b00f0;}
 div.jumbotron.jumbotron-bg a.blue-link:hover{color: #ff0000; text-decoration: none;}
 
 div.proverb{background-color: #f7f7f9; margin: 20px 0; margin-bottom: 2rem;}
+hr.hr-light{background-color: #fff;}
 
-/* Article */
-img.dev{max-width: 274px; margin: 5px;}
+/* Articles - Index */
+a.picsize{width: 310px; height: 200px;}
+img.dev{width: 100%; margin: 10px 0;}
 img.dev:hover{-webkit-filter: brightness(150%);}
+div.article-nav{background-color: #0d0d0d; margin: 100px 0 0 0; padding: 5px;}
+div.article-nav a.retour-nav{display: inline-block; margin: 13px; color: #fff;}
+div.article-nav a.retour-nav:hover{text-decoration: none; color: lightseagreen;}
+div.article-nav a.btn-spacer{margin-left: 5px;}
+div.article-elem{margin-bottom: 20px;}
+div.article-elem div.back{background-color: #0d0d0d; padding: 0 20px;}
+div.article-elem div.back a:hover{text-decoration: none;}
+div.article-elem div.back a:hover span.article-title{color: lightseagreen;}
+div.article-elem div.back a span.article-title{color: #fff; text-transform: uppercase; font-size: 25px;}
+div.article-elem div.back p.desc{margin-bottom: 10px;}
+
+nav.navbar ul.navbar-nav li.nav-item a.nav-link.user-navbar{display: inline-block; color: lightseagreen;}
+nav.navbar ul.navbar-nav li.nav-item a.nav-link.user-navbar:hover{color: cyan;}
+
+/* Article - Show */
+div.article-show{}
+div.article-show div.article-back{background-color: #1a1a1a; margin-bottom: 20px; padding: 30px 20px}
+div.article-show div.article-back span.article-title{font-size: 35px; text-transform: uppercase; color: #fff;}
+div.article-show div.article-back a.article-author{color: #fff;}
+div.article-show div.article-back a.article-author:hover{color: lightseagreen; text-decoration: none;}

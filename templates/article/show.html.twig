@@ -7,9 +7,13 @@
   <div class="row">
     <div class="col-md-12 article-nav">
       <a href="{{ url('index') }}" class="retour-nav"><i class="fas fa-arrow-left"></i>&nbsp;Retour</a>
+
       {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ url('delete', { 'id': article.id } ) }}" class="btn btn-danger float-right btn-spacer"><i class="fas fa-trash"></i>&nbsp;Supprimer cet article</a>
+
+        {{ include('article/_delete_form.html.twig') }}
+
       {% endif %}
+
       <a href="{{ url('edit', { 'id': article.id } ) }}" class="btn btn-info float-right"><i class="fas fa-pen"></i>&nbsp;Editer cet article</a>
     </div>
   </div>
@@ -63,6 +67,7 @@
 
             <div class="form-group">
               <label for="username">Message:</label>
+
               {{ form_row(ArticleCommentForm.content, {
                 'label': false,
                 'attr': {
@@ -70,6 +75,7 @@
                   'placeholder': 'Message'
                 }
               }) }}
+
             </div>
 
             <button type="submit" class="btn btn-success">Envoyer</button>

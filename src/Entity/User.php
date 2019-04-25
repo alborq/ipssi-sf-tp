@@ -73,13 +73,6 @@ class User implements UserInterface
      */
 
 
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-    }
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -272,4 +265,10 @@ class User implements UserInterface
     {
         $this->resetToken = $resetToken;
     }
+
+    public function __toString(): string
+    {
+        return $this->nickname;
+    }
+
 }

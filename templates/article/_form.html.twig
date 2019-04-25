@@ -1,4 +1,47 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<div class="article-edit">
+  <hr class="hr-light">
+
+  {{ form_start(form) }}
+
+    <div class="form-group">
+      <label for="title">Title :</label>
+      {{ form_row(form.title, {
+        'label': false,
+        'attr': {
+          'class': 'form-control',
+        }
+      }) }}
+    </div>
+
+    <div class="form-group">
+      {{ form_row(form.author, {
+        'label': false,
+        'attr': {
+          'hidden': 'hidden',
+          'disabled': 'disabled',
+        }
+      }) }}
+    </div>
+
+    <div class="form-group">
+      {{ form_row(form.content, {
+        'label': false,
+        'attr': {
+          'hidden': 'hidden',
+          'disabled': 'disabled',
+        }
+      }) }}
+    </div>
+
+    <div class="form-group">
+      <label for="article_content">Content :</label>
+      <textarea class="form-control" rows="10" id="article_content" name="article[content]" required>{{ article.content }}</textarea>
+    </div>
+
+    <button class="btn btn-success float-left article-edit-btn">
+      <i class="fas fa-check"></i>&nbsp;{{ 'Appliquer'|default('Save') }}
+    </button>
+
+  {{ form_end(form) }}
+
+</div>

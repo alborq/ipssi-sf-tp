@@ -18,6 +18,14 @@ hr.hr-light{background-color: #fff;}
 a.article-author{color: #fff;}
 a.article-author:hover{color: lightseagreen; text-decoration: none;}
 
+form.form-delete{display: inline;}
+form.form-delete button.btn-spacer{margin-left: 5px;}
+
+/* Article - Edit */
+div.article-edit{padding: 20px; margin-top: 5px;}
+div.article-edit button.article-edit-btn{margin: 20px 0;}
+div.article-edit input#article_content{}
+
 /* Blog */
 div.blog-back{background-color: rgba(50,50,50,0.7); padding: 15px;}
 div.blog-back div.blog-window{background-color: #0d0d0d; padding: 0 20px;}

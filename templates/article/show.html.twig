@@ -97,11 +97,17 @@
             <span class="comment-author">Le {{ comment.created|date('d/m/Y') }} par
               <a href="#" class="article-author">{{ comment.author.nickname }}</a>
             </span>
-            <span class="float-right">
-              <a href="{{ url('delete', { 'id': article.id }) }}" class="text-danger">
-                <i class="fas fa-comment-slash"></i>&nbsp;Censurer
-              </a>
-            </span>
+
+            {% if is_granted('ROLE_ADMIN') %}
+
+              <span class="float-right">
+                <a href="{{ url('censor', { 'id': comment.id }) }}" class="text-danger">
+                  <i class="fas fa-comment-slash"></i>&nbsp;Censurer
+                </a>
+              </span>
+
+            {% endif %}
+
           </div>
         </div>
         <div class="row">

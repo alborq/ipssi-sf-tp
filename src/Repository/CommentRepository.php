@@ -19,6 +19,17 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    public function getAllUncensoredComments($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.isCensored = 0')
+            ->andWhere('c.article = :id')
+            ->setParameter('id', $id)
+            ->orderBy('c.created', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Comment[] Returns an array of Comment objects
     //  */

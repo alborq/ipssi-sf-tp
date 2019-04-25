@@ -6,6 +6,10 @@ articles:
   resource: 'routes/article.yaml'
   prefix: '/articles'
 
+comment:
+  resource: 'routes/comment.yaml'
+  prefix: '/comment'
+
 blog:
   resource: 'routes/blog.yaml'
   prefix: '/blog'

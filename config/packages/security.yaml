@@ -19,8 +19,11 @@ security:
       form_login:
         login_path: login
         check_path: login
-        default_target_path: /login
+        default_target_path: default
         failure_path: /login
+      logout:
+        path: /logout
+        target: default
 
 
         # activate different ways to authenticate

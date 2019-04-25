@@ -4,9 +4,9 @@
 
 {% block body %}
 
-  <div class="jumbotron">
-    <div class="row">
-      <div class="col-md-6">
+  <div class="">
+    <div class="row blog-back">
+      <div class="col-md-6 blog-window blog-first">
         <div class="row">
           <div class="col-md-12">
             <a href="">
@@ -17,13 +17,13 @@
         <div class="row">
           <div class="col-md-12">
             <a href="">
-              <span style="font-size: 30px;">Un titre trop bien</span>
+              <span class="blog-title">Un titre trop bien</span>
             </a>
           </div>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <p style="color: #333333;">
+            <p class="blog-desc">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cum delectus excepturi exercitationem harum illo,
               llum itaque omnis pariatur provident quisquam recusandae
               m sapiente sint, sunt tempora tenetur ut, vel!
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 blog-window">
         <table class="table">
           <thead>
           <tr>
@@ -52,43 +52,44 @@
     </div>
   </div>
 
-  <div class="jumbotron">
+  <div class="row blog-back">
+    <div class="col-md-12">
 
-  {% for article in articles %}
+      {% for article in articles %}
 
-    <div class="row">
-      <div class="col-md-3">
-        <a href="">
-          <img src="http://img.over-blog-kiwi.com/1/10/82/36/20190102/ob_216360_la-beaute-est-partout-dans-la-nature.jpg"
-               alt="img" style="max-width: 240px; height: auto" class="dev">
-        </a>
-      </div>
-      <div class="col-md-9">
-        <div class="row">
-          <div class="col-md-12">
-            <a href="{{ url('article',{'id':article.id}) }}">
-              <span style="font-size: 30px;">{{ article.title|upper }}</span>
+        <div class="row blog-window">
+          <div class="col-md-3">
+            <a href="{{ url('article', { 'id':article.id }) }}">
+              <img src="http://img.over-blog-kiwi.com/1/10/82/36/20190102/ob_216360_la-beaute-est-partout-dans-la-nature.jpg"
+                   alt="img" style="max-width: 240px; height: auto" class="dev">
             </a>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <span>Le {{ article.created|date('d/m/Y') }} par <a href="#">{{ article.author.nickname }}</a></span>
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-12">
+                <a href="{{ url('article', { 'id':article.id }) }}">
+                  <span class="blog-title">{{ article.title|upper }}</span>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <span>Le {{ article.created|date('d/m/Y') }} par <a href="#" class="blog-author">{{ article.author.nickname }}</a></span>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <p>{{ article.content|slice(0, 200) }}</p>
+              </div>
+            </div>
           </div>
         </div>
         <hr>
-        <div class="row">
-          <div class="col-md-12">
-            <p>{{ article.content|slice(0, 200) }}</p>
-          </div>
-        </div>
+
+      {% endfor %}
+
       </div>
     </div>
-    <hr>
 
-  {% endfor %}
-
-  </div>
-
-{% endblock body %}
-
+    {% endblock body %}

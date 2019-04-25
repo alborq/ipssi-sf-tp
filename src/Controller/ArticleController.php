@@ -64,20 +64,26 @@ class ArticleController extends AbstractController
             $comment = $form->getData();
             $comment->setAuthor($this->getUser());
             $comment->setCreated(new \DateTime());
+            $comment->setIsCensored(false);
             $comment->setArticle($article);
+            $article_id = $article->getId();
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('article', [
+                'id' => $article_id,
+            ]);
         }
+
+        $article_id = $article->getId();
 
         $entityManager = $this->getDoctrine()->getManager();
         /** @var CommentRepository $commentRepository */
         $commentRepository = $entityManager->getRepository(Comment::class);
-        $comments = $commentRepository->findBy(['article' => $article],['created'=>'DESC']);
+        $comments = $commentRepository->getAllUncensoredComments($article_id);
 
         if(!empty($this->getUser())){
             return $this->render('article/show.html.twig', [

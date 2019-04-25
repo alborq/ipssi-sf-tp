@@ -1,4 +1,7 @@
 body{background: url("../img/background.jpg") top center no-repeat fixed;}
+
+.text-danger:hover{text-decoration: none;}
+
 .jumbotron-bg{margin-top: 50px; background-color: #b6d5e1; border: 2px solid black;}
 div.jumbotron.jumbotron-bg div{color: red;}
 div.jumbotron.jumbotron-bg h4.success, p.success{color: rgb(39, 99, 60);}
@@ -14,6 +17,16 @@ div.proverb{background-color: #f7f7f9; margin: 20px 0; margin-bottom: 2rem;}
 hr.hr-light{background-color: #fff;}
 a.article-author{color: #fff;}
 a.article-author:hover{color: lightseagreen; text-decoration: none;}
+
+/* Blog */
+div.blog-back{background-color: rgba(50,50,50,0.7); padding: 15px;}
+div.blog-back div.blog-window{background-color: #0d0d0d; padding: 0 20px;}
+div.blog-back div.blog-window.blog-first{padding: 20px 20px 0 20px;}
+span.blog-title{color: #fff; text-transform: uppercase; font-size: 25px;}
+a.blog-author{color: #fff;}
+a.blog-author:hover{color: lightseagreen; text-decoration: none;}
+span.blog-title:hover{color: lightseagreen; text-decoration: none;}
+p.blog-desc{color: #919aa1;}
 
 /* Articles - Index */
 a.picsize{width: 310px; height: 200px;}
@@ -32,7 +45,10 @@ div.article-elem div.back a span.article-title{color: #fff; text-transform: uppe
 div.article-elem div.back p.desc{margin-bottom: 10px;}
 
 nav.navbar ul.navbar-nav li.nav-item a.nav-link.user-navbar{display: inline-block; color: lightseagreen;}
+nav.navbar ul.navbar-nav li.nav-item span.user-navbar{display: inline-block; color: lightseagreen;}
 nav.navbar ul.navbar-nav li.nav-item a.nav-link.user-navbar:hover{color: cyan;}
+nav.navbar ul.navbar-nav li.nav-item span.user-navbar:hover{color: cyan;}
+nav.navbar ul.navbar-nav li.nav-item span.profile:hover{cursor: pointer;}
 
 /* Article - Show */
 div.article-show{}

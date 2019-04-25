@@ -42,11 +42,10 @@ class Comment
      */
     private $author;
 
-
-    public function __construct()
-    {
-        $this->author = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isCensored;
 
 
     public function getId(): ?int
@@ -63,7 +62,6 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -76,7 +74,6 @@ class Comment
     public function setCreated(\DateTimeInterface $created): self
     {
         $this->created = $created;
-
         return $this;
     }
 
@@ -89,7 +86,6 @@ class Comment
     public function setArticle(Article $article): self
     {
         $this->article = $article;
-
         return $this;
     }
 
@@ -101,7 +97,17 @@ class Comment
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+        return $this;
+    }
 
+    public function getIsCensored(): ?bool
+    {
+        return $this->isCensored;
+    }
+
+    public function setIsCensored(bool $isCensored): self
+    {
+        $this->isCensored = $isCensored;
         return $this;
     }
 }

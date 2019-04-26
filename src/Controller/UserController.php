@@ -38,7 +38,6 @@ class UserController extends AbstractController
     {
 
         $doctrine = $this->getDoctrine();
-        /** @var User $userRepository */
         $userRepository = $doctrine->getRepository(User::class);
 
         /** @var User $user */

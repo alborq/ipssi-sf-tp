@@ -22,6 +22,5 @@ class IndexController extends AbstractController
         }
 
         return $this->render('blog/index.html.twig');
-
     }
 }

@@ -167,7 +167,7 @@ class SecurityController extends AbstractController
         return $this->render('security/passwordForgotten.html.twig');
     }
 
-    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder ): Response
+    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
         if ($request->isMethod('POST')) {

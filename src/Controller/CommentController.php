@@ -17,21 +17,18 @@ class CommentController extends AbstractController
      * @param Article $article
      * @return Response
      */
-    public function censor(Request $request, Comment $comment): Response
-//    public function censor(Request $request, Comment $comment, Article $article): Response
+    public function censor(Request $request, Comment $comment)
     {
         /** @var User $user */
         $user = $this->getUser();
 
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
-
             $comment->setIsCensored(true);
             $article = $comment->getArticle();
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
-
         }
 
         return $this->redirectToRoute('article', [

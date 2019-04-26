@@ -35,7 +35,6 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $article->setCreated(new \DateTime());
             $article->setAuthor($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
@@ -89,19 +88,18 @@ class ArticleController extends AbstractController
         $commentRepository = $entityManager->getRepository(Comment::class);
         $comments = $commentRepository->getAllUncensoredComments($article_id);
 
-        if(!empty($this->getUser())){
+        if (!empty($this->getUser())) {
             return $this->render('article/show.html.twig', [
                 'article' => $article,
                 'comments' => $comments,
                 'ArticleCommentForm' => $form->createView()
             ]);
-        }else{
+        } else {
             return $this->render('article/show.html.twig', [
                 'article' => $article,
                 'comments' => $comments,
             ]);
         }
-
     }
 
     public function edit(Request $request, Article $article): Response
@@ -110,7 +108,6 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('article', [

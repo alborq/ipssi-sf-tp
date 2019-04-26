@@ -126,7 +126,8 @@ class ArticleController extends AbstractController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token')) && in_array('ROLE_ADMIN', $user->getRoles())) {
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))
+            && in_array('ROLE_ADMIN', $user->getRoles())) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();

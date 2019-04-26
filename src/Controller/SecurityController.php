@@ -30,8 +30,12 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    public function register(Request $request, UserPasswordEncoderInterface $encoder, Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
-    {
+    public function register(
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        Swift_Mailer $mailer,
+        TokenGeneratorInterface $tokenGenerator
+    ): Response {
 
         $form = $this->createForm(UserRegistrationType::class);
         $form->handleRequest($request);
@@ -98,8 +102,12 @@ class SecurityController extends AbstractController
         ));
     }
 
-    public function passwordForgotten(Request $request, UserPasswordEncoderInterface $encoder, Swift_Mailer $mailer, TokenGeneratorInterface $tokenGenerator): Response
-    {
+    public function passwordForgotten(
+        Request $request,
+        UserPasswordEncoderInterface $encoder,
+        Swift_Mailer $mailer,
+        TokenGeneratorInterface $tokenGenerator
+    ): Response {
 
         if ($request->isMethod('POST')) {
             $email = $request->request->get('email');
@@ -167,8 +175,11 @@ class SecurityController extends AbstractController
         return $this->render('security/passwordForgotten.html.twig');
     }
 
-    public function resetPassword(Request $request, string $token, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
+    public function resetPassword(
+        Request $request,
+        string $token,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response {
 
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();

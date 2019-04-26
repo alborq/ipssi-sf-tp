@@ -67,12 +67,8 @@ class User implements UserInterface
     protected $resetToken;
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @return int|null
      */
-
-
     public function getId(): ?int
     {
         return $this->id;

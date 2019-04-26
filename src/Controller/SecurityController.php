@@ -54,21 +54,15 @@ class SecurityController extends AbstractController
             $message->setFrom('contact@betrocket.com');
             $message->setTo($user->getEmail());
             $message->setBody(
-                $this->renderView(
-
-                    'email/registrationValidator.html.twig',
-                    [
-                        'nickname' => $user->getNickname(),
-                        'certification' => $token,
-                        'randomString' => $token
-
-                    ]
-                ),
+                $this->renderView('email/registrationValidator.html.twig', [
+                    'nickname' => $user->getNickname(),
+                    'certification' => $token,
+                    'randomString' => $token
+                ]),
                 'text/html'
             );
 
             $mailer->send($message);
-
 
             return $this->redirectToRoute('index');
         }

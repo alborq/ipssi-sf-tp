@@ -8,13 +8,18 @@
     <div class="col-md-12 article-nav">
       <a href="{{ url('index') }}" class="retour-nav"><i class="fas fa-arrow-left"></i>&nbsp;Retour</a>
 
-      {% if is_granted('ROLE_ADMIN') %}
+        {% if app.user != null and is_granted('ROLE_ADMIN') %}
 
-        {{ include('article/_delete_form.html.twig') }}
+          {{ include('article/_delete_form.html.twig') }}
 
-      {% endif %}
+        {% endif %}
 
-      <a href="{{ url('edit', { 'id': article.id } ) }}" class="btn btn-info float-right"><i class="fas fa-pen"></i>&nbsp;Editer cet article</a>
+        {% if is_granted('ROLE_ADMIN') and app.user != null and article.author.id == app.user.id %}
+
+          <a href="{{ url('edit', { 'id': article.id } ) }}" class="btn btn-info float-right"><i class="fas fa-pen"></i>&nbsp;Editer cet article</a>
+
+        {% endif %}
+
     </div>
   </div>
 
@@ -124,7 +129,10 @@
 
       {% else %}
 
-
+        <div class="alert alert-dismissible alert-info">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <i class="fas fa-info-circle"></i>&nbsp;<strong>Il n'y a pas encore de commentaires, soyez le 1er à en écrire un !</strong>
+        </div>
 
       {% endfor %}
 

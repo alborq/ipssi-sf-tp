@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Article;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,8 +15,9 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content')
-            ->add('author');
+            ->add('content', TextareaType::class, [
+                'attr' => ['rows' => '10'],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

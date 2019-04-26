@@ -21,10 +21,20 @@ a.article-author:hover{color: lightseagreen; text-decoration: none;}
 form.form-delete{display: inline;}
 form.form-delete button.btn-spacer{margin-left: 5px;}
 
+/* User- profile */
+span.stat-label{color: #fff; font-weight: bold;}
+
+/* _article */
+span.article-ti-tle{color: #fff; text-transform: uppercase; font-size: 30px; margin-top: 5px; display: inline-block;}
+
+/* Article - New */
+div.article-new{background-color: rgba(50,50,50,0.7); padding: 15px 0;}
+
 /* Article - Edit */
-div.article-edit{padding: 20px; margin-top: 5px;}
+div.article-edit{background-color: #1a1a1a; padding: 5px 20px 90px 20px;}
 div.article-edit button.article-edit-btn{margin: 20px 0;}
 div.article-edit input#article_content{}
+div.article-edit span.title{color: #fff; text-transform: uppercase; font-size: 30px; padding-left: 20px; margin-top: 5px; display: inline-block;}
 
 /* Blog */
 div.blog-back{background-color: rgba(50,50,50,0.7); padding: 15px;}
@@ -46,7 +56,7 @@ div.article-nav a.retour-nav:hover{text-decoration: none; color: lightseagreen;}
 div.article-nav a.btn-spacer{margin-left: 5px;}
 div.article-list.article-back{background-color: rgba(50,50,50,0.7); padding-top: 15px;}
 div.article-elem{margin-bottom: 20px;}
-div.article-elem div.back{background-color: #0d0d0d; padding: 0 20px;}
+div.article-elem div.back{background-color: #0d0d0d; padding: 0 20px; min-height: 487px;}
 div.article-elem div.back a:hover{text-decoration: none;}
 div.article-elem div.back a:hover span.article-title{color: lightseagreen;}
 div.article-elem div.back a span.article-title{color: #fff; text-transform: uppercase; font-size: 25px;}

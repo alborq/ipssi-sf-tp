@@ -21,7 +21,7 @@ class ArticleController extends AbstractController
         /** @var ArticleRepository $articleRepository */
         $articleRepository = $doctrine->getRepository(Article::class);
 
-        $articles = $articleRepository->findAll();
+        $articles = $articleRepository->getAllArticles();
 
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
@@ -35,6 +35,9 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $article->setCreated(new \DateTime());
+            $article->setAuthor($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
@@ -45,6 +48,7 @@ class ArticleController extends AbstractController
         return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+            'formname' => 'Nouvel article',
         ]);
     }
 
@@ -109,7 +113,7 @@ class ArticleController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('default', [
+            return $this->redirectToRoute('article', [
                 'id' => $article->getId(),
             ]);
         }
@@ -117,6 +121,7 @@ class ArticleController extends AbstractController
         return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+            'formname' => 'Edition d\'article',
         ]);
     }
 

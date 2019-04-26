@@ -54,7 +54,8 @@
                                         <span>Bienvenue</span>&nbsp;<span class="user-navbar">{{ app.user.nickname }}</span>
                                     </span>
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop2">
-                                        <a class="dropdown-item" href="{{ url('user', { 'id': app.user.id }) }}">Profile</a>
+                                        <a class="dropdown-item" href="{{ url('profile', { 'id': app.user.id }) }}">Profile</a>
+                                        <a class="dropdown-item" href="{{ url('userarticles', { 'id': app.user.id }) }}">Mes articles</a>
                                         <a class="dropdown-item" href="{{ url('logout') }}">Me déconnecter</a>
                                     </div>
                                 </div>

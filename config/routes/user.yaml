@@ -1,5 +1,11 @@
-user:
-  path: /{id}
+profile:
+  path: /{id}/profile
   controller: App\Controller\UserController::profile
+  requirements:
+    id: \d+
+
+userarticles:
+  path: /{id}/articles
+  controller: App\Controller\UserController::userarticles
   requirements:
     id: \d+

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserRegistrationType;
+use App\Repository\UserRepository;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,8 +36,7 @@ class SecurityController extends AbstractController
         UserPasswordEncoderInterface $encoder,
         Swift_Mailer $mailer,
         TokenGeneratorInterface $tokenGenerator
-    ) {
-        /** @var User $user */
+    ): Response {
 
         $form = $this->createForm(UserRegistrationType::class);
         $form->handleRequest($request);
@@ -44,6 +44,7 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $token = $tokenGenerator->generateToken();
 
+            /** @var User $user */
             $user = $form->getData();
             $user->setRoles(['ROLE_USER']);
             $user->setCertifiedCode($token);
@@ -54,26 +55,20 @@ class SecurityController extends AbstractController
 
             $entityManager->flush();
 
-            // Mail part
+            /** @var Swift_Message $message */
             $message = (new Swift_Message('Validate your account'));
             $message->setFrom('contact@betrocket.com');
             $message->setTo($user->getEmail());
             $message->setBody(
-                $this->renderView(
-
-                    'email/registrationValidator.html.twig',
-                    [
-                        'nickname' => $user->getNickname(),
-                        'certification' => $token,
-                        'randomString' => $token
-
-                    ]
-                ),
+                $this->renderView('email/registrationValidator.html.twig', [
+                    'nickname' => $user->getNickname(),
+                    'certification' => $token,
+                    'randomString' => $token
+                ]),
                 'text/html'
             );
 
             $mailer->send($message);
-
 
             return $this->redirectToRoute('index');
         }
@@ -89,10 +84,10 @@ class SecurityController extends AbstractController
         $form = $this->createForm(UserRegistrationType::class);
         $entityManager = $this->getDoctrine()->getManager();
         $userRepository = $entityManager->getRepository(User::class);
+        /** @var User $user */
         $user = $userRepository->findOneBy(['certifiedCode' => $certification]);
 
         if (!empty($user)) {
-            /** @var User $user */
             $user->setIsCertified(true);
             $entityManager->persist($user);
             $entityManager->flush();
@@ -121,13 +116,13 @@ class SecurityController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            /* @var $user User */
-            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
-
+            /** @var UserRepository $userRepository */
+            $userRepository = $entityManager->getRepository(User::class);
+            /* @var User $user */
+            $user = $userRepository->findOneBy(['email' => $email]);
 
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
-                //dd('nope');
                 return $this->render('security/passwordForgotten.html.twig', [
                     'alert' => true,
                     'alerttype' => 'danger',
@@ -157,6 +152,7 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
+            /** @var Swift_Message $message */
             $message = new Swift_Message('Mot de passe oublié');
             $message->setFrom('contact@betrocket.com');
             $message->setTo($user->getEmail());
@@ -190,20 +186,20 @@ class SecurityController extends AbstractController
 
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
+            /** @var UserRepository $userRepository */
+            $userRepository = $entityManager->getRepository(User::class);
+            /** @var User $user */
+            $user = $userRepository->findOneBy(['resetToken' => $token]);
 
-            $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
 
-            /* @var $user User */
-            if ($user === null) {
+            if ($user == null) {
                 $this->addFlash('danger', 'Token Inconnu');
                 //return $this->redirectToRoute('blog');
                 return $this->redirectToRoute('login');
             }
 
             $user->setResetToken(null);
-
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
-
             $entityManager->flush();
 
             $this->addFlash('notice', 'Mot de passe mis à jour'); // ???

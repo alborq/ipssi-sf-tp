@@ -11,7 +11,7 @@ App\Entity\User:
     __construct: false
     email: 'admin@admin.fr'
     nickname: 'admin'
-    roles: '[ROLE_USER]'
+    roles: '[ROLE_ADMIN]'
     password: '\$2y\$13\$e4.oQqXWfn/B5amI0oMyye4g2PqVQM97hFjTrEQ212xT9CdJ9rHaq'
     #username: 'admin'
 

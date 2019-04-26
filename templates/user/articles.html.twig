@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}RocketBet | Articles{% endblock %}
+{% block title %}RocketBet | Mes articles{% endblock %}
 
 {% block body %}
 
   <div class="row">
     <div class="col-md-12 article-nav">
-      <a href="{{ url('default') }}" class="retour-nav"><i class="fas fa-arrow-left"></i>&nbsp;Retour</a>
+      <a href="{{ url('index') }}" class="retour-nav"><i class="fas fa-arrow-left"></i>&nbsp;Retour</a>
       <a href="{{ url('new') }}" class="btn btn-success float-right"><i class="fas fa-plus"></i>&nbsp;Créer un article</a>
     </div>
   </div>
@@ -51,9 +51,15 @@
 
     {% else %}
 
-      <tr>
-        <td colspan="6">Aucun article n'a été trouvé</td>
-      </tr>
+      <div class="col-md-12">
+        <div class="alert alert-dismissible alert-info">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <i class="fas fa-info-circle"></i>&nbsp;
+          <strong>Vous n'avez pas encore créé d'article, lancez-vous !&nbsp;
+            <a href="{{ url('new') }}">Ecrire un article&nbsp;<i class="fas fa-pen"></i></a>
+          </strong>
+        </div>
+      </div>
 
     {% endfor %}
 

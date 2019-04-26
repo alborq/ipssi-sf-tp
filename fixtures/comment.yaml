@@ -5,3 +5,4 @@ App\Entity\Comment:
     created: "<dateTimeBetween('1 year ago', 'now')>"
     author: '@user-<numberBetween(1,100)>'
     article: "@article-<numberBetween(1,50)>"
+    isCensored: false

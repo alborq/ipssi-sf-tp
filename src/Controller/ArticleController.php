@@ -3,46 +3,31 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\Comment;
+use App\Entity\User;
+use App\Form\ArticleCommentType;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("blog/article")
- */
 class ArticleController extends AbstractController
 {
-    /**
-     * @Route("/", name="article_index", methods={"GET"})
-     */
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(): Response
     {
-        /** Ds un ctrller */
         $doctrine = $this->getDoctrine();
-
-        /** @var  ArticleRepository $articleRepository */
+        /** @var ArticleRepository $articleRepository */
         $articleRepository = $doctrine->getRepository(Article::class);
 
-
-        $art = $articleRepository->findAll();
-        $listArticle = $articleRepository->listArticle();
+        $articles = $articleRepository->getAllArticles();
 
         return $this->render('article/index.html.twig', [
-            'article' => $art,
-            'articles' => $listArticle,
+            'articles' => $articles,
         ]);
-        /* return $this->render('article/index.html.twig', [
-           'articles' => $articleRepository->findAll(),
-          'articles' => $articleRepository->findOneBy(['id' => 1]),
-         ]);*/
     }
 
-    /**
-     * @Route("/new", name="article_new", methods={"GET","POST"})
-     */
     public function new(Request $request): Response
     {
         $article = new Article();
@@ -50,32 +35,73 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $article->setCreated(new \DateTime());
+            $article->setAuthor($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('index');
         }
 
         return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+            'formname' => 'Nouvel article',
         ]);
     }
 
     /**
-     * @Route("/{id}", name="article_show", methods={"GET"})
+     * @param Article $article
+     * @param Request $request
+     * @return Response
      */
-    public function show(Article $article): Response
+    public function show(Article $article, Request $request): Response
     {
-        return $this->render('article/show.html.twig', [
-            'article' => $article,
-        ]);
+
+        $form = $this->createForm(ArticleCommentType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Comment $comment */
+            $comment = $form->getData();
+            $comment->setAuthor($this->getUser());
+            $comment->setCreated(new \DateTime());
+            $comment->setIsCensored(false);
+            $comment->setArticle($article);
+            $article_id = $article->getId();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('article', [
+                'id' => $article_id,
+            ]);
+        }
+
+        $article_id = $article->getId();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        /** @var CommentRepository $commentRepository */
+        $commentRepository = $entityManager->getRepository(Comment::class);
+        $comments = $commentRepository->getAllUncensoredComments($article_id);
+
+        if (!empty($this->getUser())) {
+            return $this->render('article/show.html.twig', [
+                'article' => $article,
+                'comments' => $comments,
+                'ArticleCommentForm' => $form->createView()
+            ]);
+        } else {
+            return $this->render('article/show.html.twig', [
+                'article' => $article,
+                'comments' => $comments,
+            ]);
+        }
     }
 
-    /**
-     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
-     */
     public function edit(Request $request, Article $article): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
@@ -84,7 +110,7 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('article_index', [
+            return $this->redirectToRoute('article', [
                 'id' => $article->getId(),
             ]);
         }
@@ -92,20 +118,21 @@ class ArticleController extends AbstractController
         return $this->render('article/edit.html.twig', [
             'article' => $article,
             'form' => $form->createView(),
+            'formname' => 'Edition d\'article',
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="article_delete", methods={"DELETE"})
-     */
     public function delete(Request $request, Article $article): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))) {
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($this->isCsrfTokenValid('delete' . $article->getId(), $request->request->get('_token'))
+            && in_array('ROLE_ADMIN', $user->getRoles())) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($article);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('article_index');
+        return $this->redirectToRoute('index');
     }
 }

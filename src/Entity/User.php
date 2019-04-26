@@ -67,19 +67,8 @@ class User implements UserInterface
     protected $resetToken;
 
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @return int|null
      */
-
-
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-    }
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -271,5 +260,10 @@ class User implements UserInterface
     public function setResetToken(?string $resetToken): void
     {
         $this->resetToken = $resetToken;
+    }
+
+    public function __toString(): string
+    {
+        return $this->nickname;
     }
 }

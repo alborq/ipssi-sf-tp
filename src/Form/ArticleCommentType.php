@@ -2,28 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\Article;
-use App\Entity\User;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ArticleType extends AbstractType
+class ArticleCommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('content', TextareaType::class, [
-                'attr' => ['rows' => '10'],
-            ]);
+            ->add('content')
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Article::class,
+            'data_class' => Comment::class,
         ]);
     }
 }

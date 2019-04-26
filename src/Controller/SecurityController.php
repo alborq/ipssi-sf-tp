@@ -84,10 +84,10 @@ class SecurityController extends AbstractController
         $form = $this->createForm(UserRegistrationType::class);
         $entityManager = $this->getDoctrine()->getManager();
         $userRepository = $entityManager->getRepository(User::class);
+        /** @var User $user */
         $user = $userRepository->findOneBy(['certifiedCode' => $certification]);
 
         if (!empty($user)) {
-            /** @var User $user */
             $user->setIsCertified(true);
             $entityManager->persist($user);
             $entityManager->flush();
@@ -119,10 +119,8 @@ class SecurityController extends AbstractController
             /* @var User $user */
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
-
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
-                //dd('nope');
                 return $this->render('security/passwordForgotten.html.twig', [
                     'alert' => true,
                     'alerttype' => 'danger',
@@ -152,6 +150,7 @@ class SecurityController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
 
+            /** @var Swift_Message $message */
             $message = new Swift_Message('Mot de passe oublié');
             $message->setFrom('contact@betrocket.com');
             $message->setTo($user->getEmail());
@@ -189,7 +188,7 @@ class SecurityController extends AbstractController
             /** @var User $user */
             $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
 
-            if ($user === null) {
+            if ($user == null) {
                 $this->addFlash('danger', 'Token Inconnu');
                 //return $this->redirectToRoute('blog');
                 return $this->redirectToRoute('login');

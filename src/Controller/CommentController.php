@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,13 +16,14 @@ class CommentController extends AbstractController
      * @param Comment $comment
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function censor(Request $request, Comment $comment): Response
+    public function censor(Request $request, Article $article, Comment $comment): Response
     {
         /** @var User $user */
         $user = $this->getUser();
 
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
             $comment->setIsCensored(true);
+            /** @var Article $article */
             $article = $comment->getArticle();
 
             $entityManager = $this->getDoctrine()->getManager();

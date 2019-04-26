@@ -55,7 +55,7 @@ class SecurityController extends AbstractController
 
             $entityManager->flush();
 
-            // Mail part
+            /** @var Swift_Message $message */
             $message = (new Swift_Message('Validate your account'));
             $message->setFrom('contact@betrocket.com');
             $message->setTo($user->getEmail());
@@ -116,8 +116,10 @@ class SecurityController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
 
+            /** @var UserRepository $userRepository */
+            $userRepository = $entityManager->getRepository(User::class);
             /* @var User $user */
-            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+            $user = $userRepository->findOneBy(['email' => $email]);
 
             if ($user === null) {
                 $this->addFlash('danger', 'Email Inconnu');
@@ -184,9 +186,11 @@ class SecurityController extends AbstractController
 
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
-
+            /** @var UserRepository $userRepository */
+            $userRepository = $entityManager->getRepository(User::class);
             /** @var User $user */
-            $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
+            $user = $userRepository->findOneBy(['resetToken' => $token]);
+
 
             if ($user == null) {
                 $this->addFlash('danger', 'Token Inconnu');
@@ -195,9 +199,7 @@ class SecurityController extends AbstractController
             }
 
             $user->setResetToken(null);
-
             $user->setPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
-
             $entityManager->flush();
 
             $this->addFlash('notice', 'Mot de passe mis à jour'); // ???

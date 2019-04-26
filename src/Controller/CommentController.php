@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,10 +13,9 @@ class CommentController extends AbstractController
     /**
      * @param Request $request
      * @param Comment $comment
-     * @param Article $article
-     * @return Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function censor(Request $request, Comment $comment)
+    public function censor(Request $request, Comment $comment): Response
     {
         /** @var User $user */
         $user = $this->getUser();

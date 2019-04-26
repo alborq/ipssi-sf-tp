@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserRegistrationType;
+use App\Repository\UserRepository;
 use Swift_Mailer;
 use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -43,6 +44,7 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $token = $tokenGenerator->generateToken();
 
+            /** @var User $user */
             $user = $form->getData();
             $user->setRoles(['ROLE_USER']);
             $user->setCertifiedCode($token);
@@ -114,7 +116,7 @@ class SecurityController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            /* @var $user User */
+            /* @var User $user */
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
 
 
@@ -184,9 +186,9 @@ class SecurityController extends AbstractController
         if ($request->isMethod('POST')) {
             $entityManager = $this->getDoctrine()->getManager();
 
+            /** @var User $user */
             $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
 
-            /* @var $user User */
             if ($user === null) {
                 $this->addFlash('danger', 'Token Inconnu');
                 //return $this->redirectToRoute('blog');
